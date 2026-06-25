@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'sqm-review/**'
+      - '.github/workflows/deploy.yml'
 
   workflow_dispatch:
 
@@ -13,7 +16,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: sqm-review-pages
   cancel-in-progress: true
 
 jobs:
@@ -21,12 +24,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 拉取仓库代码
-      - name: Checkout
+      # 拉取代码
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 安装 Node
-      - name: Setup Node
+      # 安装 Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -43,7 +46,11 @@ jobs:
         working-directory: sqm-review
         run: npm run build
 
-      # 上传 dist
+      # 配置 Pages 环境
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # 上传构建产物
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -56,6 +63,10 @@ jobs:
 
     needs: build
     runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
 
     steps:
       - name: Deploy to GitHub Pages
