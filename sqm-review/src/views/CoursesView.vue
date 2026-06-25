@@ -2,7 +2,7 @@
   <div class="courses-view container">
     <header class="page-header">
       <h1>课件学习</h1>
-      <p>课程分两大部分：荣国平老师（基础理论）+ 邵栋老师（敏捷与工程实践）</p>
+      <p>课程分两大部分、共 19 个章节：荣国平老师（1-8 章 · 基础理论）+ 邵栋老师（9-19 章 · 敏捷与工程实践）</p>
     </header>
 
     <div class="course-stats">
@@ -16,11 +16,11 @@
       </div>
       <div class="stat-item">
         <User :size="18" />
-        <span>荣国平 {{ teacherStats.rong }} 章</span>
+        <span>荣国平 1-8 章（{{ teacherStats.rong }} 节）</span>
       </div>
       <div class="stat-item">
         <User :size="18" />
-        <span>邵栋 {{ teacherStats.shao }} 章</span>
+        <span>邵栋 9-19 章（{{ teacherStats.shao }} 节）</span>
       </div>
     </div>
 
@@ -39,7 +39,7 @@
         @click="activeTeacher = '荣国平'"
       >
         <User :size="16" />
-        荣国平老师 · 基础理论
+        荣国平老师 · 基础理论（ch1-ch8）
       </button>
       <button
         class="teacher-tab shao"
@@ -47,7 +47,7 @@
         @click="activeTeacher = '邵栋'"
       >
         <User :size="16" />
-        邵栋老师 · 敏捷与实践
+        邵栋老师 · 敏捷与实践（ch9-ch19）
       </button>
     </div>
 

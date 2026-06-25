@@ -4,22 +4,37 @@
       <h3>章节导航</h3>
       <span class="chapter-indicator">{{ currentIndex + 1 }} / {{ chapters.length }}</span>
     </div>
-    <div class="nav-list">
-      <router-link
-        v-for="(chapter, index) in chapters"
-        :key="chapter.id"
-        :to="`/courses/${chapter.id}`"
-        class="nav-item"
-        :class="{
-          'is-active': chapter.id === currentId,
-          'is-completed': index < currentIndex
-        }"
+
+    <div class="nav-groups">
+      <div
+        v-for="(group, groupIndex) in groupedChapters"
+        :key="groupIndex"
+        class="nav-group"
       >
-        <span class="chapter-number">{{ index + 1 }}</span>
-        <span class="chapter-title">{{ chapter.title }}</span>
-        <CheckCircle v-if="index < currentIndex" :size="16" class="check-icon" />
-      </router-link>
+        <div class="group-header">
+          <span class="group-dot" :style="{ background: group.color }"></span>
+          <span class="group-title">{{ group.teacher }}老师</span>
+          <span class="group-count">{{ group.chapters.length }} 章</span>
+        </div>
+        <div class="nav-list">
+          <router-link
+            v-for="(chapter) in group.chapters"
+            :key="chapter.id"
+            :to="`/courses/${chapter.id}`"
+            class="nav-item"
+            :class="{
+              'is-active': chapter.id === currentId,
+              'is-completed': chapter.globalIndex < currentIndex
+            }"
+          >
+            <span class="chapter-number">{{ chapter.globalIndex + 1 }}</span>
+            <span class="chapter-title">{{ chapter.title }}</span>
+            <CheckCircle v-if="chapter.globalIndex < currentIndex" :size="16" class="check-icon" />
+          </router-link>
+        </div>
+      </div>
     </div>
+
     <div class="nav-actions">
       <button
         class="nav-btn"
@@ -42,9 +57,10 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { ChevronLeft, ChevronRight, CheckCircle } from 'lucide-vue-next'
 
-defineProps({
+const props = defineProps({
   chapters: {
     type: Array,
     required: true
@@ -68,6 +84,29 @@ defineProps({
 })
 
 defineEmits(['prev', 'next'])
+
+const groupedChapters = computed(() => {
+  const rong = []
+  const shao = []
+
+  props.chapters.forEach((ch, idx) => {
+    const chapterWithIndex = { ...ch, globalIndex: idx }
+    if (ch.teacher === '荣国平') {
+      rong.push(chapterWithIndex)
+    } else {
+      shao.push(chapterWithIndex)
+    }
+  })
+
+  const groups = []
+  if (rong.length > 0) {
+    groups.push({ teacher: '荣国平', chapters: rong, color: '#2c5282' })
+  }
+  if (shao.length > 0) {
+    groups.push({ teacher: '邵栋', chapters: shao, color: '#d69e2e' })
+  }
+  return groups
+})
 </script>
 
 <style lang="scss" scoped>
@@ -101,17 +140,68 @@ defineEmits(['prev', 'next'])
   }
 }
 
-.nav-list {
+.nav-groups {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  max-height: 400px;
+  gap: 16px;
+  max-height: 420px;
   overflow-y: auto;
   margin-bottom: 16px;
 
   &::-webkit-scrollbar {
     width: 4px;
   }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 2px;
+  }
+}
+
+.nav-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.group-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 4px;
+  margin-bottom: 2px;
+
+  .group-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .group-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .group-count {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-left: auto;
+    background: var(--bg-secondary);
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .nav-item {

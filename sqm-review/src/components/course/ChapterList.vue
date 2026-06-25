@@ -15,6 +15,10 @@
             <Layers :size="14" />
             {{ chapter.flashcards?.length || 0 }} 闪卡
           </span>
+          <span v-if="chapter.diagrams?.length" class="diagram-count">
+            <BarChart3 :size="14" />
+            {{ chapter.diagrams.length }} 图表
+          </span>
         </div>
       </div>
       <div class="chapter-arrow">
@@ -25,7 +29,7 @@
 </template>
 
 <script setup>
-import { ArrowRight, Layers } from 'lucide-vue-next'
+import { ArrowRight, Layers, BarChart3 } from 'lucide-vue-next'
 
 defineProps({
   chapters: {

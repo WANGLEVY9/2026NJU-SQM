@@ -1,0 +1,40 @@
+============================================================
+FILE: 软件质量与管理.课程总结.pptx
+SLIDES: 5
+============================================================
+
+--- SLIDE 1 ---
+[TEXT]:
+  荣国平
+  南京大学软件学院
+  2026年 春
+  软件质量与管理课程总结
+[NOTES]: (empty)
+
+--- SLIDE 2 ---
+[TEXT]:
+  过程线
+  2
+[NOTES]: (none)
+
+--- SLIDE 3 ---
+[TEXT]:
+  项目管理线
+  3
+[NOTES]: (none)
+
+--- SLIDE 4 ---
+[TEXT]:
+  质量管理线
+  4
+[NOTES]: (none)
+
+--- SLIDE 5 ---
+[TEXT]:
+  我的联系方式
+  荣国平
+  费彝民楼B-917
+  ronggp@nju.edu.cn
+  https://softeng.nju.edu.cn/faculty/GuopingRong/
+  5
+[NOTES]: (none)

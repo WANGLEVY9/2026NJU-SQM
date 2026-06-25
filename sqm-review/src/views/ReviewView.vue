@@ -77,34 +77,11 @@
 
       <!-- 列表模式 -->
       <div v-if="viewMode === 'list'" class="review-list">
-        <ReviewSection
+        <MemorizationCard
           v-for="item in filteredItems"
           :key="item.id"
-          :title="item.title"
-          :category="item.category"
-          :content="item.content"
-          :keyPoints="item.keyPoints"
-          :diagrams="item.diagrams"
-          :showDiagrams="showDiagrams"
-          :defaultOpen="true"
-        >
-          <template #footer>
-            <div class="flashcards-mini">
-              <h4 class="mini-title">
-                <Sparkles :size="14" />
-                快速记忆检测
-              </h4>
-              <div class="mini-cards">
-                <QuickFlashCard
-                  v-for="(point, idx) in item.keyPoints.slice(0, 3)"
-                  :key="idx"
-                  :question="getQuestionFromPoint(point)"
-                  :answer="point"
-                />
-              </div>
-            </div>
-          </template>
-        </ReviewSection>
+          :item="item"
+        />
       </div>
 
       <!-- 闪卡模式 -->
@@ -287,6 +264,7 @@ import { pastExamData } from '@/data/pastExams'
 import ReviewSection from '@/components/review/ReviewSection.vue'
 import QuickFlashCard from '@/components/review/QuickFlashCard.vue'
 import ReviewFlashcard from '@/components/review/ReviewFlashcard.vue'
+import MemorizationCard from '@/components/review/MemorizationCard.vue'
 
 // === 顶层模式 ===
 const topMode = ref('knowledge')

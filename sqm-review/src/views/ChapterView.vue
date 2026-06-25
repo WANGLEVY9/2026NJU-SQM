@@ -48,6 +48,22 @@
           </div>
         </section>
 
+        <section v-if="chapter.diagrams?.length" class="diagrams-section">
+          <h2>
+            <BarChart3 :size="20" />
+            可视化辅助
+          </h2>
+          <div class="diagrams-grid">
+            <ReviewDiagram
+              v-for="(diagram, index) in chapter.diagrams"
+              :key="index"
+              :type="diagram.type"
+              :title="diagram.title"
+              :data="diagram.data"
+            />
+          </div>
+        </section>
+
         <section class="key-points-section" v-if="chapter.keyPoints?.length">
           <h2>
             <Lightbulb :size="20" />
@@ -101,11 +117,12 @@
 <script setup>
 import { computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { ArrowLeft, Lightbulb, Sparkles, FileQuestion, MessageSquare, Star, GraduationCap } from 'lucide-vue-next'
+import { ArrowLeft, Lightbulb, Sparkles, FileQuestion, MessageSquare, Star, GraduationCap, BarChart3 } from 'lucide-vue-next'
 import { useCourseStore } from '@/store/useCourseStore'
 import { commentaryData } from '@/data/commentary'
 import ChapterNav from '@/components/course/ChapterNav.vue'
 import FlashCard from '@/components/course/FlashCard.vue'
+import ReviewDiagram from '@/components/review/ReviewDiagram.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -121,15 +138,72 @@ const hasNextChapter = computed(() => currentIndex.value < courseStore.chapters.
 
 const formattedContent = computed(() => {
   if (!chapter.value?.content) return ''
-  return chapter.value.content
-    .replace(/^## /gm, '<h2>')
-    .replace(/^### /gm, '<h3>')
-    .replace(/^#### /gm, '<h4>')
-    .replace(/\n\n/g, '</p><p>')
-    .replace(/^(.+)$/gm, (match) => {
-      if (match.startsWith('<')) return match
-      return `<p>${match}</p>`
-    })
+  let html = chapter.value.content
+
+  // Replace markdown headers
+  html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>')
+  html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>')
+  html = html.replace(/^#### (.*$)/gim, '<h4>$1</h4>')
+
+  // Replace bold text
+  html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+
+  // Replace blockquotes
+  html = html.replace(/^> (.*$)/gim, '<blockquote>$1</blockquote>')
+
+  // Handle code blocks
+  html = html.replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>')
+
+  // Replace numbered lists with styled items
+  html = html.replace(/^(\d+)\. (.*$)/gim, '<li class="numbered-item"><span class="number-badge">$1</span>$2</li>')
+  html = html.replace(/(<li class="numbered-item">.*<\/li>\n?)+/g, '<ol class="styled-list">$&</ol>')
+
+  // Replace bullet lists with styled items
+  html = html.replace(/^- (.*$)/gim, '<li class="bullet-item">$1</li>')
+  html = html.replace(/(<li class="bullet-item">.*<\/li>\n?)+/g, '<ul class="styled-list">$&</ul>')
+
+  // Handle table rows (simplified)
+  html = html.replace(/\|(.+)\|/g, (match) => {
+    const cells = match.split('|').filter(c => c.trim())
+    if (cells.length === 0) return match
+    const isHeader = cells.every(c => c.trim().match(/^[-:]+$/))
+    if (isHeader) return ''
+    const tag = match.includes('---') ? 'th' : 'td'
+    return `<tr>${cells.map(c => `<${tag}>${c.trim()}</${tag}>`).join('')}</tr>`
+  })
+
+  // Wrap consecutive lines in paragraphs
+  const lines = html.split('\n')
+  const result = []
+  let inParagraph = false
+
+  for (const line of lines) {
+    const trimmed = line.trim()
+    if (!trimmed) {
+      if (inParagraph) {
+        result.push('</p>')
+        inParagraph = false
+      }
+      continue
+    }
+
+    if (trimmed.startsWith('<')) {
+      if (inParagraph) {
+        result.push('</p>')
+        inParagraph = false
+      }
+      result.push(trimmed)
+    } else {
+      if (!inParagraph) {
+        result.push('<p>')
+        inParagraph = true
+      }
+      result.push(trimmed)
+    }
+  }
+  if (inParagraph) result.push('</p>')
+
+  return result.join('\n')
 })
 
 const goToPrevChapter = () => {
@@ -274,6 +348,113 @@ watch(chapterId, (id) => {
   :deep(strong) {
     color: var(--accent);
     font-weight: 600;
+  }
+
+  :deep(blockquote) {
+    margin: 20px 0;
+    padding: 16px 20px;
+    background: rgba(214, 158, 46, 0.06);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    font-style: italic;
+    color: var(--text-secondary);
+    line-height: 1.7;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  :deep(pre) {
+    margin: 20px 0;
+    padding: 16px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+
+    code {
+      font-family: $font-mono;
+      font-size: 13px;
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+  }
+
+  :deep(.styled-list) {
+    margin: 16px 0;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  :deep(.bullet-item) {
+    position: relative;
+    padding-left: 22px;
+    margin-bottom: 10px;
+    line-height: 1.7;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.7;
+    }
+  }
+
+  :deep(.numbered-item) {
+    position: relative;
+    padding-left: 32px;
+    margin-bottom: 10px;
+    line-height: 1.7;
+
+    .number-badge {
+      position: absolute;
+      left: 0;
+      top: 2px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--bg-primary);
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+  }
+
+  :deep(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 14px;
+
+    th, td {
+      padding: 12px 16px;
+      border: 1px solid var(--border-color);
+      text-align: left;
+    }
+
+    th {
+      background: var(--bg-secondary);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    td {
+      color: var(--text-secondary);
+    }
+
+    tr:nth-child(even) {
+      background: rgba(255, 255, 255, 0.02);
+    }
   }
 }
 
@@ -435,6 +616,41 @@ watch(chapterId, (id) => {
     font-size: 14px;
     color: var(--text-muted);
     margin-bottom: 24px;
+  }
+}
+
+.diagrams-section {
+  margin-top: 48px;
+  padding: 24px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: $font-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+
+    svg {
+      color: var(--accent);
+    }
+  }
+
+  .diagrams-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+
+    @include respond-to(md) {
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
   }
 }
 
