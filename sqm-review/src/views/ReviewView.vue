@@ -5,47 +5,298 @@
       <p>系统梳理核心知识点，高效备战考试</p>
     </header>
 
-    <div class="review-categories">
-      <button
-        v-for="category in categories"
-        :key="category"
-        class="category-tag"
-        :class="{ 'is-active': selectedCategory === category }"
-        @click="selectedCategory = category"
-      >
-        {{ category }}
-      </button>
+    <!-- 顶部模式切换 -->
+    <div class="review-toolbar">
+      <div class="mode-switch">
+        <button
+          class="mode-switch-btn"
+          :class="{ 'is-active': topMode === 'knowledge' }"
+          @click="topMode = 'knowledge'"
+        >
+          <BookOpen :size="16" />
+          知识点梳理
+        </button>
+        <button
+          class="mode-switch-btn"
+          :class="{ 'is-active': topMode === 'pastExam' }"
+          @click="topMode = 'pastExam'"
+        >
+          <FileText :size="16" />
+          往年原题专项
+          <span class="badge">{{ pastExamData.questions.length }}</span>
+        </button>
+      </div>
     </div>
 
-    <div class="review-list">
-      <ReviewSection
-        v-for="item in filteredItems"
-        :key="item.id"
-        :title="item.title"
-        :category="item.category"
-        :content="item.content"
-        :keyPoints="item.keyPoints"
-        :defaultOpen="true"
-      >
-        <template #footer>
-          <QuickFlashCard
-            v-if="item.keyPoints?.length"
-            :question="`巩固练习：${item.keyPoints[0]}`"
-            :answer="item.keyPoints[0]"
+    <!-- 知识点梳理模式 -->
+    <template v-if="topMode === 'knowledge'">
+      <div class="review-toolbar">
+        <div class="review-categories">
+          <button
+            v-for="category in categories"
+            :key="category"
+            class="category-tag"
+            :class="{ 'is-active': selectedCategory === category }"
+            @click="selectedCategory = category"
+          >
+            {{ category }}
+          </button>
+        </div>
+
+        <div class="mode-toggle">
+          <button
+            class="mode-btn"
+            :class="{ 'is-active': viewMode === 'list' }"
+            @click="viewMode = 'list'"
+          >
+            <List :size="16" />
+            列表模式
+          </button>
+          <button
+            class="mode-btn"
+            :class="{ 'is-active': viewMode === 'flashcard' }"
+            @click="viewMode = 'flashcard'"
+          >
+            <Sparkles :size="16" />
+            闪卡模式
+          </button>
+        </div>
+
+        <div class="diagram-toggle">
+          <button
+            class="diagram-toggle-btn"
+            :class="{ 'is-active': showDiagrams }"
+            @click="showDiagrams = !showDiagrams"
+            title="显示/隐藏可视化图表"
+          >
+            <BarChart3 :size="14" />
+            <span class="toggle-label">图表辅助</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 列表模式 -->
+      <div v-if="viewMode === 'list'" class="review-list">
+        <ReviewSection
+          v-for="item in filteredItems"
+          :key="item.id"
+          :title="item.title"
+          :category="item.category"
+          :content="item.content"
+          :keyPoints="item.keyPoints"
+          :diagrams="item.diagrams"
+          :showDiagrams="showDiagrams"
+          :defaultOpen="true"
+        >
+          <template #footer>
+            <div class="flashcards-mini">
+              <h4 class="mini-title">
+                <Sparkles :size="14" />
+                快速记忆检测
+              </h4>
+              <div class="mini-cards">
+                <QuickFlashCard
+                  v-for="(point, idx) in item.keyPoints.slice(0, 3)"
+                  :key="idx"
+                  :question="getQuestionFromPoint(point)"
+                  :answer="point"
+                />
+              </div>
+            </div>
+          </template>
+        </ReviewSection>
+      </div>
+
+      <!-- 闪卡模式 -->
+      <div v-else class="flashcard-mode">
+        <div v-if="allFlashcards.length > 0" class="flashcard-container">
+          <ReviewFlashcard
+            :question="currentFlashcard.question"
+            :answer="currentFlashcard.answer"
+            :current-index="flashcardIndex"
+            :total="allFlashcards.length"
+            :category="currentFlashcard.category"
+            @prev="prevFlashcard"
+            @next="nextFlashcard"
+            @rate="handleRate"
           />
-        </template>
-      </ReviewSection>
-    </div>
+        </div>
+        <div v-else class="empty-state">
+          <Sparkles :size="64" />
+          <h3>暂无闪卡</h3>
+          <p>请尝试切换其他知识点分类</p>
+        </div>
+
+        <div v-if="allFlashcards.length > 0" class="flashcard-progress">
+          <div class="progress-header">
+            <span>闪卡进度</span>
+            <span class="progress-text">{{ flashcardIndex + 1 }} / {{ allFlashcards.length }}</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" :style="{ width: flashcardProgress + '%' }"></div>
+          </div>
+        </div>
+
+        <div v-if="Object.keys(ratings).length > 0" class="rating-stats">
+          <div class="rating-item good">
+            <CheckCircle :size="16" />
+            <span>已掌握 {{ goodCount }} 张</span>
+          </div>
+          <div class="rating-item hard">
+            <XCircle :size="16" />
+            <span>需复习 {{ hardCount }} 张</span>
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <!-- 往年原题专项模式 -->
+    <template v-else>
+      <div class="past-exam-intro">
+        <div class="intro-card">
+          <FileText :size="24" />
+          <div>
+            <h3>往年原题精选</h3>
+            <p>基于复习背诵文件夹整理，涵盖选择题、简答题、论述题、案例分析题</p>
+            <div class="source-tags">
+              <span v-for="src in pastExamData.meta.sources" :key="src" class="source-tag">
+                {{ src }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="exam-stats">
+          <div class="exam-stat">
+            <span class="stat-num">{{ choiceCount }}</span>
+            <span class="stat-label">选择题</span>
+          </div>
+          <div class="exam-stat">
+            <span class="stat-num">{{ shortCount }}</span>
+            <span class="stat-label">简答题</span>
+          </div>
+          <div class="exam-stat">
+            <span class="stat-num">{{ essayCount }}</span>
+            <span class="stat-label">论述题</span>
+          </div>
+          <div class="exam-stat">
+            <span class="stat-num">{{ pastExamData.questions.length }}</span>
+            <span class="stat-label">总题数</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 题型 / 分类过滤 -->
+      <div class="exam-filters">
+        <div class="filter-group">
+          <span class="filter-label">题型：</span>
+          <button
+            v-for="t in typeOptions"
+            :key="t.value"
+            class="filter-btn"
+            :class="{ 'is-active': typeFilter === t.value }"
+            @click="typeFilter = t.value"
+          >
+            {{ t.label }}
+          </button>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">分类：</span>
+          <select v-model="categoryFilter" class="filter-select">
+            <option value="all">全部分类</option>
+            <option v-for="c in examCategories" :key="c" :value="c">{{ c }}</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 题目列表 -->
+      <div class="exam-list">
+        <article
+          v-for="q in filteredPastExams"
+          :key="q.id"
+          class="exam-item"
+          :class="['type-' + q.type, { 'is-revealed': revealedIds.includes(q.id) }]"
+        >
+          <header class="exam-item-header">
+            <div class="exam-item-meta">
+              <span class="exam-type" :class="'type-' + q.type">
+                {{ typeLabel(q.type) }}
+              </span>
+              <span class="exam-year">{{ q.year }}</span>
+              <span class="exam-category">{{ q.category }}</span>
+            </div>
+            <button
+              class="reveal-btn"
+              @click="toggleReveal(q.id)"
+            >
+              <component :is="revealedIds.includes(q.id) ? EyeOff : Eye" :size="14" />
+              {{ revealedIds.includes(q.id) ? '隐藏答案' : '查看答案' }}
+            </button>
+          </header>
+
+          <div class="exam-question">{{ q.question }}</div>
+
+          <!-- 选择题选项 -->
+          <div v-if="q.type === 'choice'" class="exam-options">
+            <div
+              v-for="(opt, key) in q.options"
+              :key="key"
+              class="option-item"
+              :class="{
+                'is-correct': revealedIds.includes(q.id) && key === q.answer,
+                'is-wrong': revealedIds.includes(q.id) && key !== q.answer
+              }"
+            >
+              <span class="option-key">{{ key }}.</span>
+              <span class="option-text">{{ opt }}</span>
+            </div>
+          </div>
+
+          <!-- 答案与解析 -->
+          <div v-if="revealedIds.includes(q.id)" class="exam-answer">
+            <div v-if="q.type === 'choice'" class="answer-line">
+              <strong>正确答案：</strong>
+              <span class="answer-value">{{ q.answer }}</span>
+            </div>
+            <div v-else class="answer-content">
+              <strong>参考答案：</strong>
+              <div class="answer-text">{{ q.answer }}</div>
+            </div>
+            <div class="exam-explanation">
+              <Lightbulb :size="14" />
+              <span>{{ q.explanation }}</span>
+            </div>
+          </div>
+        </article>
+
+        <div v-if="filteredPastExams.length === 0" class="empty-state">
+          <FileQuestion :size="64" />
+          <h3>暂无符合条件的题目</h3>
+          <p>请尝试调整筛选条件</p>
+        </div>
+      </div>
+    </template>
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
+import { List, Sparkles, CheckCircle, XCircle, BookOpen, FileText, FileQuestion, Eye, EyeOff, Lightbulb, BarChart3 } from 'lucide-vue-next'
 import { reviewData } from '@/data/review'
+import { pastExamData } from '@/data/pastExams'
 import ReviewSection from '@/components/review/ReviewSection.vue'
 import QuickFlashCard from '@/components/review/QuickFlashCard.vue'
+import ReviewFlashcard from '@/components/review/ReviewFlashcard.vue'
 
+// === 顶层模式 ===
+const topMode = ref('knowledge')
+
+// === 知识点梳理模式（原有逻辑）===
 const selectedCategory = ref('全部')
+const viewMode = ref('list')
+const showDiagrams = ref(true)
+const flashcardIndex = ref(0)
+const ratings = ref({})
 
 const categories = computed(() => {
   const cats = new Set(reviewData.map(item => item.category))
@@ -58,13 +309,133 @@ const filteredItems = computed(() => {
   }
   return reviewData.filter(item => item.category === selectedCategory.value)
 })
+
+const allFlashcards = computed(() => {
+  const cards = []
+  filteredItems.value.forEach(item => {
+    if (item.keyPoints && item.keyPoints.length) {
+      item.keyPoints.forEach((point, idx) => {
+        cards.push({
+          id: `${item.id}-${idx}`,
+          question: getQuestionFromPoint(point),
+          answer: point,
+          category: item.category,
+          title: item.title
+        })
+      })
+    }
+  })
+  return cards
+})
+
+const currentFlashcard = computed(() => {
+  return allFlashcards.value[flashcardIndex.value] || null
+})
+
+const flashcardProgress = computed(() => {
+  if (allFlashcards.value.length === 0) return 0
+  return ((flashcardIndex.value + 1) / allFlashcards.value.length) * 100
+})
+
+const goodCount = computed(() => {
+  return Object.values(ratings.value).filter(r => r === 'good').length
+})
+
+const hardCount = computed(() => {
+  return Object.values(ratings.value).filter(r => r === 'hard').length
+})
+
+function getQuestionFromPoint(point) {
+  if (point.includes('：')) {
+    const parts = point.split('：')
+    return `请解释：${parts[0]}`
+  }
+  if (point.includes('（')) {
+    const idx = point.indexOf('（')
+    return `请解释：${point.substring(0, idx)}`
+  }
+  if (point.includes('=')) {
+    const idx = point.indexOf('=')
+    return `请解释：${point.substring(0, idx).trim()}`
+  }
+  if (point.length > 20) {
+    return `请解释：${point.substring(0, 20)}...`
+  }
+  return `请解释：${point}`
+}
+
+function prevFlashcard() {
+  if (flashcardIndex.value > 0) {
+    flashcardIndex.value--
+  }
+}
+
+function nextFlashcard() {
+  if (flashcardIndex.value < allFlashcards.value.length - 1) {
+    flashcardIndex.value++
+  }
+}
+
+function handleRate(rating) {
+  if (currentFlashcard.value) {
+    ratings.value[currentFlashcard.value.id] = rating
+  }
+  if (flashcardIndex.value < allFlashcards.value.length - 1) {
+    setTimeout(() => {
+      flashcardIndex.value++
+    }, 300)
+  }
+}
+
+// === 往年原题模式 ===
+const typeOptions = [
+  { value: 'all', label: '全部' },
+  { value: 'choice', label: '选择题' },
+  { value: 'short', label: '简答题' },
+  { value: 'essay', label: '论述题' }
+]
+const typeFilter = ref('all')
+const categoryFilter = ref('all')
+const revealedIds = ref([])
+
+const choiceCount = computed(() => pastExamData.questions.filter(q => q.type === 'choice').length)
+const shortCount = computed(() => pastExamData.questions.filter(q => q.type === 'short').length)
+const essayCount = computed(() => pastExamData.questions.filter(q => q.type === 'essay').length)
+
+const examCategories = computed(() => {
+  return [...new Set(pastExamData.questions.map(q => q.category))]
+})
+
+const filteredPastExams = computed(() => {
+  return pastExamData.questions.filter(q => {
+    const matchType = typeFilter.value === 'all' || q.type === typeFilter.value
+    const matchCategory = categoryFilter.value === 'all' || q.category === categoryFilter.value
+    return matchType && matchCategory
+  })
+})
+
+function typeLabel(type) {
+  const map = { choice: '选择题', short: '简答题', essay: '论述题' }
+  return map[type] || type
+}
+
+function toggleReveal(id) {
+  const idx = revealedIds.value.indexOf(id)
+  if (idx > -1) {
+    revealedIds.value.splice(idx, 1)
+  } else {
+    revealedIds.value.push(id)
+  }
+}
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/styles/variables';
+@use '@/assets/styles/variables' as *;
 
 .review-view {
   padding: 40px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .page-header {
@@ -83,11 +454,75 @@ const filteredItems = computed(() => {
   }
 }
 
+.review-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+
+  @include respond-to(md) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.mode-switch {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  width: fit-content;
+}
+
+.mode-switch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+
+  &:hover {
+    color: var(--text-primary);
+  }
+
+  &.is-active {
+    background: var(--accent);
+    color: var(--bg-primary);
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+
+  .is-active & {
+    background: rgba(15, 20, 25, 0.2);
+    color: var(--bg-primary);
+  }
+}
+
 .review-categories {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-bottom: 32px;
 }
 
 .category-tag {
@@ -99,6 +534,7 @@ const filteredItems = computed(() => {
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   transition: all var(--transition-fast);
+  cursor: pointer;
 
   &:hover {
     border-color: var(--accent);
@@ -112,9 +548,565 @@ const filteredItems = computed(() => {
   }
 }
 
+.mode-toggle {
+  display: flex;
+  gap: 8px;
+}
+
+.mode-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  &.is-active {
+    background: rgba(214, 158, 46, 0.15);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+}
+
+.diagram-toggle {
+  display: flex;
+  align-items: center;
+}
+
+.diagram-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  &.is-active {
+    background: rgba(56, 161, 105, 0.15);
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  .toggle-label {
+    @media (max-width: 480px) {
+      display: none;
+    }
+  }
+}
+
 .review-list {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+.flashcards-mini {
+  .mini-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .mini-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+.flashcard-mode {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.flashcard-container {
+  animation: fadeIn 0.4s ease;
+}
+
+.flashcard-progress {
+  padding: 16px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+
+  .progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+
+    span:first-child {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .progress-text {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      font-family: $font-mono;
+    }
+  }
+
+  .progress-bar {
+    height: 6px;
+    background: var(--bg-secondary);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
+    border-radius: 3px;
+    transition: width 0.3s ease;
+  }
+}
+
+.rating-stats {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+
+  .rating-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 18px;
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    font-weight: 500;
+
+    &.good {
+      background: rgba(56, 161, 105, 0.1);
+      color: var(--success);
+    }
+
+    &.hard {
+      background: rgba(229, 62, 62, 0.1);
+      color: var(--error);
+    }
+  }
+}
+
+.empty-state {
+  @include flex-center;
+  flex-direction: column;
+  padding: 80px 20px;
+  text-align: center;
+
+  svg {
+    color: var(--text-muted);
+    opacity: 0.5;
+    margin-bottom: 16px;
+  }
+
+  h3 {
+    font-size: 18px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+}
+
+// === 往年原题样式 ===
+.past-exam-intro {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+
+  @include respond-to(md) {
+    grid-template-columns: 2fr 1fr;
+    align-items: stretch;
+  }
+}
+
+.intro-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(214, 158, 46, 0.1) 0%, rgba(183, 121, 31, 0.05) 100%);
+  border: 1px solid rgba(214, 158, 46, 0.25);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-lg);
+
+  > svg {
+    color: var(--accent);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  h3 {
+    font-family: $font-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+}
+
+.source-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.source-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-family: $font-mono;
+}
+
+.exam-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+}
+
+.exam-stat {
+  text-align: center;
+
+  .stat-num {
+    display: block;
+    font-family: $font-mono;
+    font-size: 24px;
+    font-weight: 700;
+    @include text-gradient;
+    margin-bottom: 2px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+}
+
+.exam-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding: 14px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.filter-btn {
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+
+  &:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  &.is-active {
+    background: var(--accent);
+    color: var(--bg-primary);
+    border-color: var(--accent);
+  }
+}
+
+.filter-select {
+  padding: 6px 10px;
+  font-size: 13px;
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  outline: none;
+
+  &:focus {
+    border-color: var(--accent);
+  }
+}
+
+.exam-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.exam-item {
+  padding: 20px 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  transition: border-color var(--transition-fast);
+
+  &.type-choice {
+    border-left: 4px solid #3182ce;
+  }
+
+  &.type-short {
+    border-left: 4px solid #38a169;
+  }
+
+  &.type-essay {
+    border-left: 4px solid #d69e2e;
+  }
+
+  &.is-revealed {
+    background: var(--bg-secondary);
+  }
+}
+
+.exam-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.exam-item-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.exam-type {
+  display: inline-block;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+
+  &.type-choice {
+    color: #63b3ed;
+    background: rgba(49, 130, 206, 0.15);
+  }
+
+  &.type-short {
+    color: #68d391;
+    background: rgba(56, 161, 105, 0.15);
+  }
+
+  &.type-essay {
+    color: var(--accent);
+    background: rgba(214, 158, 46, 0.15);
+  }
+}
+
+.exam-year {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  font-family: $font-mono;
+}
+
+.exam-category {
+  font-size: 12px;
+  color: var(--text-secondary);
+  padding: 2px 8px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+}
+
+.reveal-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+
+  &:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+}
+
+.exam-question {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--text-primary);
+  white-space: pre-wrap;
+  margin-bottom: 16px;
+}
+
+.exam-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.option-item {
+  display: flex;
+  gap: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+
+  &.is-correct {
+    color: var(--success);
+    background: rgba(56, 161, 105, 0.1);
+    border-color: rgba(56, 161, 105, 0.4);
+  }
+
+  &.is-wrong {
+    opacity: 0.5;
+  }
+}
+
+.option-key {
+  font-weight: 700;
+  color: var(--accent);
+  font-family: $font-mono;
+  flex-shrink: 0;
+}
+
+.exam-answer {
+  margin-top: 16px;
+  padding: 16px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+}
+
+.answer-line {
+  font-size: 14px;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+
+  .answer-value {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 10px;
+    font-weight: 700;
+    color: var(--bg-primary);
+    background: var(--success);
+    border-radius: var(--radius-sm);
+  }
+}
+
+.answer-content {
+  font-size: 14px;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+
+  strong {
+    color: var(--accent);
+    display: block;
+    margin-bottom: 8px;
+  }
+}
+
+.answer-text {
+  white-space: pre-wrap;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+.exam-explanation {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border-color);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-muted);
+
+  svg {
+    color: var(--accent);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 </style>

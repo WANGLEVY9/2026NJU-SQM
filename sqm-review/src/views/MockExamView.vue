@@ -181,7 +181,7 @@ watch(timeRemaining, (val) => {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/styles/variables';
+@use '@/assets/styles/variables' as *;
 
 .mock-exam-view {
   min-height: 100vh;

@@ -32,7 +32,7 @@
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/styles/variables';
+@use '@/assets/styles/variables' as *;
 
 .app-footer {
   background: var(--bg-secondary);

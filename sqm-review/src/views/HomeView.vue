@@ -53,6 +53,14 @@
           <p>历年真题分类整理，答案解析详尽</p>
           <span class="feature-count">{{ examCount }} 套试卷</span>
         </router-link>
+        <router-link to="/choices" class="feature-card">
+          <div class="feature-icon">
+            <ListChecks :size="32" />
+          </div>
+          <h3>选择题专项</h3>
+          <p>汇总所有选择题，按知识点刷题</p>
+          <span class="feature-count">{{ choiceCount }} 题</span>
+        </router-link>
         <router-link to="/mock" class="feature-card">
           <div class="feature-icon">
             <ClipboardList :size="32" />
@@ -126,9 +134,10 @@
 
 <script setup>
 import { computed } from 'vue'
-import { BookOpen, Brain, FileText, ClipboardList, Sparkles, Layers, Filter, Timer } from 'lucide-vue-next'
+import { BookOpen, Brain, FileText, ClipboardList, Sparkles, Layers, Filter, Timer, ListChecks } from 'lucide-vue-next'
 import { useCourseStore } from '@/store/useCourseStore'
 import { useExamStore } from '@/store/useExamStore'
+import { choiceQuestions } from '@/data/choices'
 
 const courseStore = useCourseStore()
 const examStore = useExamStore()
@@ -138,10 +147,11 @@ const examCount = computed(() => examStore.papers.length)
 const flashcardCount = computed(() => {
   return courseStore.chapters.reduce((acc, ch) => acc + (ch.flashcards?.length || 0), 0)
 })
+const choiceCount = computed(() => choiceQuestions.length)
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/styles/variables';
+@use '@/assets/styles/variables' as *;
 
 .home-view {
   overflow-x: hidden;

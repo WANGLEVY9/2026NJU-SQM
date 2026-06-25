@@ -71,7 +71,7 @@ defineEmits(['prev', 'next'])
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/styles/variables';
+@use '@/assets/styles/variables' as *;
 
 .chapter-nav {
   background: var(--bg-card);

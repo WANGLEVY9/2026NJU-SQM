@@ -119,7 +119,7 @@ const hideAllAnswers = () => {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/styles/variables';
+@use '@/assets/styles/variables' as *;
 
 .paper-view {
   padding: 40px 20px;

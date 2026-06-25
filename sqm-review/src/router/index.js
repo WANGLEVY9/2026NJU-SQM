@@ -32,6 +32,12 @@ const routes = [
         meta: { title: '真题练习' }
     },
     {
+        path: '/choices',
+        name: 'Choices',
+        component: () => import('@/views/ChoicePracticeView.vue'),
+        meta: { title: '选择题专项' }
+    },
+    {
         path: '/exams/:id',
         name: 'Paper',
         component: () => import('@/views/PaperView.vue'),

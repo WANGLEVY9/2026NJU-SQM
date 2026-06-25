@@ -17,6 +17,37 @@
 
         <article class="chapter-content" v-html="formattedContent"></article>
 
+        <!-- 老师讲解区 -->
+        <section v-if="commentary" class="commentary-section">
+          <h2>
+            <MessageSquare :size="20" />
+            {{ chapter.teacher }}老师讲解
+          </h2>
+
+          <div v-if="commentary.overview" class="commentary-block">
+            <h3 class="commentary-title">本章导览</h3>
+            <p class="commentary-text">{{ commentary.overview }}</p>
+          </div>
+
+          <div v-if="commentary.keyTakeaway" class="commentary-block">
+            <h3 class="commentary-title">
+              <Star :size="14" />
+              核心要点
+            </h3>
+            <p class="commentary-text">{{ commentary.keyTakeaway }}</p>
+          </div>
+
+          <div v-if="commentary.examHints?.length" class="commentary-block">
+            <h3 class="commentary-title">
+              <GraduationCap :size="14" />
+              常见考点（往年考题方向）
+            </h3>
+            <ul class="exam-hints">
+              <li v-for="(hint, idx) in commentary.examHints" :key="idx">{{ hint }}</li>
+            </ul>
+          </div>
+        </section>
+
         <section class="key-points-section" v-if="chapter.keyPoints?.length">
           <h2>
             <Lightbulb :size="20" />
@@ -70,8 +101,9 @@
 <script setup>
 import { computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { ArrowLeft, Lightbulb, Sparkles, FileQuestion } from 'lucide-vue-next'
+import { ArrowLeft, Lightbulb, Sparkles, FileQuestion, MessageSquare, Star, GraduationCap } from 'lucide-vue-next'
 import { useCourseStore } from '@/store/useCourseStore'
+import { commentaryData } from '@/data/commentary'
 import ChapterNav from '@/components/course/ChapterNav.vue'
 import FlashCard from '@/components/course/FlashCard.vue'
 
@@ -81,6 +113,7 @@ const courseStore = useCourseStore()
 
 const chapterId = computed(() => route.params.id)
 const chapter = computed(() => courseStore.getChapterById(chapterId.value))
+const commentary = computed(() => commentaryData[chapterId.value])
 const chapters = computed(() => courseStore.chapters)
 const currentIndex = computed(() => courseStore.chapters.findIndex(ch => ch.id === chapterId.value))
 const hasPrevChapter = computed(() => currentIndex.value > 0)
@@ -119,7 +152,7 @@ watch(chapterId, (id) => {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/styles/variables';
+@use '@/assets/styles/variables' as *;
 
 .chapter-view {
   background: var(--bg-primary);
@@ -241,6 +274,95 @@ watch(chapterId, (id) => {
   :deep(strong) {
     color: var(--accent);
     font-weight: 600;
+  }
+}
+
+.commentary-section {
+  margin-top: 48px;
+  padding: 28px;
+  background: linear-gradient(135deg, rgba(26, 54, 93, 0.12) 0%, rgba(44, 82, 130, 0.08) 100%);
+  border: 1px solid rgba(44, 82, 130, 0.25);
+  border-left: 4px solid #2c5282;
+  border-radius: var(--radius-lg);
+
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: $font-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #63b3ed;
+    margin-bottom: 24px;
+  }
+}
+
+.commentary-block {
+  margin-bottom: 22px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.commentary-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed var(--border-color);
+
+  svg {
+    color: var(--accent);
+  }
+}
+
+.commentary-text {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+}
+
+.exam-hints {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    position: relative;
+    padding: 10px 12px 10px 36px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+
+    &::before {
+      content: '?';
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--bg-primary);
+      background: var(--accent);
+      border-radius: 50%;
+      @include flex-center;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }
 

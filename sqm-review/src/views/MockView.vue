@@ -70,7 +70,7 @@ const startExam = (paperId) => {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/styles/variables';
+@use '@/assets/styles/variables' as *;
 
 .mock-view {
   padding: 40px 20px;

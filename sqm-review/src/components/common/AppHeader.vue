@@ -34,6 +34,10 @@
           <FileText :size="18" />
           <span>真题练习</span>
         </router-link>
+        <router-link to="/choices" class="nav-link" @click="closeMobileMenu">
+          <ListChecks :size="18" />
+          <span>选择题专项</span>
+        </router-link>
         <router-link to="/mock" class="nav-link" @click="closeMobileMenu">
           <ClipboardList :size="18" />
           <span>模拟考试</span>
@@ -50,7 +54,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { Home, BookOpen, Brain, FileText, ClipboardList, Menu, X } from 'lucide-vue-next'
+import { Home, BookOpen, Brain, FileText, ClipboardList, ListChecks, Menu, X } from 'lucide-vue-next'
 
 const isMobileMenuOpen = ref(false)
 
@@ -64,7 +68,7 @@ const closeMobileMenu = () => {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/styles/variables';
+@use '@/assets/styles/variables' as *;
 
 .app-header {
   position: fixed;

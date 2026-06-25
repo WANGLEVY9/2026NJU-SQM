@@ -97,7 +97,7 @@ import { BookOpen, Layers, Info, Heart } from 'lucide-vue-next'
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/styles/variables';
+@use '@/assets/styles/variables' as *;
 
 .about-view {
   padding: 40px 20px;

@@ -42,7 +42,7 @@ const toggle = () => {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/styles/variables';
+@use '@/assets/styles/variables' as *;
 
 .quick-flashcard {
   background: var(--bg-secondary);
