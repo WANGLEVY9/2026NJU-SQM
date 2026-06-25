@@ -1,0 +1,21 @@
+﻿# 依赖
+node_modules/
+sqm-review/node_modules/
+
+# 构建产物
+dist/
+sqm-review/dist/
+
+# IDE和临时文件
+.trae/
+.uploads/
+*.log
+*.local
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 提取的中间产物
+extracted_content/
