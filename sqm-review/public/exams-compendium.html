@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>软件质量管理 — 往年真题汇总</title>
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-card: #1c2128;
+            --border-color: #30363d;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-gold: #d29922;
+            --accent-green: #3fb950;
+            --accent-red: #f85149;
+            --accent-purple: #bc8cff;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            padding: 20px;
+        }
+        .container { max-width: 1100px; margin: 0 auto; }
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            padding: 30px 0 20px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .meta-info {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 13px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .year-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+        .year-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, rgba(88,166,255,0.1), rgba(210,153,34,0.08));
+            border-bottom: 1px solid var(--border-color);
+        }
+        .year-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 80px;
+            height: 36px;
+            padding: 0 16px;
+            font-size: 18px;
+            font-weight: 800;
+            border-radius: 8px;
+            color: #fff;
+        }
+        .year-badge.recent { background: linear-gradient(135deg, #f85149, #d29922); }
+        .year-badge.old { background: linear-gradient(135deg, #30363d, #484f58); }
+        .year-subtitle {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        .year-body { padding: 20px 24px; }
+        .question-block {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            transition: border-color 0.2s;
+        }
+        .question-block:hover { border-color: rgba(88,166,255,0.4); }
+        .q-type-tag {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+        }
+        .q-type-tag.choice { color: var(--accent-blue); background: rgba(88,166,255,0.12); border: 1px solid rgba(88,166,255,0.3); }
+        .q-type-tag.multi-choice { color: var(--accent-purple); background: rgba(188,140,255,0.12); border: 1px solid rgba(188,140,255,0.3); }
+        .q-type-tag.short-answer { color: var(--accent-green); background: rgba(63,185,80,0.12); border: 1px solid rgba(63,185,80,0.3); }
+        .q-type-tag.essay { color: var(--accent-gold); background: rgba(210,153,34,0.12); border: 1px solid rgba(210,153,34,0.3); }
+        .q-type-tag.defn { color: var(--text-secondary); background: rgba(139,148,158,0.1); border: 1px solid rgba(139,148,158,0.25); }
+        .q-text { font-size: 14px; line-height: 1.75; color: var(--text-primary); }
+        .q-options { margin-top: 10px; padding-left: 16px; }
+        .q-option { font-size: 13px; line-height: 1.7; color: var(--text-secondary); margin: 4px 0; }
+        .answer-box {
+            margin-top: 10px;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        .answer-correct { background: rgba(63,185,80,0.08); border-left: 3px solid var(--accent-green); color: #c9f4ca; }
+        .analysis-box {
+            margin-top: 8px;
+            padding: 10px 14px;
+            background: rgba(210,153,34,0.06);
+            border-left: 3px solid var(--accent-gold);
+            border-radius: 0 6px 6px 0;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        .source-note {
+            font-size: 11px;
+            color: var(--text-secondary);
+            opacity: 0.7;
+            margin-top: 6px;
+        }
+        .section-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin: 18px 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .toc {
+            position: sticky;
+            top: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+        }
+        .toc h2 { font-size: 16px; margin-bottom: 12px; color: var(--accent-gold); }
+        .toc-list { list-style: none; columns: 2; column-gap: 12px; }
+        .toc-list li {
+            font-size: 13px;
+            padding: 5px 0;
+            border-bottom: 1px dashed var(--border-color);
+            break-inside: avoid;
+        }
+        .toc-list a { color: var(--accent-blue); text-decoration: none; }
+        .toc-list a:hover { color: var(--accent-gold); text-decoration: underline; }
+        .unknown-year { border-color: var(--accent-purple) !important; }
+        .unknown-year .year-header { background: linear-gradient(135deg, rgba(188,140,255,0.1), rgba(210,153,34,0.05)); }
+        .image-source {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            color: var(--accent-blue);
+            background: rgba(88,166,255,0.08);
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 8px;
+        }
+        @media (max-width: 768px) {
+            .toc-list { columns: 1; }
+            body { padding: 10px; }
+            .year-body { padding: 14px 16px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<h1>📚 软件质量管理 — 往年真题汇总</h1>
+
+<div class="meta-info">
+    数据来源：<a href="https://fredqinhz.github.io/posts/d7c515c7.html" style="color:#58a6ff">Fred's Blog</a> + 
+    <a href="https://eaglebear2002.github.io/8554/" style="color:#58a6ff">EagleBear2002</a><br>
+    整理时间：2026-06-26 | 课程：南京大学 软件质量管理（荣国平/邵栋）
+</div>
+
+<div class="toc">
+    <h2>📋 快速导航（按年份）</h2>
+    <ul class="toc-list">
+        <li><a href="#y2024">🔴 2024 Spring</a></li>
+        <li><a href="#y2023">🔴 2023 Fall</a></li>
+        <li><a href="#y2022">🟠 2022 Fall</a></li>
+        <li><a href="#y2021">🟡 2021 Fall</a></li>
+        <li><a href="#y2020">🟢 2020 Fall (期中+期末)</a></li>
+        <li><a href="#y2019">⚪ 2019 Fall</a></li>
+        <li><a href="#y2018">⚪ 2018 Fall</a></li>
+        <li><a href="#y2016">⚪ 2016 Fall</a> <span style="font-size:11px;color:#888">[图片识图]</span></li>
+        <li><a href="#y2015">⚪ 2015 A/B卷</a></li>
+        <li><a href="#y2014">⚪ 2014</a></li>
+        <li><a href="#y2013">⚪ 2013 Fall</a> <span style="font-size:11px;color:#888">[图片识图]</span></li>
+        <li><a href="#unknown">❓ 年份未确定</a></li>
+    </ul>
+</div>
+
+<!-- ============================================================ -->
+<!-- 2024 -->
+<!-- ============================================================ -->
+<div class="year-section" id="y2024">
+<div class="year-header">
+<span class="year-badge recent">2024 Spring</span>
+<div>
+<strong>软件质量管理期末试卷</strong>
+<div class="year-subtitle">来源：Fred Blog · 作者 qhz · 得分 91 分</div>
+</div>
+</div>
+<div class="year-body">
+
+<div class="section-title">一、名词解释（8 分）</div>
+
+<div class="question-block">
+<span class="q-type-tag defn">名词解释</span>
+<div class="q-text"><strong>1. 配置管理中的配置项</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag defn">名词解释</span>
+<div class="q-text"><strong>2. 配置管理中的基线</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag defn">名词解释</span>
+<div class="q-text"><strong>3. 关键子过程性能基线</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag defn">名词解释</span>
+<div class="q-text"><strong>4. 软件过程</strong></div>
+</div>
+
+<div class="section-title">二、简答题</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">简答/论述</span>
+<div class="q-text"><strong>【2022Fall】【2024Spring】</strong>结合"软件开发作为一种知识工作，需要领导者而不是一般的经理"，阐述知识工作领导者应该具备的品质或者特点（至少三项）。</div>
+<div class="answer-box answer-correct">
+<strong>参考答案：</strong><br>
+• <strong>诚实（Honest）</strong>：信守承诺，言行一致，让团队成员感到信任和尊重<br>
+• <strong>能力（Competent）</strong>：展现卓越能力和广泛知识<br>
+• <strong>远见（Visionary）</strong>：超越眼前挑战和任务，具备明确可信的未来愿景<br>
+• <strong>激励（Inspirational）</strong>：传播积极、充满热情和能量的未来愿景
+</div>
+<div class="source-note">提示：正确答案在 PPT 团队动力学当中；Eagle 的博客上此题有些问题</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>【2021Fall】【2020-mid】【2024Spring】</strong>我们如何理解瀑布模型？</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>敏捷宣言的内容，如何理解敏捷宣言？</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>挣值管理的三种实现方式（简单、中级、高级）。</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>估算的四个要点。</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>列出 TSP 角色，并说明 TSP 对自主团队的支持。</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>质量管理策略，质量管理计划制定过程中有哪些要关注的点？</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">论述题</span>
+<div class="q-text"><strong>【2022Fall】【2024Spring】</strong>随着 ChatGPT 的横空出世，以大模型为代表的 AI 技术势必对各行各业带来前所未有的影响。具体到软件工程，人工智能技术的应用也日渐常见。请结合这一背景畅想本课程涉及的若干话题可能在这一波 AI 浪潮中的挑战和机遇。至少应包括如下话题：<strong>项目管理、质量管理、过程改进</strong>。（15 分）</div>
+</div>
+
+</div></div>
+
+<!-- ============================================================ -->
+<!-- 2023 -->
+<!-- ============================================================ -->
+<div class="year-section" id="y2023">
+<div class="year-header">
+<span class="year-badge recent">2023 Fall</span>
+<div>
+<strong>软件质量管理期末试卷</strong>
+<div class="year-subtitle">来源：Fred Blog · 作者 hy · 90+ 很多</div>
+</div>
+</div>
+<div class="year-body">
+
+<div class="section-title">选择题（不定项选择）</div>
+
+<div class="question-block">
+<span class="q-type-tag multi-choice">不定项选择</span>
+<div class="q-text">基本是课堂上那些内容，有 3-4 道没见过。具体题目未详细记录。</div>
+</div>
+
+<div class="section-title">简答题</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>1. 知识工作者需要领导而不是经理 —— 领导的特点至少三条</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>2. 敏捷宣言和理解</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>3. EVM 初级中级高级特点</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>4. 资源估算的要点</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>5. CMMI 五层简述，为什么第四层和第五层是高级层次，和其他有什么本质区别</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">论述题</span>
+<div class="q-text"><strong>6. ChatGPT 引发大模型 AI 技术浪潮，阐述对我们课程内容的机遇和挑战，至少包括项目管理、质量管理、过程改进</strong></div>
+</div>
+
+</div></div>
+
+<!-- ============================================================ -->
+<!-- 2022 -->
+<!-- ============================================================ -->
+<div class="year-section" id="y2022">
+<div class="year-header">
+<span class="year-badge recent">2022 Fall</span>
+<div>
+<strong>软件质量与管理期末试卷</strong>
+<div class="year-subtitle">来源：Fred Blog + EagleBear2002（含详细答案）</div>
+</div>
+</div>
+<div class="year-body">
+
+<div class="section-title">一、选择题 / 判断题</div>
+
+<div class="question-block">
+<span class="q-type-tag choice">判断题</span>
+<div class="q-text"><strong>1.</strong> 软件过程管理是软件项目管理应该要实现目标</div>
+<div class="answer-box answer-correct"><strong>答案：×</strong> 软件过程管理和项目管理完全是两回事，项目过程管理应当有专门的人去做。</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag choice">判断题</span>
+<div class="q-text"><strong>2.【2022Fall】</strong>在公司导入敏捷过程是我们今年过程改进的主要目标</div>
+<div class="answer-box answer-correct"><strong>答案：√</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag choice">判断题</span>
+<div class="q-text"><strong>3.</strong>XP 与 CMM/CMMI 是对立的两种软件开发方法</div>
+<div class="answer-box answer-correct"><strong>答案：×</strong> CMM/CMMI 不是开发方法而是过程管理和改进模型。</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag choice">判断题</span>
+<div class="q-text"><strong>4.【2022Fall】</strong>CMM/CMMI 不适合当今互联网环境的项目管理需求</div>
+<div class="answer-box answer-correct"><strong>答案：√</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag choice">判断题</span>
+<div class="q-text"><strong>5.【2022Fall】</strong>PDCA 和 IDEAL 不适合在敏捷环境中使用</div>
+<div class="answer-box answer-correct"><strong>答案：×</strong> PDCA、IDEAL 是过程改进参考元模型，适合在敏捷环境中使用。</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag choice">单选题</span>
+<div class="q-text"><strong>6.【2022Fall】</strong>"Measure twice, cut once"描述的是下述哪个软件开发场景？</div>
+<div class="q-options">
+A. 软件设计 &nbsp; B. 代码评审 &nbsp; C. 需求开发 &nbsp; D. V&V &nbsp; E. 软件测试
+</div>
+<div class="answer-box answer-correct"><strong>答案：B</strong> 强调在应用更改之前仔细检查代码以识别和纠正问题。</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag choice">单选题</span>
+<div class="q-text"><strong>7.【2022Fall】</strong>软件发展三大阶段，以下不属于三大主要阶段的是：</div>
+<div class="q-options">
+A. 软硬件一体化 &nbsp; B. 网络化和服务化 &nbsp; C. 云计算化和云原生 &nbsp; D. 软件成为独立产品
+</div>
+<div class="answer-box answer-correct"><strong>答案：C</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag choice">单选题</span>
+<div class="q-text"><strong>8.【2022Fall】</strong>以下描述中，<strong>不属于</strong>软件开发本质困难或者本质挑战的是：</div>
+<div class="q-options">
+A. 质量难题 &nbsp; B. 复杂性 &nbsp; C. 不可见 &nbsp; D. 一致性
+</div>
+<div class="answer-box answer-correct"><strong>答案：A</strong> Brooks 四大本质困难：复杂性、一致性、可变性、不可见性。质量不是本质困难。</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag choice">单选题</span>
+<div class="q-text"><strong>9.【2022Fall】</strong>软硬件一体化阶段的典型实践：</div>
+<div class="q-options">
+A. Code and Fix &nbsp; B. 迭代式开发 &nbsp; C. 瀑布生命周期模型 &nbsp; D. 成熟度模型
+</div>
+<div class="answer-box answer-correct"><strong>答案：A</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag multi-choice">不定项选择</span>
+<div class="q-text"><strong>10.</strong>对比 TSP 和 SCRUM，下列说法不恰当的是：</div>
+<div class="q-options">
+A. 都是过程框架，需要填补具体实践之后才是一个可以工作的过程<br>
+B. 一种是计划驱动方法，另外一种是敏捷方法<br>
+C. SCRUM 适合迭代式场景，TSP 适合瀑布场景<br>
+D. 两种方法都需要进行度量数据收集、分析
+</div>
+<div class="answer-box answer-correct"><strong>答案：BC</strong> 计划驱动和敏捷不对立；TSP 也支持迭代。</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag choice">单选题</span>
+<div class="q-text"><strong>11.</strong>适用麦克勒格 Y 理论（Theory Y）激励的场合是：</div>
+<div class="q-options">
+A. 关注工作环境、薪金等 &nbsp; B. 更喜欢经常的指导，避免承担责任<br>
+C. 自我中心，反对变革 &nbsp; D. 能够自我约束，渴望承担责任
+</div>
+<div class="answer-box answer-correct"><strong>答案：D</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag multi-choice">不定项选择</span>
+<div class="q-text"><strong>12.</strong>关于马斯洛需求层次理论描述不正确的是：</div>
+<div class="q-options">
+A. 自我实现是寻求自尊 &nbsp; B. 激励来自为没有满足的需求而努力奋斗<br>
+C. 低层次需求必须在高层次需求满足之前得到满足 &nbsp; D. 满足高层次需求的途径更少
+</div>
+<div class="answer-box answer-correct"><strong>答案：AD</strong> 自我实现是最高层（非自尊）；马斯洛晚年修正认为高层次不一定要在低层次满足后才能实现。</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag choice">单选题</span>
+<div class="q-text"><strong>13.</strong>关于团队动力学的论述，不恰当的是：</div>
+<div class="q-options">
+A. 马斯洛需求层次理论可以用来更好地维持激励水平<br>
+B. 应该尽可能使用鼓励承诺这种激励方式<br>
+C. X 理论适合用马斯洛底层需求激励<br>
+D. 海兹伯格理论区分为内在因素和外在因素
+</div>
+<div class="answer-box answer-correct"><strong>答案：A</strong> 马斯洛理论用于指导激励手段的选择，而非维持手段。</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag multi-choice">不定项选择</span>
+<div class="q-text"><strong>14.【2022Fall】</strong>下述关于 WBS 描述中哪些不正确的：</div>
+<div class="q-options">
+A. WBS 应该对应 OBS（Organization Breakdown Structure）<br>
+B. WBS 提供了范围管理的基础<br>
+C. WBS 最底层要素是实现目标的充分必要条件<br>
+D. WBS 同一层不能应用不同标准
+</div>
+<div class="answer-box answer-correct"><strong>答案：A</strong> WBS 和 OBS 关注角度不同。</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag multi-choice">不定项选择</span>
+<div class="q-text"><strong>15.【2022Fall】</strong>下述关于 EVM 描述中哪些不正确的：</div>
+<div class="q-options">
+A. EVM 不适用于质量管理 &nbsp; B. EVM 中级引入成本信息<br>
+C. EVM 高度依赖估算准确 &nbsp; D. EVM 可以适应需求变更
+</div>
+<div class="answer-box answer-correct"><strong>答案：B</strong> EVM 只做进度和成本管理；高级才引入成本信息。</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag multi-choice">不定项选择</span>
+<div class="q-text"><strong>16.【2022Fall】</strong>PSP 质量管理策略，下列说法中正确的：</div>
+<div class="q-options">
+A. 用缺陷管理替代质量管理，既有必要性也有合理性<br>
+B. 基本无缺陷的开发是通过高质量评审实现的<br>
+C. 经过训练评审是最有效的缺陷消除手段<br>
+D. PSP 主要解决外部质量
+</div>
+<div class="answer-box answer-correct"><strong>答案：ABD</strong> 编译才是最高效的消除手段。</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag multi-choice">不定项选择</span>
+<div class="q-text"><strong>17.【2022Fall】</strong>关于 DRL，不正确的：</div>
+<div class="q-options">
+A. 模块级开发质量控制指标 &nbsp; B. 以单元测试每小时发现缺陷率为基准<br>
+C. 以单元测试发现缺陷个数为基准 &nbsp; D. 只能预测不能度量
+</div>
+<div class="answer-box answer-correct"><strong>答案：CD</strong> DRL 只能度量不能预测。</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag multi-choice">不定项选择</span>
+<div class="q-text"><strong>18.【2022Fall】</strong>关于 PQI，不正确的：</div>
+<div class="q-options">
+A. 表征模块级别过程规范化程度 &nbsp; B. 越高越好<br>
+C. 越低越好 &nbsp; D. 不能用于质量规划
+</div>
+<div class="answer-box answer-correct"><strong>答案：BCD</strong> PQI > 0.4 即可，可用于质量规划和过程改进。</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag multi-choice">不定项选择</span>
+<div class="q-text"><strong>19.【2022Fall】</strong>Humphrey Quality Journey 中正确的：</div>
+<div class="q-options">
+A. 步骤可在适当时候更换顺序 &nbsp; B. 加强需求开发应是早期必备步骤<br>
+C. 仍在"用缺陷管理替代质量管理"基本策略之下讨论<br>
+D. 测试应先于评审得到贯彻 &nbsp; E. 加强团队评审是后期步骤
+</div>
+<div class="answer-box answer-correct"><strong>答案：CD</strong> 前后顺序不能改变；QJ 不包括需求开发。</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag multi-choice">不定项选择</span>
+<div class="q-text"><strong>20.【2022Fall】</strong>完全正确的状态机应满足：</div>
+<div class="q-options">
+A. 没有死循环和陷阱 &nbsp; B. 状态转化条件正交性<br>
+C. 状态转化条件完整性 &nbsp; D. 状态转化条件独立性 &nbsp; E. 符合设计意图
+</div>
+<div class="answer-box answer-correct"><strong>答案：ABCE</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag choice">单选题</span>
+<div class="q-text"><strong>21.【2022Fall】</strong>典型客户需求的是：</div>
+<div class="q-options">A. 客户期望 &nbsp; B. 预算限制 &nbsp; C. 法律法规限制 &nbsp; D. 系统功能描述</div>
+<div class="answer-box answer-correct"><strong>答案：ABC</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag multi-choice">不定项选择</span>
+<div class="q-text"><strong>22.【2022Fall】</strong>集成策略描述正确的：</div>
+<div class="q-options">
+A. 组件质量不高时不可以用扁平化策略 &nbsp; B. 尽早获取可用组件用集簇式<br>
+C. 组件质量高时可用大爆炸式 &nbsp; D. 持续集成本质上就是逐一添加策略
+</div>
+<div class="answer-box answer-correct"><strong>答案：BCD</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag choice">单选题</span>
+<div class="q-text"><strong>23.【2022Fall】</strong>规模估算和度量的描述正确的：</div>
+<div class="q-options">
+A. 功能点提供精确规模度量 &nbsp; B. 规模数据扮演历史数据桥梁角色<br>
+C. 规模估算通常不用质量计划 &nbsp; D. PROBE 只用于规模估算
+</div>
+<div class="answer-box answer-correct"><strong>答案：B</strong></div>
+</div>
+
+<div class="section-title">二、主观题（简答/论述）</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">论述题 9分</span>
+<div class="q-text"><strong>【2022Fall】</strong>结合"软件开发作为一种知识工作，需要领导者而不是一般的经理"，阐述知识工作者领导者的品质或特点（至少三项）。</div>
+<div class="answer-box answer-correct">
+<strong>参考答案：</strong><br>
+项目组长目标：①建设维持高效团队 ②激励成员 ③处理成员问题 ④提供完整进度信息 ⑤充当合格会议组织者协调者<br>
+TL 技能：①天生领导者 ②识别关键问题并客观决策 ③不介意偶尔当"恶人" ④尊敬团队成员<br>
+TL 工作内容：①激励团队 ②主持周例会 ③每周汇报状态 ④分配工作任务 ⑤维护资料 ⑥组织总结
+</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">论述题 10分</span>
+<div class="q-text"><strong>【2022Fall】【2021Fall】【2020-mid】</strong>完整描述敏捷宣言的内容。应该如何正确理解敏捷宣言？</div>
+<div class="answer-box answer-correct">
+四大价值观：<br>
+• 个体和互动 <strong>高于</strong> 流程和工具<br>
+• 工作的软件 <strong>高于</strong> 详尽的文档<br>
+• 客户合作 <strong>高于</strong> 合同谈判<br>
+• 响应变化 <strong>高于</strong> 遵循计划<br>
+→ 尽管右项有其价值，我们更重视左项的价值
+</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">论述题 10分</span>
+<div class="q-text"><strong>【2022Fall】</strong>挣值管理的三种实现方式（简单、中级、高级），分别描述基本要点。</div>
+<div class="answer-box answer-correct">
+• <strong>简单实现</strong>：仅关注进度信息 → 建 WBS → 定义 PV → 按 0-100 或 50-50 规则赋 EV<br>
+• <strong>中级实现</strong>：加入日程偏差计算 SV = EV – PV，SPI = EV/PV<br>
+• <strong>高级实现</strong>：在中级基础上考察实际成本 AC，计算 CV = EV – AC，CPI = EV/AC
+</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">论述题 10分</span>
+<div class="q-text"><strong>【2022Fall】【2021Fall】</strong>软件项目规模估算基本要点有哪些？</div>
+<div class="answer-box answer-correct">
+① 尽可能划分详细一些 ② 建立对结果的信心 ③ 依赖数据 ④ 估算要的是过程而非结果；估算是干系人达成共识的过程
+</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">论述题 10分</span>
+<div class="q-text"><strong>【2022Fall】</strong>CMMI-DEV V1.3 五个成熟度等级特征？为何四级五级被称为高等级？与普通等级的本质差别？解释为何 CMMI 不应该是敏捷方法的对立面。</div>
+<div class="answer-box answer-correct">
+五级特征：①Initial 原始（依赖个人英雄主义）②Managed 已管理（有计划和跟踪）③Defined 已定义（公司层面标准流程）④Quantitatively Managed 定量管理（统计过程控制）⑤Optimizing 优化级（根因分析避免复发）<br><br>
+四五级为高等级原因：构建预测模型，以统计方法管理过程。<br>
+CMMI 不是敏捷对立面：CMMI 是过程改进模型（刻画组织成熟路线图）；敏捷是开发方法。两者性质完全不同。
+</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">论述题 15分</span>
+<div class="q-text"><strong>【2022Fall】</strong>ChatGPT/大模型 AI 对项目管理、质量管理、过程改进的机遇与挑战。（15分）</div>
+</div>
+
+</div></div>
+
+<!-- ============================================================ -->
+<!-- 2021 -->
+<!-- ============================================================ -->
+<div class="year-section" id="y2021">
+<div class="year-header">
+<span class="year-badge">2021 Fall</span>
+<div>
+<strong>软件质量与管理期末试卷</strong>
+<div class="year-subtitle">来源：EagleBear2002（含详细答案）</div>
+</div>
+</div>
+<div class="year-body">
+
+<div class="section-title">选择题</div>
+
+<div class="question-block">
+<span class="q-type-tag choice">单选 10道×2分</span>
+<div class="q-text">比较基础（页面未提供具体题目）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag multi-choice">不定项选择 10道×2分</span>
+<div class="q-text">有一定难度（页面未提供具体题目）</div>
+</div>
+
+<div class="section-title">简答题</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">10分</span>
+<div class="q-text"><strong>【2021Fall】【2020-mid】</strong>我们如何理解瀑布模型？（6 分）</div>
+<div class="answer-box answer-correct">
+① 瀑布模型不是单一模型，是一系列模型（从最简单到最复杂）<br>
+② 项目应结合实际情况选择合适过程元素的瀑布模型<br>
+③ 团队往往低估挑战，选择了过于简单不适用的瀑布模型
+</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">10分</span>
+<div class="q-text"><strong>【2021Fall】</strong>解释至少 5 个 DevOps 技术、实践、方法。</div>
+<div class="answer-box answer-correct">
+① 方法论基础：敏捷开发 + 精益思想 + Kanban<br>
+② 微服务架构（领域驱动设计）<br>
+③ 大量虚拟化技术<br>
+④ 一切皆服务 XaaS 理念<br>
+⑤ 强大的工具链支持高水平自动化
+</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">10分</span>
+<div class="q-text"><strong>【2021Fall】</strong>列出 TSP 角色并解释 5 个角色的职责。【2016】TSP 项目经理、过程经理、计划经理的工作内容（9-10 分）</div>
+<div class="answer-box answer-correct">
+<strong>TSP 七种角色：</strong><br>
+① <strong>项目组长</strong>（Team Leader）<br>
+② <strong>计划经理</strong>：开发完整的准确的团队和个人计划；每周报告状态<br>
+③ <strong>开发经理</strong>：开发优秀软件产品；充分利用团队成员技能<br>
+④ <strong>质量经理</strong>：严格按质量计划开展；确保小组评审正常进行并有报告<br>
+⑤ <strong>过程经理</strong>：所有成员准确记录报告跟踪过程数据；会议都有记录<br>
+⑥ <strong>支持经理</strong>：工具环境合适；基线无未授权变更；风险得到跟踪；满足复用目标<br>
+⑦ 开发人员
+</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">10分</span>
+<div class="q-text"><strong>【2021Fall】</strong>给一个挣值管理的表格，项目进度提前还是落后？有可能出现什么风险？（4 分）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">10分</span>
+<div class="q-text"><strong>【2021Fall】</strong>设计一个 Yield 预测模型：描述建模方式、需要哪些数据和要求、用什么方法构建预测。（10 分）</div>
+</div>
+
+</div></div>
+
+<!-- ============================================================ -->
+<!-- 2020 -->
+<!-- ============================================================ -->
+<div class="year-section" id="y2020">
+<div class="year-header">
+<span class="year-badge">2020 Fall</span>
+<div>
+<strong>软件质量与管理（期中 + 期末）</strong>
+<div class="year-subtitle">来源：EagleBear2002 + Fred Blog 图片回忆</div>
+</div>
+</div>
+<div class="year-body">
+
+<div class="section-title">期中选择题</div>
+
+<div class="question-block">
+<span class="q-type-tag multi-choice">不定项选择</span>
+<div class="q-text"><strong>1.</strong>Brooks 本质难题，不准确的说法：</div>
+<div class="q-options">
+A. 总共有四个：复杂、不可见、可变和质量挑战<br>
+B. 既然是本质难题，不可能在开发中得到缓解<br>
+C. 只有不可见才是真正的"本质"难题，其他因项目而异<br>
+D. 四大本质难题贯穿不同阶段但凸显程度不同
+</div>
+<div class="answer-box answer-correct"><strong>答案：AB</strong> 质量挑战不是本质难题；本质难题可以缓解不可消除。</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag multi-choice">不定项选择</span>
+<div class="q-text"><strong>2.</strong>软硬件一体化阶段的典型特征：</div>
+<div class="q-options">
+A. 引入操作系统摆脱硬件束缚 &nbsp; B. 几乎不需要考虑需求变更<br>
+C. 缺乏科班软件工程师 &nbsp; D. 系统兼容决定成败
+</div>
+<div class="answer-box answer-correct"><strong>答案：BC</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag multi-choice">不定项选择</span>
+<div class="q-text"><strong>3.</strong>不属于软件过程的有哪些：</div>
+<div class="q-options">A. SCRUM &nbsp; B. CMM/CMMI &nbsp; C. GATE方法 &nbsp; D. IDEAL</div>
+<div class="answer-box answer-correct"><strong>答案：BD</strong> CMM/CMMI 是过程管理模型，IDEAL 是过程改进元模型。</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag multi-choice">不定项选择</span>
+<div class="q-text"><strong>4.</strong>不属于管理活动要素：</div>
+<div class="q-options">A. 成本 &nbsp; B. 质量 &nbsp; C. 目标 &nbsp; D. 工期</div>
+<div class="answer-box answer-correct"><strong>答案：ABD</strong> 管理要素 = 目标 + 状态 + 纠偏；成本/质量/工期是目标。</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag multi-choice">不定项选择</span>
+<div class="q-text"><strong>5.</strong>完成完整项目日程计划需要的信息：</div>
+<div class="q-options">A. 任务清单 &nbsp; B. 任务顺序 &nbsp; C. 质量要求 &nbsp; D. 人员资源水平</div>
+<div class="answer-box answer-correct"><strong>答案：ABD</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag choice">单选题</span>
+<div class="q-text"><strong>6.</strong>TSP 团队组建中确定软件开发策略的是第几次会议：</div>
+<div class="q-options">A. 第一次 &nbsp; B. 第二次 &nbsp; C. 第三次 &nbsp; D. 第四次</div>
+<div class="answer-box answer-correct"><strong>答案：C</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag choice">单选题</span>
+<div class="q-text"><strong>7.</strong>同类型的技术/方法：</div>
+<div class="q-options">A. CMMI SPICE PDCA &nbsp; B. IDEAL XP SCRUM &nbsp; C. Cleanroom Gate TSP &nbsp; D. Waterfall SCRUM XP</div>
+<div class="answer-box answer-correct"><strong>答案：CD</strong> C都是软件过程；D都是软件实践。</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag choice">单选题</span>
+<div class="q-text"><strong>8.</strong>EVM 描述错误的是：</div>
+<div class="q-options">
+A. 可跟踪项目预算消耗 &nbsp; B. 高度依赖估算准确性<br>
+C. 可以支持质量管理 &nbsp; D. 可以用来跟踪项目进度
+</div>
+<div class="answer-box answer-correct"><strong>答案：C</strong> EVM 不支持质量管理！</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag multi-choice">不定项选择</span>
+<div class="q-text"><strong>9.</strong>属于过程经理的工作内容：</div>
+<div class="q-options">
+A. 建立团队开发标准 &nbsp; B. 主持周例会<br>
+C. 记录会议记录 &nbsp; D. 制定开发计划
+</div>
+<div class="answer-box answer-correct"><strong>答案：AC</strong></div>
+</div>
+
+<div class="section-title">期末回忆（来自 Fred Blog 图片）</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题（回忆）</span>
+<div class="q-text"><strong>1.</strong>如何正确理解瀑布模型？（期中试卷重出，当时没人答对，上课重新强调了一次，这 10 分算送的）</div>
+<div class="image-source">📷 来自 2020 期末图片回忆</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题（回忆）</span>
+<div class="q-text"><strong>2.</strong>真值表验证来判断状态图的正确性。（看到这题就懵了）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题（回忆）</span>
+<div class="q-text"><strong>3.</strong>给一个这周开发的记录（类似挣值那部分分类表），问进度差异？为什么？这样子的话几周才能完成？如何改善？（说实话连题目意思都没读懂，这是我的理解的意思）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题（回忆）</span>
+<div class="q-text"><strong>4.</strong>解释客户需求与产品需求，并解释 V&V 的区别与联系。（还算简单，至于会不会扣分就不是我能决定的了 hhhh）</div>
+</div>
+
+<div class="source-note">2020 期末整体情况：40 道不定项 60 分，知识点覆盖全部 ppt，连马斯洛模型都考了。出来时已确定人已经没了 hhhhh。</div>
+
+</div></div>
+
+<!-- ============================================================ -->
+<!-- 2019 -->
+<!-- ============================================================ -->
+<div class="year-section" id="y2019">
+<div class="year-header">
+<span class="year-badge old">2019 Devops</span>
+<div>
+<strong>DevOps 专项考试回忆</strong>
+<div class="year-subtitle">来源：Fred Blog 图片回忆 · 2019年11月25日</div>
+</div>
+</div>
+<div class="year-body">
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>1.</strong>摩尔定律和反摩尔定律分别是什么？对软件的发展有什么意义？</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>2.</strong>简述软件发展的三大阶段，用到了什么主要开发方法，Brooks 的软件工程本质难题对它有什么影响？</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>3.</strong>JIT 及时生产，价值拉动和价值流的关系</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>4.</strong>PSP 的质量策略是什么？有哪些度量项？如何在项目中应用这些度量项？</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>5.</strong>软件框架的演化过程？微服务对 devops 的意义？</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>6.</strong>构建一个基本的 devops pipeline 需要哪些工具和软件？</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>7.</strong>软件项目管理和软件过程管理在管理对象、实现目标和参考模型三个角度的区别</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>8.</strong>马斯洛需求理论是什么？对软件工程实践有什么启发？</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>9.</strong>估算的目的是什么？这一目的对实践的启发？</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>10.</strong>什么是迭代式开发？有什么特点和优势？</div>
+</div>
+
+</div></div>
+
+<!-- ============================================================ -->
+<!-- 2018 -->
+<!-- ============================================================ -->
+<div class="year-section" id="y2018">
+<div class="year-header">
+<span class="year-badge old">2018 Fall</span>
+<div>
+<strong>软件过程与管理 2018 试题</strong>
+<div class="year-subtitle">来源：Fred Blog 图片回忆 · 2018年11月29日 · 整理 By SJ羊🐑</div>
+</div>
+</div>
+<div class="year-body">
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>1.</strong>解释以下概念和他们的区别：<strong>软件过程 and 生命周期模型</strong>、<strong>软件项目管理 and 软件过程管理</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>2.</strong>云原生是什么？几个重要的概念</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>3.</strong>精益屋的两大支柱</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>4.</strong>JIT 及及时生产、价值流和价值拉动的关系</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>5.</strong>软件发展三大阶段的特点和主流开发方法</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>6.</strong>devops 的特点，为什么流行？</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>7.</strong>probe 估算的基本流程</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>8.</strong>什么是面向用户的质量观，这对质量管理的策略有什么影响？</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>9.</strong>PQI 指标和计算方法，PQI 有什么作用</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag short-answer">简答题</span>
+<div class="q-text"><strong>10.</strong>什么是软件过程的多维视角？这对软件过程的融合和定制有什么启发？</div>
+</div>
+
+</div></div>
+
+<!-- ============================================================ -->
+<!-- 2016 -->
+<!-- ============================================================ -->
+<div class="year-section" id="y2016">
+<div class="year-header">
+<span class="year-badge old">2016 Fall</span>
+<div>
+<strong>软件过程与管理 考试</strong>
+<div class="year-subtitle">南京大学软件学院 · 考试时间 2 小时 <span class="image-source">📷 图片识图</span></div>
+</div>
+</div>
+<div class="year-body">
+
+<div class="question-block">
+<span class="q-type-tag essay">10%</span>
+<div class="q-text"><strong>1.</strong>什么是 Fredrick P. Brooks 在"没有银弹"一文中提到的软件开发中的根本任务、次要任务？解释软件系统的 4 个内在特性（10%）。自主动选择一种软件技术或管理上的方法，说明它是如何解决软件系统的 4 个内在特性的。（10%）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">5%</span>
+<div class="q-text"><strong>2.</strong>"大教堂与市集"中的市集模式是指怎样的开发模式？请描述"Linus 定律"。（5%）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">10%</span>
+<div class="q-text"><strong>3.</strong>描述你所理解的互联网开发模式和互联网商业模式。请具体谈谈 google 和百度的商业模式。（10%）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">10%</span>
+<div class="q-text"><strong>4.</strong>什么是破坏性创新？为什么行业领先企业在面临破坏性创新的时候失败的可能性很大？（10%）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">5%</span>
+<div class="q-text"><strong>5.</strong>描述一下本学期你阅读并做读书笔记的一本书的基本内容？（5%）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">12%</span>
+<div class="q-text"><strong>6.</strong>请描述 CMMI-DEV 模型的五个不同成熟度等级的特征，并在此基础上论述伴随着每个等级的提升（例如，1 级升 2 级，2 级升 3 级等等）其过程改进的重点和出发点在哪里？（12%）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">8%</span>
+<div class="q-text"><strong>7.</strong>请按照类别别和成熟度等级，将 CMMI-DEV 模型 1.3 版本的 22 个过程域（PA）填入一张表格。（8%）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">30%</span>
+<div class="q-text"><strong>8.</strong>在软件工程中有一些谬误（即，错误的论断被当成真理或本身没什么错，但是被过于夸大了的作用），请分别就如下三个主题罗列这些谬误（每个主题至少 2 个），并解释原因：</div>
+<div class="q-options">
+a) 开源软件；（10%）<br>
+b) 软件测试；（10%）<br>
+c) 敏捷开发；（10%）
+</div>
+</div>
+
+</div></div>
+
+<!-- ============================================================ -->
+<!-- 2015 -->
+<!-- ============================================================ -->
+<div class="year-section" id="y2015">
+<div class="year-header">
+<span class="year-badge old">2015 A/B卷</span>
+<div>
+<strong>软件过程与管理考试</strong>
+<div class="year-subtitle">来源：EagleBear2002（含 A/B 卷答案）</div>
+</div>
+</div>
+<div class="year-body">
+
+<div class="section-title">选择题</div>
+
+<div class="question-block">
+<span class="q-type-tag choice">单选题</span>
+<div class="q-text"><strong>【2015B】</strong>CMM 的创始人是哪位：</div>
+<div class="q-options">A. Boehm &nbsp; B. Juran &nbsp; C. Humphrey &nbsp; D. Crosby</div>
+<div class="answer-box answer-correct"><strong>答案：C</strong> Humphrey — "软件过程之父"</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag choice">单选题</span>
+<div class="q-text"><strong>【2015B】</strong>XP 规定开发人员每周工作时间不超过___小时，连续加班不超过两周：</div>
+<div class="q-options">A. 30 &nbsp; B. 40 &nbsp; C. 50 &nbsp; D. 60</div>
+<div class="answer-box answer-correct"><strong>答案：B</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag multi-choice">不定项选择</span>
+<div class="q-text"><strong>【2015B】</strong>不属于看板方法典型实践的：</div>
+<div class="q-options">A. 可视化工作流 &nbsp; B. 站立式会议 &nbsp; C. 限定WIP &nbsp; D. 重构</div>
+<div class="answer-box answer-correct"><strong>答案：BD</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag choice">单选题</span>
+<div class="q-text"><strong>【2015B】</strong>状态机验证中不用以验证状态机本身是否正确的是：</div>
+<div class="q-options">A. 无隐藏陷阱死循环 &nbsp; B. 转换完整性 &nbsp; C. 状态描述完整性 &nbsp; D. 转换正交性</div>
+<div class="answer-box answer-correct"><strong>答案：C</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag choice">单选题</span>
+<div class="q-text"><strong>【2015B】</strong>制定 Schedule Plan 时不需要的一项：</div>
+<div class="q-options">A. Task size &nbsp; B. Task Order &nbsp; C. Schedule Hour &nbsp; D. Task hour for each task</div>
+<div class="answer-box answer-correct"><strong>答案：A</strong></div>
+</div>
+
+<div class="section-title">主观题（精选高频考题）</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">论述题</span>
+<div class="q-text"><strong>【2015B】</strong>请解释 V&V 分别是什么含义？两者之间的关系是什么？（5分）</div>
+<div class="source-note">同 2013/2014 年考点</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">论述题</span>
+<div class="q-text"><strong>【2015B】【2016】</strong>请描述 PDCA 模型的主要步骤（5分）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">论述题</span>
+<div class="q-text"><strong>【2015B】</strong>请解释 A/FR、PQI 的计算方式和用途（10分）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">论述题</span>
+<div class="q-text"><strong>【2015A】</strong>请结合 A/FR、PQI、Review Rate、DRL、Yield 描述如何从多方面确保高质量（10分）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">论述题</span>
+<div class="q-text"><strong>【2013】【2015A】</strong>如果对质量追求无止境（不考虑资源成本），有哪些有效策略？（质量路径）</div>
+<div class="answer-box answer-correct">
+① 重视测试并将测试文档化稳定化 ② 重视小组评审定义过程使 performance 稳定化<br>
+③ 重视个人评审提升评审者技能 ④ 重视设计 ⑤ 开展设计验证 ⑥ 参考质量策略
+</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">论述题</span>
+<div class="q-text"><strong>【2013】【2015A】</strong>基于 Yield 指标构建缺陷预测模型及改进方案（21分）</div>
+<div class="answer-box answer-correct">
+利用回归技术预测 Inject Rate 和 Yield；需知注入密度/速度、消除密度/速度、历史规模等数据。<br>
+步骤：确定影响因子 → 收集历史数据 → 回归计算 → 过程中不断比较调整参数 → 风险预防控制。
+</div>
+</div>
+
+</div></div>
+
+<!-- ============================================================ -->
+<!-- 2014 -->
+<!-- ============================================================ -->
+<div class="year-section" id="y2014">
+<div class="year-header">
+<span class="year-badge old">2014</span>
+<div><strong>软件过程与管理试题</strong><div class="year-subtitle">来源：EagleBear2002</div></div>
+</div>
+<div class="year-body">
+
+<div class="question-block">
+<span class="q-type-tag essay">6分</span>
+<div class="q-text"><strong>1.【2014】</strong>马斯洛需求层次理论的需求分层？对软件开发的启发？</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay"></span>
+<div class="q-text"><strong>2.【2014】</strong>应对风险的典型策略？举例说明</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">4分</span>
+<div class="q-text"><strong>3.【2014】</strong>为确保最终产品质量，项目计划阶段应注意哪些问题？</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">10分</span>
+<div class="q-text"><strong>4.【2013】【2014】【2015A】【2015B】【2016】</strong>如何制定一份让人无法拒绝的计划？基本步骤和注意事项（10分）</div>
+<div class="answer-box answer-correct">
+① 制定任务计划和日程计划（任务清单、先后顺序、时间资源）<br>
+② 制定资源计划<br>
+③ 关键：必须用<strong>正推</strong>方式制订项目计划（非倒推）<br>
+④ 除概要设计和资源估算外，其他环节尽可能自动化；充分参考历史数据
+</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">6分</span>
+<div class="q-text"><strong>5.【2014】</strong>举例说明验证和确认的区别与联系（4分）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">8分</span>
+<div class="q-text"><strong>6.【2014】</strong>罗列集成测试典型策略，解释优缺点（8分）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">6分</span>
+<div class="q-text"><strong>7.【2014】</strong>客户需求和产品需求的差别？设计流程完成需求开发？（6分）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">10分</span>
+<div class="q-text"><strong>8.【2015B】</strong>需求开发的完整过程？客户需求和产品需求的含义及体现？（8分）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">10分</span>
+<div class="q-text"><strong>9.【2015B】【2016】</strong>结合 Scrum 论述敏捷方法的特征？为何将严格/重型/计划驱动作为敏捷的对立面不合适？（10分）</div>
+<div class="answer-box answer-correct">
+敏捷特征：小周期迭代、快速响应变更、价值交付、自动化<br>
+误导之处：<br>
+• "严格"：所有优秀工程方法和实践都是严格的<br>
+• "重型"：轻量级/重型并未刻画具体方法<br>
+• "计划驱动"：所有正式项目都应计划驱动
+</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">10分</span>
+<div class="q-text"><strong>10.【2015A】</strong>敏捷方法特征？哪些施加于敏捷之上的说法不合适？为什么？（10分）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">10分</span>
+<div class="q-text"><strong>11.【2014】</strong>为何将"规范方法""计划驱动方法"作为敏捷对立面带有很大误导性质？通过多维度改进理解（10分）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay"></span>
+<div class="q-text"><strong>12.【2016】</strong>DevOps 三个步骤</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">6分</span>
+<div class="q-text"><strong>13.【2014】</strong>解释过程度量项定义时应注意的方面，评价 PSP 度量元的合理处（6分）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">8分</span>
+<div class="q-text"><strong>14.【2014】</strong>如何对某软件产品组件进行产品质量评价？选择哪些度量元辅助判断？（8分）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">6分</span>
+<div class="q-text"><strong>15.【2014】</strong>区分质量管理和缺陷管理的联系与差异，为何将质量和生产效率妥协不合适？（6分）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">8分</span>
+<div class="q-text"><strong>16.【2014】</strong>追求极高质量的方法和先后顺序（8分）（质量路径）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay"></span>
+<div class="q-text"><strong>17.【2013】【2015A】【2018Fall】</strong>谈谈对项目估算的认识，PROBE 估算优缺点</div>
+</div>
+
+</div></div>
+
+<!-- ============================================================ -->
+<!-- 2013 -->
+<!-- ============================================================ -->
+<div class="year-section" id="y2013">
+<div class="year-header">
+<span class="year-badge old">2013 Fall</span>
+<div>
+<strong>软件过程与管理 考试</strong>
+<div class="year-subtitle">南京大学软件学院 · 考试时间 2小时 <span class="image-source">📷 图片识图</span></div>
+</div>
+</div>
+<div class="year-body">
+
+<div class="question-block">
+<span class="q-type-tag essay">10%</span>
+<div class="q-text"><strong>1.</strong>什么是 Fredrick P. Brooks 在"没有银弹"一文中提到的软件开发中的根本任务、次要任务？解释软件系统 4 个内在特性。（10%）</div>
+<div class="source-note">与 2016 年第 1 题高度重复</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">10%</span>
+<div class="q-text"><strong>2.</strong>"大教堂与市集"中市集模式指怎样的开发模式？描述"Linus 定律"。（10%）</div>
+<div class="source-note">与 2016 年第 2 题高度重复</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">10%</span>
+<div class="q-text"><strong>3.</strong>来推进你的软件的主开发工作，给每个相关用户群。你能应用到哪些？（200%）（"Linus 定律"）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">10%</span>
+<div class="q-text"><strong>4.</strong>精益——每位顾客，每次市场领先获取时的相应市场策略。"Technology Adoption Life Cycle"。描述其中每个部分的市场特点。（10%）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">10%+5%</span>
+<div class="q-text"><strong>5.</strong>你认为敏捷宣言(the agile manifesto)的开发有什么样的情形下的形式？为什么适合用敏捷来开发？什么样的情况下不适合用敏捷来开发？（10%）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">10%</span>
+<div class="q-text"><strong>6.</strong>你认为在一个高科技产品采用周期中 Chasm？（Chasm？）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">15%</span>
+<div class="q-text"><strong>7.</strong>请为一个处于高科技产品采用周期的 Chasm 设计一个详细的跨越策略。（15%）</div>
+</div>
+
+</div></div>
+
+<!-- ============================================================ -->
+<!-- 年份未确定 -->
+<!-- ============================================================ -->
+<div class="year-section unknown-year" id="unknown">
+<div class="year-header">
+<span class="year-badge" style="background:linear-gradient(135deg,#6e40c9,#9333ea)">❓ 未确定年份</span>
+<div><strong>无法确定年份的试题集合</strong><div class="year-subtitle">出现在多个来源中但无明确年份标注</div></div>
+</div>
+<div class="year-body">
+
+<div class="section-title">科学家贡献类（常考论述题）</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">论述题</span>
+<div class="q-text"><strong>Deming 【2013】【2015B】【2016】</strong> — 日本质量管理之父</div>
+<div class="answer-box answer-correct">
+• 质量改进思想 → PDCA 循环（戴明环 Plan/Do/Check/Action）<br>
+• 14 条原则（树立改进目标、停止靠检验获质量、不再凭价格进货、坚持不懈提高质量、岗位培训制度化、管理者作用突出等）
+</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">论述题</span>
+<div class="q-text"><strong>Juran 【2013】【2015B】【2016】</strong> — 《质量控制手册》"圣经"</div>
+<div class="answer-box answer-correct">
+• 适用性质量（Quality as Fitness for Use）<br>
+• 质量三部曲：质量计划 → 质量控制 → 质量改进<br>
+• 80/20 原则：80%质量问题由领导责任引起
+</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">论述题</span>
+<div class="q-text"><strong>Crosby 【2013】【2015B】【2016】</strong> — 零缺陷之父</div>
+<div class="answer-box answer-correct">
+• 零缺陷：第一次就把事情做对（预防 > 检验）<br>
+• 质量绝对性：符合要求 ≠ 完美；质量 = 符合要求；标准 = 零缺陷<br>
+• 6C 变革管理六阶段：领悟→承诺→能力→沟通→改正→坚持
+</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">论述题</span>
+<div class="q-text"><strong>Humphrey 【2015B】【2016】</strong> — 软件过程之父</div>
+<div class="answer-box answer-correct">
+• 采用 Crosby 的成熟度度量 → 提出 CMM<br>
+• 将上述理论和实践引入软件过程
+</div>
+</div>
+
+<div class="section-title">概念解释类</div>
+
+<div class="question-block">
+<span class="q-type-tag defn">概念解释</span>
+<div class="q-text"><strong>【2016】CI — CD/CD — Pipeline Orchestration — Container — Micro Service — A/B Testing — GitFlow</strong></div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag defn">概念解释</span>
+<div class="q-text"><strong>【2016】Docker — Jenkins — JIRA — SonarQube — Git 的用途描述</strong></div>
+</div>
+
+<div class="section-title">不在 2023Fall 课程范围的简答题</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">论述题</span>
+<div class="q-text"><strong>【2015A】</strong>Capture-recapture 方法进行缺陷预测的假设条件和模型定义（M0/Mh/Mt/Mth 四种模型）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay"></span>
+<div class="q-text"><strong>【2018Fall】</strong>什么是软件过程的多维视角？这对融合定制有何启发？</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay"></span>
+<div class="q-text"><strong>【2013】</strong>请结合 GQM 思想解释 PSP 过程的基本度量元有哪几个？</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">论述题 10分</span>
+<div class="q-text"><strong>【2015B】</strong>描述度量和分析活动在软件项目中的作用以及如何正确开展（或描述 GQM）</div>
+</div>
+
+<div class="question-block">
+<span class="q-type-tag essay">论述题</span>
+<div class="q-text"><strong>【2013】</strong>配置管理中配置项和产品基线的概念，设计流程控制变更（单元测试后代码修改若干问题的变更控制流程）</div>
+<div class="answer-box answer-correct">
+变更控制流程：<br>
+① 启动变更请求程序，保存到变更数据库<br>
+② 分析变更建议和对工作产品/进度/日程的影响<br>
+③ 若影响其他基线，与相关干系人审查取得同意<br>
+④ 跟踪变更申请直到结项<br>
+控制：确认授权 → 更新配置项 → 归档旧基线获取新基线 → 执行审查 → 记录变更内容和理由
+</div>
+</div>
+
+</div></div>
+
+<div style="text-align:center; padding: 40px 0 20px; color: var(--text-secondary); font-size: 13px;">
+<hr style="border:none; border-top:1px solid var(--border-color); margin-bottom:20px;">
+<p><strong>数据来源声明</strong></p>
+<p>Fred Blog (<a href="https://fredqinhz.github.io/posts/d7c515c7.html" style="color:#58a6ff">fredqinhz.github.io</a>) 提供 2019-2024 年真题回忆</p>
+<p>EagleBear2002 (<a href="https://eaglebear2002.github.io/8554/" style="color:#58a6ff">eaglebear2002.github.io</a>) 提供 2013-2023 年完整习题及答案</p>
+<p>部分试卷通过图片 OCR 识图获得（2013、2016、2018、2019、2020）</p>
+<p style="margin-top:10px; color:#f85149;">⚠️ Eagle Bear 提示：有些题目不太准确，需要对应课程 PPT 核实，部分答案隐藏在 PPT 备注中</p>
+</div>
+
+</div>
+</body>
+</html>
