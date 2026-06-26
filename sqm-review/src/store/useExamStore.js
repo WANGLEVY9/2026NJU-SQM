@@ -1,6 +1,19 @@
 import { defineStore } from 'pinia'
 import { examPapers } from '@/data/exams'
 
+// 年份排序：数字年份降序（最新优先），非数字年份排末尾并按固定顺序
+const NON_NUMERIC_YEAR_ORDER = ['课堂', '早期', '未确定']
+
+function compareYear(yearA, yearB) {
+    const aNum = typeof yearA === 'number'
+    const bNum = typeof yearB === 'number'
+    if (aNum && bNum) return yearB - yearA
+    if (aNum && !bNum) return -1
+    if (!aNum && bNum) return 1
+    // 两个都是非数字年份：按预设顺序排列
+    return NON_NUMERIC_YEAR_ORDER.indexOf(yearA) - NON_NUMERIC_YEAR_ORDER.indexOf(yearB)
+}
+
 export const useExamStore = defineStore('exam', {
     state: () => ({
         papers: examPapers,
@@ -19,24 +32,18 @@ export const useExamStore = defineStore('exam', {
         },
 
         filteredPapers: (state) => {
-            return state.papers.filter(paper => {
+            const filtered = state.papers.filter(paper => {
                 if (state.filters.year && paper.year !== state.filters.year) return false
                 if (state.filters.type && paper.type !== state.filters.type) return false
                 return true
             })
+            // 按年份排序：数字年份降序，非数字年份（课堂/早期/未确定）排末尾
+            return filtered.sort((a, b) => compareYear(a.year, b.year))
         },
 
         allYears: (state) => {
             const years = [...new Set(state.papers.map(p => p.year))]
-            // 数字年份降序排列，非数字年份（如 '早期', '课堂'）排在最后
-            return years.sort((a, b) => {
-                const aNum = typeof a === 'number'
-                const bNum = typeof b === 'number'
-                if (aNum && bNum) return b - a
-                if (aNum && !bNum) return -1
-                if (!aNum && bNum) return 1
-                return 0
-            })
+            return years.sort(compareYear)
         },
 
         getAnswer: (state) => (questionId) => {
