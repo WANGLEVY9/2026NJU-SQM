@@ -62,6 +62,7 @@ const handleFilterChange = (filters) => {
 const getPaperTypeLabel = (type) => {
   const typeMap = {
     final: '期末',
+    mid: '期中',
     class: '课堂',
     early: '汇编'
   }
@@ -134,6 +135,11 @@ const getPaperTypeLabel = (type) => {
   &.final {
     background: rgba(214, 158, 46, 0.15);
     color: var(--accent);
+  }
+
+  &.mid {
+    background: rgba(88, 166, 255, 0.15);
+    color: #58a6ff;
   }
 
   &.class {

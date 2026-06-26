@@ -12,6 +12,7 @@
       <select v-model="selectedType" class="filter-select" @change="handleTypeChange">
         <option :value="null">全部类型</option>
         <option value="final">期末真题</option>
+        <option value="mid">期中试卷</option>
         <option value="class">课堂测试</option>
         <option value="early">往年汇编</option>
       </select>

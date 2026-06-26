@@ -50,8 +50,8 @@ export const examPapers = [
                     'C. 不可见',
                     'D. 一致性'
                 ],
-                correctAnswer: 'D',
-                explanation: '根据课程内容，软件开发的本质困难包括复杂性、不可见性、可变性和质量难题。一致性不属于课程所定义的软件开发本质困难或本质挑战。',
+                correctAnswer: 'A',
+                explanation: 'Brooks在《没有银弹》中提出的四大本质困难为：复杂性（Complexity）、一致性（Conformity）、可变性（Changeability）、不可见性（Invisibility）。「质量难题」不属于四大本质困难，软件质量是衍生属性。一致性指软件必须与外部世界、遗留系统和人为习惯保持对接，是四大本质困难之一。',
                 year: 2023,
                 topic: '软件发展'
             },
@@ -790,6 +790,876 @@ export const examPapers = [
         ]
     },
     {
+        id: 'exam2024',
+        title: '2024年期末真题',
+        year: 2024,
+        type: 'final',
+        source: 'Fred Blog + EagleBear2002',
+        description: '2024年软件质量管理期末考试真题。含名词解释(8分)、简答题(7道)、AI论述题(15分)。来源：Fred Blog作者qhz(得分91)。',
+        questions: [
+            {
+                id: 'q2024-d1',
+                type: 'essay',
+                question: '名词解释：配置管理中的配置项',
+                answer: '配置项是配置管理中纳入管理的实体，包括各类工作产品（如需求文档、设计文档、源代码、测试用例、用户手册等），每个配置项都有唯一的标识、版本号和状态。',
+                explanation: '配置项是配置管理的基本管理对象。',
+                score: 2,
+                year: 2024,
+                topic: '配置管理'
+            },
+            {
+                id: 'q2024-d2',
+                type: 'essay',
+                question: '名词解释：配置管理中的基线',
+                answer: '基线是经过正式评审和批准的配置项集合，在某个时间点被固化，作为后续开发的基准。变更基线需要经过正式的变更控制流程。',
+                explanation: '基线是配置管理中用于控制变更的关键概念。',
+                score: 2,
+                year: 2024,
+                topic: '配置管理'
+            },
+            {
+                id: 'q2024-d3',
+                type: 'essay',
+                question: '名词解释：关键子过程性能基线',
+                answer: '关键子过程性能基线是对组织中关键子过程的性能数据进行统计分析后建立的基线，用于量化管理和预测过程性能。它是CMMI四级（定量管理级）的核心概念。',
+                explanation: '关键子过程性能基线体现了CMMI高等级的定量管理特征。',
+                score: 2,
+                year: 2024,
+                topic: '软件过程'
+            },
+            {
+                id: 'q2024-d4',
+                type: 'essay',
+                question: '名词解释：软件过程',
+                answer: '软件过程是软件开发中所使用的方法、实践和活动的集合，是将用户需求转化为软件产品的一系列活动。包括需求开发、设计、编码、测试、维护等阶段。',
+                explanation: '软件过程是软件工程的核心概念。',
+                score: 2,
+                year: 2024,
+                topic: '软件过程'
+            },
+            {
+                id: 'q2024-e1',
+                type: 'essay',
+                question: '结合"软件开发作为一种知识工作，需要领导者而不是一般的经理"，阐述知识工作领导者应该具备的品质或者特点（至少三项）。',
+                answer: '1. 诚实（Honest）：信守承诺，言行一致，让团队成员感到信任和尊重\n2. 能力（Competent）：展现卓越能力和广泛知识\n3. 远见（Visionary）：超越眼前挑战和任务，具备明确可信的未来愿景\n4. 激励（Inspirational）：传播积极、充满热情和能量的未来愿景',
+                explanation: '正确答案在PPT团队动力学中。Eagle的博客上此题有些问题。四个品质特点是固定的。',
+                score: 9,
+                year: 2024,
+                topic: '团队管理'
+            },
+            {
+                id: 'q2024-e2',
+                type: 'essay',
+                question: '我们如何理解瀑布模型？',
+                answer: '1. 瀑布模型不是单一模型，是一系列模型，覆盖最简单场景（过程元素少）到最复杂的场景（过程元素多）\n2. 软件项目应该结合实际情况选择合适过程元素的瀑布模型，基本原则是，项目面临困难和挑战越多，选择的模型应该越复杂\n3. 软件项目团队往往低估项目的挑战，选择了过于简单的不适用的瀑布模型',
+                explanation: '此题为高频重复考题，2021Fall、2020-mid均考过。',
+                score: 10,
+                year: 2024,
+                topic: '软件过程'
+            },
+            {
+                id: 'q2024-e3',
+                type: 'essay',
+                question: '敏捷宣言的内容，如何理解敏捷宣言？',
+                answer: '四大价值观：\n1. 个体和互动 高于 流程和工具\n2. 工作的软件 高于 详尽的文档\n3. 客户合作 高于 合同谈判\n4. 响应变化 高于 遵循计划\n→ 尽管右项有其价值，我们更重视左项的价值。\n\n理解：敏捷宣言并非否定右项，而是强调左项更重要。敏捷不是无文档无计划，而是更注重人的交互、可工作软件、客户合作和响应变化。',
+                score: 10,
+                year: 2024,
+                topic: '敏捷方法'
+            },
+            {
+                id: 'q2024-e4',
+                type: 'essay',
+                question: '挣值管理的三种实现方式（简单、中级、高级）。',
+                answer: '简单实现：仅关注进度信息。建WBS→定义PV→按0-100或50-50规则赋EV。AC不对EV产生影响。\n中级实现：加入日程偏差计算。SV=EV-PV，SPI=EV/PV。\n高级实现：加入成本线AC和预测线BAC。CV=EV-AC，CPI=EV/AC。',
+                score: 10,
+                year: 2024,
+                topic: '项目管理'
+            },
+            {
+                id: 'q2024-e5',
+                type: 'essay',
+                question: '估算的四个要点。',
+                answer: '1. 尽可能划分详细一些：估算多个部件时，总的误差比各个部件的误差总和小\n2. 建立对结果的信心\n3. 依赖数据\n4. 估算要的是过程，而非结果；估算是相关干系人达成一致共识的过程',
+                score: 10,
+                year: 2024,
+                topic: '项目管理'
+            },
+            {
+                id: 'q2024-e6',
+                type: 'essay',
+                question: '列出TSP角色，并说明TSP对自主团队的支持。',
+                answer: 'TSP角色：项目组长、计划经理、开发经理、质量经理、过程经理、支持经理、开发人员。\n\nTSP对自主团队的支持：\n1. 自行定义项目目标\n2. 自行决定团队组成形式和成员角色\n3. 自行决定项目开发策略\n4. 自行定义项目开发过程\n5. 自行制定项目开发计划\n6. 自行度量、管理和控制项目工作',
+                score: 10,
+                year: 2024,
+                topic: '团队管理'
+            },
+            {
+                id: 'q2024-e7',
+                type: 'essay',
+                question: '质量管理策略，质量管理计划制定过程中有哪些要关注的点？',
+                answer: '1. 用缺陷管理替代质量管理：将抽象质量问题转化为具体缺陷数据\n2. 尽早开展质量活动：需求、设计阶段就开展评审\n3. 利用质量指标（A/FR、PQI、Yield、DRL、Review Rate）进行度量和预测\n4. 制定质量计划时关注评审时间、评审速度等要求\n5. 通过过程改进持续提升质量',
+                score: 10,
+                year: 2024,
+                topic: '质量管理'
+            },
+            {
+                id: 'q2024-e8',
+                type: 'essay',
+                question: '随着ChatGPT的横空出世，以大模型为代表的AI技术势必对各行各业带来前所未有的影响。请结合本课程涉及的若干话题畅想AI浪潮中的挑战和机遇。至少包括：项目管理、质量管理、过程改进。',
+                answer: '项目管理：AI可提供更准确的预测，帮助分配资源、识别风险。挑战是团队需适应与AI系统集成。\n\n质量管理：AI可通过自动化测试、静态代码分析、缺陷预测提高质量。挑战是AI模型不透明性使测试更困难。\n\n过程改进：AI可帮助发现效率低下的环节、优化流程。需要重新评估开发过程，关注数据质量和模型解释性。',
+                score: 15,
+                year: 2024,
+                topic: '前沿话题'
+            }
+        ]
+    },
+    {
+        id: 'exam2022',
+        title: '2022年期末真题',
+        year: 2022,
+        type: 'final',
+        source: 'EagleBear2002',
+        description: '2022年软件质量与管理期末考试真题。含判断题、选择题、简答题/论述题。来源：EagleBear2002博客（含详细答案）。',
+        questions: [
+            {
+                id: 'q2022-j1',
+                type: 'judgment',
+                question: '在公司导入敏捷过程是我们今年过程改进的主要目标。',
+                correctAnswer: true,
+                explanation: '正确。过程管理和过程改进是类似的，这个说法在概念上是合适的。',
+                year: 2022,
+                topic: '软件过程'
+            },
+            {
+                id: 'q2022-j2',
+                type: 'judgment',
+                question: 'CMM/CMMI不适合当今互联网环境的项目管理需求。',
+                correctAnswer: true,
+                explanation: '正确。CMM/CMMI是用来做过程管理和改进的，根本不是满足项目管理需求的手段。',
+                year: 2022,
+                topic: '软件过程'
+            },
+            {
+                id: 'q2022-j3',
+                type: 'judgment',
+                question: 'PDCA和IDEAL不适合在敏捷环境中使用。',
+                correctAnswer: false,
+                explanation: '错误。PDCA、IDEAL是软件过程改进参考元模型，适合在敏捷环境中使用。',
+                year: 2022,
+                topic: '软件过程'
+            },
+            {
+                id: 'q2022-c1',
+                type: 'choice',
+                question: '关于规模估算和度量的描述中，正确的是：',
+                options: [
+                    'A. 功能点是一种可提供精确规模度量结果的方式',
+                    'B. 规模数据扮演了沟通历史数据的桥梁的角色',
+                    'C. 规模估算通常不用于质量计划当中',
+                    'D. PROBE只用于规模估算'
+                ],
+                correctAnswer: 'B',
+                explanation: 'B正确：规模数据是沟通历史数据的桥梁。A错误：功能点不能精确度量。C错误：规模估算可用于质量计划。D错误：PROBE不只用于规模估算。',
+                year: 2022,
+                topic: '项目管理'
+            },
+            {
+                id: 'q2022-c2',
+                type: 'choice',
+                question: '关于PSP缺陷日志，哪些信息是至关重要的？',
+                options: [
+                    'A. 缺陷发现时间',
+                    'B. 缺陷重现方式',
+                    'C. 缺陷根因描述',
+                    'D. 缺陷关联的其他缺陷'
+                ],
+                correctAnswer: 'AC',
+                explanation: 'A和C是至关重要的：缺陷发现时间和缺陷根因描述。',
+                year: 2022,
+                topic: '质量管理'
+            },
+            {
+                id: 'q2022-e1',
+                type: 'essay',
+                question: '结合"软件开发作为一种知识工作，需要领导者而不是一般的经理"，阐述知识工作领导者应该具备的品质或者特点（至少三项）。',
+                answer: '诚实（Honest）：信守承诺，言行一致\n能力（Competent）：展现卓越能力和广泛知识\n远见（Visionary）：超越眼前挑战，具备未来愿景\n激励（Inspirational）：传播积极热情的未来愿景',
+                score: 9,
+                year: 2022,
+                topic: '团队管理'
+            },
+            {
+                id: 'q2022-e2',
+                type: 'essay',
+                question: '请完整描述敏捷宣言的内容。我们应该如何正确理解敏捷宣言？',
+                answer: '四大价值观：\n1. 个体和互动 高于 流程和工具\n2. 工作的软件 高于 详尽的文档\n3. 客户合作 高于 合同谈判\n4. 响应变化 高于 遵循计划\n→ 尽管右项有其价值，我们更重视左项的价值。',
+                score: 10,
+                year: 2022,
+                topic: '敏捷方法'
+            },
+            {
+                id: 'q2022-e3',
+                type: 'essay',
+                question: '挣值管理的三种实现方式（简单、中级、高级），分别描述基本要点。',
+                answer: '简单：仅关注进度→WBS→PV→0-100或50-50规则赋EV\n中级：加入SV=EV-PV，SPI=EV/PV\n高级：加入AC，CV=EV-AC，CPI=EV/AC',
+                score: 10,
+                year: 2022,
+                topic: '项目管理'
+            },
+            {
+                id: 'q2022-e4',
+                type: 'essay',
+                question: '软件项目规模估算基本要点有哪些？',
+                answer: '1. 尽可能划分详细一些\n2. 建立对结果的信心\n3. 依赖数据\n4. 估算要的是过程，而非结果',
+                score: 10,
+                year: 2022,
+                topic: '项目管理'
+            },
+            {
+                id: 'q2022-e5',
+                type: 'essay',
+                question: 'CMMI-DEV V1.3版本五个不同成熟度等级分别是什么？为什么四级和五级被称为高等级？与普通等级的本质差别是什么？',
+                answer: '五级：①Initial原始 ②Managed已管理 ③Defined已定义 ④Quantitatively Managed定量管理 ⑤Optimizing优化\n\n四五级为高等级原因：构建预测模型，以统计方法管理过程。等级2、3关注当前状态，等级4、5根据结果（未来）进行管理。本质差别：从定性管理转向定量管理，从被动应对转向主动优化。',
+                score: 10,
+                year: 2022,
+                topic: '软件过程'
+            },
+            {
+                id: 'q2022-e6',
+                type: 'essay',
+                question: '随着ChatGPT的横空出世，以大模型为代表的AI技术势必对各行各业带来前所未有的影响。请结合本课程涉及的若干话题畅想AI浪潮中的挑战和机遇。至少包括：项目管理、质量管理、过程改进。',
+                answer: '项目管理：AI可提供更准确的预测，帮助分配资源。挑战是团队需适应AI集成。\n质量管理：AI可通过自动化测试、缺陷预测提高质量。挑战是AI模型不透明性使测试更困难。\n过程改进：AI可帮助发现效率低下的环节、优化流程。需要关注数据质量和模型解释性。',
+                score: 15,
+                year: 2022,
+                topic: '前沿话题'
+            }
+        ]
+    },
+    {
+        id: 'exam2020mid',
+        title: '2020年期中试卷',
+        year: 2020,
+        type: 'mid',
+        source: 'EagleBear2002',
+        description: '2020年软件质量与管理期中试卷（含答案）。9道不定项选择题，覆盖软件发展、过程管理、项目管理、团队管理等知识点。',
+        questions: [
+            {
+                id: 'q2020m-1',
+                type: 'choice',
+                question: '关于Brooks提及的软件开发本质难题，下列说法中不准确的是：',
+                options: [
+                    'A. 本质难题总共有四个，分别为复杂、不可见、可变和质量挑战',
+                    'B. 既然是本质难题，那就说明是根植于软件开发本身，因而不可能在软件开发当中得到缓解',
+                    'C. 严格来说，只有不可见才是真正的"本质"难题，其他三个因项目而异',
+                    'D. 四大本质难题贯穿软件发展的不同历史阶段，但是在不同历史阶段，相互凸显程度不一样'
+                ],
+                correctAnswer: 'AB',
+                explanation: 'A不准确：质量挑战不是本质难题。B不准确：本质难题可以缓解，不可消除。',
+                year: 2020,
+                topic: '软件发展'
+            },
+            {
+                id: 'q2020m-2',
+                type: 'choice',
+                question: '下列软件应用和开发的典型特征中属于软硬件一体化阶段的是：',
+                options: [
+                    'A. 可以通过引入操作系统来摆脱硬件束缚',
+                    'B. 几乎不需要考虑需求变更',
+                    'C. 缺乏科班的软件工程师',
+                    'D. 系统兼容对应软件开发的成败非常关键'
+                ],
+                correctAnswer: 'BC',
+                explanation: 'B和C是软硬件一体化阶段的特征。A和D是软件成为独立产品阶段的特征。',
+                year: 2020,
+                topic: '软件发展'
+            },
+            {
+                id: 'q2020m-3',
+                type: 'choice',
+                question: '下列名词和术语中不属于软件过程的有哪些？',
+                options: ['A. SCRUM', 'B. CMM/CMMI', 'C. GATE方法', 'D. IDEAL'],
+                correctAnswer: 'BD',
+                explanation: 'B（CMM/CMMI）是过程管理和改进模型。D（IDEAL）是过程改进元模型。不是软件过程本身。',
+                year: 2020,
+                topic: '软件过程'
+            },
+            {
+                id: 'q2020m-4',
+                type: 'choice',
+                question: '下列哪些项不属于管理活动应该包含的要素？',
+                options: ['A. 成本', 'B. 质量', 'C. 目标', 'D. 工期'],
+                correctAnswer: 'ABD',
+                explanation: '管理活动要素是目标、状态、纠偏。成本、质量、工期是三大典型目标，不是管理要素。',
+                year: 2020,
+                topic: '软件过程'
+            },
+            {
+                id: 'q2020m-5',
+                type: 'choice',
+                question: '完成一份完整的项目日程计划，需要下列哪些信息？',
+                options: ['A. 任务清单', 'B. 任务顺序', 'C. 质量要求', 'D. 人员资源水平'],
+                correctAnswer: 'ABD',
+                explanation: '需要任务清单、任务顺序和人员资源水平。质量要求不是日程计划的直接输入。',
+                year: 2020,
+                topic: '项目管理'
+            },
+            {
+                id: 'q2020m-6',
+                type: 'choice',
+                question: '在TSP的团队组建过程中，确定软件开发策略的是第几次会议？',
+                options: ['A. 第一次', 'B. 第二次', 'C. 第三次', 'D. 第四次'],
+                correctAnswer: 'C',
+                explanation: '第3次会议确定开发策略。第1次建立团队目标，第2次确定角色，第3次确定策略。',
+                year: 2020,
+                topic: '团队管理'
+            },
+            {
+                id: 'q2020m-7',
+                type: 'choice',
+                question: '下列术语描述的技术或者方法是同类型的是？',
+                options: [
+                    'A. CMMI SPICE PDCA',
+                    'B. IDEAL XP SCRUM',
+                    'C. Cleanroom Gate TSP',
+                    'D. Waterfall SCRUM XP'
+                ],
+                correctAnswer: 'CD',
+                explanation: 'C都是软件过程。D都是软件实践/方法。A中CMMI/SPICE是过程管理，PDCA是过程改进。B中IDEAL是过程改进，XP/SCRUM是开发方法。',
+                year: 2020,
+                topic: '软件过程'
+            },
+            {
+                id: 'q2020m-8',
+                type: 'choice',
+                question: '下列关于挣值管理方法的描述中错误的是：',
+                options: [
+                    'A. 这是一种可以用来跟踪项目预算消耗的方法',
+                    'B. 这种方法高度依赖估算准确性',
+                    'C. 这种方法可以支持质量管理',
+                    'D. 这种方法可以用来跟踪项目进度'
+                ],
+                correctAnswer: 'C',
+                explanation: 'C错误：EVM不能支持质量管理。EVM主要关注进度和成本。',
+                year: 2020,
+                topic: '项目管理'
+            },
+            {
+                id: 'q2020m-9',
+                type: 'choice',
+                question: '下列描述当中，属于过程经理的工作内容有哪些？',
+                options: [
+                    'A. 建立团队的开发标准',
+                    'B. 主持项目周例会',
+                    'C. 记录周例会的会议记录',
+                    'D. 制定开发计划'
+                ],
+                correctAnswer: 'AC',
+                explanation: 'A和C是过程经理职责。B是项目组长职责。D是计划经理职责。',
+                year: 2020,
+                topic: '团队管理'
+            }
+        ]
+    },
+    {
+        id: 'exam2019',
+        title: '2019年DevOps专项考试',
+        year: 2019,
+        type: 'final',
+        source: 'Fred Blog 图片回忆',
+        description: '2019年DevOps专项考试回忆卷（10道简答题）。涵盖摩尔定律、三大阶段、PSP质量策略、DevOps Pipeline等DevOps专题内容。',
+        questions: [
+            {
+                id: 'q2019-e1',
+                type: 'essay',
+                question: '摩尔定律和反摩尔定律分别是什么？对软件的发展有什么意义？',
+                answer: '摩尔定律：集成电路上可容纳的晶体管数量约每18-24个月翻一番，性能提升一倍。反摩尔定律：如果一家IT公司今天和18个月前卖掉同样多的同样产品，它的营业额就要降一半。\n\n意义：硬件性能不断提升，软件规模和复杂度随之增长，推动软件开发方法的演进。',
+                score: 10,
+                year: 2019,
+                topic: '软件发展'
+            },
+            {
+                id: 'q2019-e2',
+                type: 'essay',
+                question: '简述软件发展的三大阶段，用到了什么主要开发方法，Brooks的软件工程本质难题对它有什么影响？',
+                answer: '1. 软硬件一体化：Code and Fix，线性顺序过程\n2. 软件成为独立产品：结构化程序设计、瀑布模型、成熟度运动\n3. 网络化和服务化：迭代式开发、敏捷开发、DevOps\n\nBrooks本质难题（复杂性、一致性、可变性、不可见性）贯穿三大阶段，不同阶段凸显程度不同，推动了方法的演进。',
+                score: 10,
+                year: 2019,
+                topic: '软件发展'
+            },
+            {
+                id: 'q2019-e3',
+                type: 'essay',
+                question: 'JIT及时生产，价值拉动和价值流的关系。',
+                answer: '价值流是产品从原材料到交付客户的完整流程。价值拉动是JIT的核心原则：按客户需求拉动生产，而非推动。\n\n关系：价值流是基础，价值拉动是实现方式。通过价值拉动优化价值流，消除浪费。',
+                score: 10,
+                year: 2019,
+                topic: 'DevOps'
+            },
+            {
+                id: 'q2019-e4',
+                type: 'essay',
+                question: 'PSP的质量策略是什么？有哪些度量项？如何在项目中应用这些度量项？',
+                answer: '质量策略：用缺陷管理替代质量管理。\n度量项：A/FR、PQI、Yield、DRL、Review Rate。\n应用：在计划阶段安排评审活动满足A/FR>2.0和PQI>0.4；利用Yield构建质量预测模型；利用DRL比较各阶段效率；控制Review Rate确保评审质量。',
+                score: 10,
+                year: 2019,
+                topic: '质量管理'
+            },
+            {
+                id: 'q2019-e5',
+                type: 'essay',
+                question: '软件框架的演化过程？微服务对DevOps的意义？',
+                answer: '演化：单体应用→分层架构→SOA→微服务。\n\n微服务对DevOps的意义：微服务架构使得每个服务可以独立开发、部署和扩展，与CI/CD天然契合，支持DevOps的快速交付和持续反馈。',
+                score: 10,
+                year: 2019,
+                topic: 'DevOps'
+            },
+            {
+                id: 'q2019-e6',
+                type: 'essay',
+                question: '构建一个基本的DevOps Pipeline需要哪些工具和软件？',
+                answer: '1. 版本控制：Git\n2. 持续集成：Jenkins/GitLab CI\n3. 容器化：Docker、Kubernetes\n4. 配置管理：Ansible/Chef/Puppet\n5. 代码质量：SonarQube\n6. 监控：Prometheus/Grafana\n7. 项目管理：JIRA',
+                score: 10,
+                year: 2019,
+                topic: 'DevOps'
+            },
+            {
+                id: 'q2019-e7',
+                type: 'essay',
+                question: '软件项目管理和软件过程管理在管理对象、实现目标和参考模型三个角度的区别。',
+                answer: '管理对象：项目管理→具体项目；过程管理→开发过程\n实现目标：项目管理→完成项目目标（成本、质量、工期）；过程管理→提升过程性能（效率、质量）\n参考模型：项目管理→WBS、EVM；过程管理→CMMI、IDEAL、PDCA',
+                score: 10,
+                year: 2019,
+                topic: '软件过程'
+            },
+            {
+                id: 'q2019-e8',
+                type: 'essay',
+                question: '马斯洛需求理论是什么？对软件工程实践有什么启发？',
+                answer: '五层需求：生理→安全→社交→尊重→自我实现。\n\n启发：软件开发者是知识工作者，管理应关注高层次需求（尊重、自我实现），采用Y理论激励，而非仅依靠物质奖励。',
+                score: 10,
+                year: 2019,
+                topic: '团队管理'
+            },
+            {
+                id: 'q2019-e9',
+                type: 'essay',
+                question: '估算的目的是什么？这一目的对实践的启发？',
+                answer: '目的：估算本质上是一种猜测，追求的目标是一致性和对估算结果的信心。\n\n启发：①估算要详细划分 ②建立信心 ③依赖数据 ④注重过程而非结果，估算是干系人达成共识的过程。',
+                score: 10,
+                year: 2019,
+                topic: '项目管理'
+            },
+            {
+                id: 'q2019-e10',
+                type: 'essay',
+                question: '什么是迭代式开发？有什么特点和优势？',
+                answer: '迭代式开发：将开发过程分为多个短周期迭代，每个迭代都包含需求、设计、编码、测试，产出可工作的软件增量。\n\n特点：小周期、快速反馈、持续交付。\n优势：尽早发现风险、快速响应变更、持续交付价值。',
+                score: 10,
+                year: 2019,
+                topic: '敏捷方法'
+            }
+        ]
+    },
+    {
+        id: 'exam2018',
+        title: '2018年期末真题',
+        year: 2018,
+        type: 'final',
+        source: 'Fred Blog 图片回忆',
+        description: '2018年软件过程与管理期末考试回忆卷（10道简答题）。涵盖软件过程vs项目管理、云原生、精益屋、JIT、PQI、DevOps等知识点。',
+        questions: [
+            {
+                id: 'q2018-e1',
+                type: 'essay',
+                question: '解释以下概念和区别：软件过程 and 生命周期模型、软件项目管理 and 软件过程管理。',
+                answer: '软件过程 vs 生命周期模型：生命周期模型是对软件开发过程的人为划分，是框架和粗粒度划分，往往不包括技术实践。\n软件项目管理 vs 软件过程管理：项目管理是完成项目目标的过程；过程管理是让软件过程在效率、质量等方面有更好性能绩效。',
+                score: 10,
+                year: 2018,
+                topic: '软件过程'
+            },
+            {
+                id: 'q2018-e2',
+                type: 'essay',
+                question: '云原生是什么？几个重要的概念。',
+                answer: '云原生是利用云计算优势的架构理念。重要概念：容器（Container）、微服务（Micro Service）、不可变基础设施（Immutable Infrastructure）、服务网格（Service Mesh）、声明式API。',
+                score: 10,
+                year: 2018,
+                topic: 'DevOps'
+            },
+            {
+                id: 'q2018-e3',
+                type: 'essay',
+                question: '精益屋的两大支柱。',
+                answer: '精益屋两大支柱：①JIT（准时化）②自动化（Jidoka）。JIT：按需生产，消除浪费。自动化：出现异常时自动停机，内置质量。',
+                score: 5,
+                year: 2018,
+                topic: 'DevOps'
+            },
+            {
+                id: 'q2018-e4',
+                type: 'essay',
+                question: 'JIT及时生产，价值流和价值拉动的关系。',
+                answer: '价值流是产品从原材料到交付客户的完整流程。价值拉动是JIT的核心：按客户需求拉动生产。关系：价值流是基础，价值拉动是实现方式。',
+                score: 5,
+                year: 2018,
+                topic: 'DevOps'
+            },
+            {
+                id: 'q2018-e5',
+                type: 'essay',
+                question: '软件发展三大阶段的特点和主流开发方法。',
+                answer: '1. 软硬件一体化：功能单一、几乎不需需求变更→Code and Fix\n2. 软件成为独立产品：摆脱硬件束缚、需求多变→形式化方法、结构化程序设计、瀑布模型\n3. 网络化和服务化：规模更大、需求不确定→迭代式开发、敏捷开发、DevOps',
+                score: 10,
+                year: 2018,
+                topic: '软件发展'
+            },
+            {
+                id: 'q2018-e6',
+                type: 'essay',
+                question: 'DevOps的特点，为什么流行？',
+                answer: '特点：自动化、持续反馈、文化变革、监控与度量。\n流行原因：①互联网需快速响应 ②云计算和容器技术发展 ③微服务架构 ④缩短交付周期提高质量。',
+                score: 8,
+                year: 2018,
+                topic: 'DevOps'
+            },
+            {
+                id: 'q2018-e7',
+                type: 'essay',
+                question: 'PROBE估算的基本流程。',
+                answer: '1. 概要设计：将待估算部件分解为若干对象\n2. 比较历史数据：寻找同类型对象的历史数据\n3. 综合估算：使用线性回归建立代理规模与实际规模的关系，计算估算结果和预测区间',
+                score: 8,
+                year: 2018,
+                topic: '项目管理'
+            },
+            {
+                id: 'q2018-e8',
+                type: 'essay',
+                question: '什么是面向用户的质量观？这对质量管理的策略有什么影响？',
+                answer: '面向用户的质量观：质量是一种适用性（Fitness for Use），用户满意度是质量的最终衡量标准。\n影响：①用缺陷管理替代质量管理 ②关注用户可感知的外部质量 ③优先级排序：先解决用户最关心的问题 ④可度量：通过缺陷数据量化质量。',
+                score: 10,
+                year: 2018,
+                topic: '质量管理'
+            },
+            {
+                id: 'q2018-e9',
+                type: 'essay',
+                question: 'PQI指标和计算方法，PQI有什么作用。',
+                answer: 'PQI = 设计质量 × 设计评审质量 × 代码评审质量 × 代码质量 × 测试质量。\n作用：①辅助判断模块开发质量 ②提供过程改进依据 ③可用于质量规划 ④PQI>0.4即可。',
+                score: 10,
+                year: 2018,
+                topic: '质量管理'
+            },
+            {
+                id: 'q2018-e10',
+                type: 'essay',
+                question: '什么是软件过程的多维视角？这对软件过程的融合和定制有什么启发？',
+                answer: '多维视角：从不同维度（如人员、方法、工具、度量等）看待软件过程。\n启发：①不同项目可根据自身特点选择不同维度组合 ②融合多种方法的优点 ③定制适合项目需求的过程 ④避免一刀切的方法选择。',
+                score: 10,
+                year: 2018,
+                topic: '软件过程'
+            }
+        ]
+    },
+    {
+        id: 'exam2016',
+        title: '2016年期末真题',
+        year: 2016,
+        type: 'final',
+        source: 'Fred Blog 图片识别',
+        description: '2016年软件过程与管理期末考试（2小时，南京大学软件学院）。8道大题，涵盖Brooks本质难题、Linus定律、互联网商业模式、破坏性创新、CMMI五级、开源/测试/敏捷谬误等。',
+        questions: [
+            {
+                id: 'q2016-e1',
+                type: 'essay',
+                question: '什么是Brooks在"没有银弹"一文中提到的软件开发中的根本任务、次要任务？解释软件系统的4个内在特性。自主动选择一种软件技术或管理上的方法，说明它是如何解决软件系统的4个内在特性的。',
+                answer: '根本任务：构建软件概念结构（抽象的复杂概念结构）。次要任务：表达这些概念结构（编程语言、工具等）。\n四个内在特性：复杂性、一致性、可变性、不可见性。\n\n方法示例（TSP）：\n复杂性→通过WBS分解任务\n一致性→通过过程标准化应对环境一致性要求\n可变性→通过迭代式开发适应变更\n不可见性→通过设计文档和度量数据可视化过程',
+                score: 20,
+                year: 2016,
+                topic: '软件发展'
+            },
+            {
+                id: 'q2016-e2',
+                type: 'essay',
+                question: '"大教堂与市集"中的市集模式是指怎样的开发模式？请描述"Linus定律"。',
+                answer: '市集模式：开源软件开发模式，代码公开，任何人可参与开发和贡献，通过社区协作完成。\nLinus定律："Given enough eyeballs, all bugs are shallow"（只要有足够的测试者和开发者，所有Bug都将无所遁形）。',
+                score: 5,
+                year: 2016,
+                topic: '开源软件'
+            },
+            {
+                id: 'q2016-e3',
+                type: 'essay',
+                question: '描述你所理解的互联网开发模式和互联网商业模式。请具体谈谈google和百度的商业模式。',
+                answer: '互联网开发模式：迭代式开发、敏捷开发、DevOps、快速发布、持续迭代。\n互联网商业模式：免费服务+广告、增值服务、平台佣金。\nGoogle：搜索广告（AdWords/AdSense）为主要收入。\n百度：搜索竞价排名、移动生态、AI云服务。',
+                score: 10,
+                year: 2016,
+                topic: '软件发展'
+            },
+            {
+                id: 'q2016-e4',
+                type: 'essay',
+                question: '什么是破坏性创新？为什么行业领先企业在面临破坏性创新的时候失败的可能性很大？',
+                answer: '破坏性创新：最初在低端市场或新市场出现的创新，性能较低但价格便宜或使用更便捷，逐步改进后颠覆现有市场。\n\n领先企业失败原因：①关注高端客户需求 ②利润率导向 ③现有价值网络束缚 ④组织结构不适 ⑤决策理性但方向错误。',
+                score: 10,
+                year: 2016,
+                topic: '软件发展'
+            },
+            {
+                id: 'q2016-e5',
+                type: 'essay',
+                question: '描述本学期你阅读并做读书笔记的一本书的基本内容。',
+                answer: '（开放性题目，根据个人阅读情况作答。常见选书：《人月神话》《大教堂与市集》《敏捷软件开发》等）',
+                score: 5,
+                year: 2016,
+                topic: '综合'
+            },
+            {
+                id: 'q2016-e6',
+                type: 'essay',
+                question: '请描述CMMI-DEV模型的五个不同成熟度等级的特征，并在此基础上论述伴随着每个等级的提升其过程改进的重点和出发点在哪里？',
+                answer: '五级：①Initial原始 ②Managed已管理 ③Defined已定义 ④Quantitatively Managed定量管理 ⑤Optimizing优化\n\n过程改进重点：\n1→2：建立基本项目管理\n2→3：从项目级到组织级标准化\n3→4：从定性到定量管理\n4→5：从被动到主动优化',
+                score: 12,
+                year: 2016,
+                topic: '软件过程'
+            },
+            {
+                id: 'q2016-e7',
+                type: 'essay',
+                question: '请按照类别和成熟度等级，将CMMI-DEV模型1.3版本的22个过程域填入一张表格。',
+                answer: '（表格题，需要填写22个PA的分类：\n项目管理类：PP, PMC, SAM, IPM, RSKM, IT\n工程类：REQM, RD, TS, PI, VER, VAL\n支持类：CM, MA, PPQA, DAR, OT, CAR, OPF, OPP, OPM, QPM等）',
+                score: 8,
+                year: 2016,
+                topic: '软件过程'
+            },
+            {
+                id: 'q2016-e8a',
+                type: 'essay',
+                question: '在软件工程中关于开源软件的谬误（至少2个），并解释原因。',
+                answer: '1. "开源软件是免费的"：开源不等于免费，需要投入开发、维护、集成成本。\n2. "开源软件安全性更差"：实际上Linus定律表明开源更安全（足够多的审查者）。',
+                score: 10,
+                year: 2016,
+                topic: '开源软件'
+            },
+            {
+                id: 'q2016-e8b',
+                type: 'essay',
+                question: '在软件工程中关于软件测试的谬误（至少2个），并解释原因。',
+                answer: '1. "测试能证明软件没有缺陷"：测试只能证明缺陷存在，不能证明缺陷不存在（Dijkstra）。\n2. "测试越多质量越高"：过度测试可能浪费资源，关键在于测试的有效性和覆盖率。',
+                score: 10,
+                year: 2016,
+                topic: '质量管理'
+            },
+            {
+                id: 'q2016-e8c',
+                type: 'essay',
+                question: '在软件工程中关于敏捷开发的谬误（至少2个），并解释原因。',
+                answer: '1. "敏捷是轻量级方法"：敏捷对工程规范有极为严格的要求，并非轻量级。\n2. "敏捷就是拥抱变更"：所有方法都限制和管理变更，敏捷也不例外。\n3. "TDD可以提供更高的质量"：没有足够的证据支持。',
+                score: 10,
+                year: 2016,
+                topic: '敏捷方法'
+            }
+        ]
+    },
+    {
+        id: 'exam2015',
+        title: '2015年A/B卷选择题',
+        year: 2015,
+        type: 'final',
+        source: 'EagleBear2002',
+        description: '2015年软件过程与管理考试A/B卷选择题精选。含CMM创始人、XP工时、看板方法、状态机验证、日程计划等知识点。',
+        questions: [
+            {
+                id: 'q2015-c1',
+                type: 'choice',
+                question: 'CMM的创始人是哪位？',
+                options: ['A. Boehm', 'B. Juran', 'C. Humphrey', 'D. Crosby'],
+                correctAnswer: 'C',
+                explanation: 'Humphrey是"软件过程之父"，采用Crosby的成熟度度量提出CMM。',
+                year: 2015,
+                topic: '软件过程'
+            },
+            {
+                id: 'q2015-c2',
+                type: 'choice',
+                question: 'XP规定开发人员每周工作时间不超过___小时，连续加班不可以超过两周？',
+                options: ['A. 30', 'B. 40', 'C. 50', 'D. 60'],
+                correctAnswer: 'B',
+                explanation: 'XP规定每周不超过40小时，强调可持续的开发节奏。',
+                year: 2015,
+                topic: '敏捷方法'
+            },
+            {
+                id: 'q2015-c3',
+                type: 'choice',
+                question: '下列不属于看板方法典型实践的是：',
+                options: ['A. 可视化工作流', 'B. 站立式会议', 'C. 限定WIP', 'D. 重构'],
+                correctAnswer: 'BD',
+                explanation: 'B是Scrum的实践，D是XP的实践。看板核心实践是可视化工作流、限定WIP、管理流动等。',
+                year: 2015,
+                topic: '敏捷方法'
+            },
+            {
+                id: 'q2015-c4',
+                type: 'choice',
+                question: '下述内容在状态机验证中不用以验证状态机本身是否正确的是：',
+                options: [
+                    'A. 没有隐藏的陷阱和死循环',
+                    'B. 状态转换是否完整',
+                    'C. 状态描述是否完整',
+                    'D. 状态转换是否正交'
+                ],
+                correctAnswer: 'C',
+                explanation: '状态机验证关注状态转换的完整性、正交性、无死循环和陷阱，不验证状态描述本身的完整性。',
+                year: 2015,
+                topic: '软件设计'
+            },
+            {
+                id: 'q2015-c5',
+                type: 'choice',
+                question: '为了制定Schedule Plan，下述描述中哪一项是不需要的？',
+                options: [
+                    'A. Task size',
+                    'B. Task Order',
+                    'C. Schedule Hour',
+                    'D. Task hour for each task'
+                ],
+                correctAnswer: 'A',
+                explanation: 'Task size不是制定日程计划的直接输入。需要任务顺序、日程可用时间和每项任务的计划工时。',
+                year: 2015,
+                topic: '项目管理'
+            },
+            {
+                id: 'q2015-c6',
+                type: 'choice',
+                question: '在上题中，还需要补充下述哪一项数据就可以定义Schedule Plan了？',
+                options: ['A. Task List', 'B. Plan Value', 'C. Earned Value', 'D. Nothing'],
+                correctAnswer: 'A',
+                explanation: '还需补充Task List（任务清单）。有了任务清单、顺序、日程时间和工时即可制定日程计划。',
+                year: 2015,
+                topic: '项目管理'
+            }
+        ]
+    },
+    {
+        id: 'exam2013',
+        title: '2013年期末真题',
+        year: 2013,
+        type: 'final',
+        source: 'Fred Blog 图片识别',
+        description: '2013年软件过程与管理期末考试（2小时，南京大学软件学院）。7道大题，涵盖Brooks本质难题、Linus定律、Technology Adoption Life Cycle、Chasm跨越策略等。',
+        questions: [
+            {
+                id: 'q2013-e1',
+                type: 'essay',
+                question: '什么是Brooks在"没有银弹"一文中提到的软件开发中的根本任务、次要任务？解释软件系统的4个内在特性。',
+                answer: '根本任务：构建软件概念结构。次要任务：表达这些概念结构。\n四个内在特性：复杂性、一致性、可变性、不可见性。',
+                score: 10,
+                year: 2013,
+                topic: '软件发展'
+            },
+            {
+                id: 'q2013-e2',
+                type: 'essay',
+                question: '"大教堂与市集"中的市集模式指怎样的开发模式？描述"Linus定律"。',
+                answer: '市集模式：开源软件开发模式，代码公开，社区协作。\nLinus定律："Given enough eyeballs, all bugs are shallow"（足够多的审查者使所有Bug无所遁形）。',
+                score: 10,
+                year: 2013,
+                topic: '开源软件'
+            },
+            {
+                id: 'q2013-e3',
+                type: 'essay',
+                question: '描述Technology Adoption Life Cycle中每个部分的市场特点。',
+                answer: 'Technology Adoption Life Cycle五个阶段：\n1. 创新者：愿意承担风险尝试新技术\n2. 早期采用者：有远见，关注战略优势\n3. 早期大众：实用主义，关注实用性和改进\n4. 晚期大众：保守，关注稳定性和低成本\n5. 落后者：怀疑一切，仅在被迫时采用',
+                score: 10,
+                year: 2013,
+                topic: '软件发展'
+            },
+            {
+                id: 'q2013-e4',
+                type: 'essay',
+                question: '你认为敏捷宣言在什么样的情形下适合？为什么适合用敏捷来开发？什么样的情况下不适合用敏捷来开发？',
+                answer: '适合敏捷：需求不确定、快速变化、小团队、创新产品。\n原因：敏捷支持小周期迭代、快速响应变更、价值交付。\n不适合敏捷：需求明确且稳定、大型基础设施项目、安全关键系统、强合规要求的项目。',
+                score: 10,
+                year: 2013,
+                topic: '敏捷方法'
+            },
+            {
+                id: 'q2013-e5',
+                type: 'essay',
+                question: '什么是高科技产品采用周期中的Chasm？',
+                answer: 'Chasm（鸿沟）是早期采用者（有远见者）和早期大众（实用主义者）之间的巨大鸿沟。两者购买动机不同：早期采用者关注战略优势，早期大众关注实用性和现有改进。跨越Chasm是产品从早期市场走向主流市场的关键挑战。',
+                score: 10,
+                year: 2013,
+                topic: '软件发展'
+            },
+            {
+                id: 'q2013-e6',
+                type: 'essay',
+                question: '请为一个处于高科技产品采用周期的Chasm的产品设计一个详细的跨越策略。',
+                answer: '跨越Chasm策略：\n1. 瞄准细分市场：选择一个具体的利基市场作为滩头阵地\n2. 整体产品：确保产品完整解决目标客户问题\n3. 制定竞争对比：明确与现有方案的优势\n4. 定价和渠道：制定适合实用主义客户的定价和渠道\n5. 竞争定位：在目标市场中建立领导地位\n6. 从滩头堡扩展：成功后向相邻市场扩展',
+                score: 15,
+                year: 2013,
+                topic: '软件发展'
+            }
+        ]
+    },
+    {
+        id: 'exam-unknown',
+        title: '年份未确定题目汇编',
+        year: '未确定',
+        type: 'early',
+        source: 'EagleBear2002',
+        description: '出现在多个来源中但无法确定具体年份的题目集合。包括质量大师贡献、DevOps概念解释、Capture-Recapture方法等课程外内容。',
+        questions: [
+            {
+                id: 'qunk-e1',
+                type: 'essay',
+                question: '【2013/2015B/2016】描述质量管理大师（Deming、Juran、Crosby、Humphrey）的观点、贡献及借鉴意义。',
+                answer: 'Deming：日本质量管理之父，PDCA循环，14条原则。\nJuran：质量控制手册，适用性质量，质量三部曲，80/20原则。\nCrosby：零缺陷之父，质量=符合要求，6C变革管理。\nHumphrey：软件过程之父，借鉴Crosby成熟度度量提出CMM，将理论引入软件过程。',
+                explanation: '论述题必考！每位大师的贡献约2-3分。答题结构：每位大师分述「观点+贡献+影响」。借鉴意义总结五位大师如何形成「从统计→系统→适用→零缺陷→软件」的演进脉络。',
+                score: 10,
+                year: '未确定',
+                topic: '质量管理'
+            },
+            {
+                id: 'qunk-e2',
+                type: 'essay',
+                question: '【2018Fall】DevOps的特点，为什么流行？',
+                answer: '特点：自动化、持续反馈、文化变革、监控与度量。\n流行原因：①互联网需快速响应 ②云计算和容器技术发展 ③微服务架构 ④缩短交付周期。',
+                score: 8,
+                year: '未确定',
+                topic: 'DevOps'
+            },
+            {
+                id: 'qunk-e3',
+                type: 'essay',
+                question: '【2015A】Capture-recapture方法进行缺陷预测的假设条件和模型定义。',
+                answer: 'CRC模型定义两个参数：评审者发现缺陷能力t和缺陷难度h。\n四个基本模型：\nM0：假设h和t都一样\nMh：假设h不等而t都一样\nMt：假设t不等而h都一样\nMth：假设t和h都不等',
+                score: 10,
+                year: '未确定',
+                topic: '质量管理'
+            },
+            {
+                id: 'qunk-e4',
+                type: 'essay',
+                question: '【2013】配置管理中配置项和产品基线的概念，设计流程对变更进行控制。',
+                answer: '配置项：纳入配置管理的工作产品。产品基线：经正式评审批准的配置项集合。\n变更控制流程：①启动变更请求程序 ②分析变更影响 ③与干系人审查 ④跟踪直到结项。控制：确认授权→更新配置项→归档旧基线获取新基线→执行审查→记录变更。',
+                score: 10,
+                year: '未确定',
+                topic: '配置管理'
+            },
+            {
+                id: 'qunk-e5',
+                type: 'essay',
+                question: '【2016】解释以下概念：CI、CD/CD、Pipeline Orchestration、Container、Micro Service、A/B Testing、GitFlow。',
+                answer: 'CI：持续集成，频繁将代码集成到主干。\nCD/CD：持续交付/持续部署。\nPipeline Orchestration：流水线编排，自动化构建-测试-部署流程。\nContainer：容器，轻量级虚拟化技术。\nMicro Service：微服务，将应用拆分为独立部署的小服务。\nA/B Testing：A/B测试，对比两个版本的效果。\nGitFlow：Git分支管理模型。',
+                score: 10,
+                year: '未确定',
+                topic: 'DevOps'
+            }
+        ]
+    },
+    {
         id: 'exam-class',
         title: '课堂测试选择题',
         year: '课堂',
@@ -822,8 +1692,8 @@ export const examPapers = [
                 type: 'choice',
                 question: '以下描述中，不属于软件开发本质困难或者本质挑战的是：',
                 options: ['A. 质量难题', 'B. 复杂性', 'C. 不可见', 'D. 一致性'],
-                correctAnswer: 'D',
-                explanation: '一致性不属于课程所定义的软件开发本质困难或本质挑战。',
+                correctAnswer: 'A',
+                explanation: 'Brooks四大本质困难为：复杂性、一致性、可变性、不可见性。「质量难题」不属于本质困难，软件质量是衍生属性。',
                 year: '课堂',
                 topic: '软件发展'
             },
