@@ -355,15 +355,22 @@ const renderedContent = computed(() => {
 
 function parseInline(text) {
   // 处理行内的粗体、斜体、代码（已经在外层处理过，但这里做保险）
-  return text
+  if (!text || typeof text !== 'string') return text
+  // 粗体+斜体
+  let result = text.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>')
+  // 粗体
+  result = result.replace(/\*\*(.+?)\*\*/g, '<strong class="md-strong">$1</strong>')
+  // 斜体
+  result = result.replace(/\*(.+?)\*/g, '<em class="md-em">$1</em>')
+  return result
 }
 
 function renderTable(table) {
-  const thead = `<thead><tr>${table.headers.map(h => `<th>${h}</th>`).join('')}</tr></thead>`
+  const thead = `<thead><tr>${table.headers.map(h => `<th>${parseInline(h)}</th>`).join('')}</tr></thead>`
   const tbody = `<tbody>${table.rows.map(row =>
     `<tr>${row.map((cell, ci) => {
       const tag = ci === 0 ? 'th' : 'td'
-      return `<${tag}>${cell}</${tag}>`
+      return `<${tag}>${parseInline(cell)}</${tag}>`
     }).join('')}</tr>`
   ).join('')}</tbody>`
   return `<div class="md-table-wrapper"><table class="md-table">${thead}${tbody}</table></div>`
