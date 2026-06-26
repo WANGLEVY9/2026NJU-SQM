@@ -44,6 +44,8 @@
         </router-link>
       </nav>
 
+      <VisitorCounter />
+
       <button class="mobile-menu-btn" @click="toggleMobileMenu" :aria-label="isMobileMenuOpen ? '关闭菜单' : '打开菜单'">
         <Menu v-if="!isMobileMenuOpen" :size="24" />
         <X v-else :size="24" />
@@ -55,6 +57,7 @@
 <script setup>
 import { ref } from 'vue'
 import { Home, BookOpen, Brain, FileText, ClipboardList, ListChecks, Menu, X } from 'lucide-vue-next'
+import VisitorCounter from './VisitorCounter.vue'
 
 const isMobileMenuOpen = ref(false)
 
@@ -88,7 +91,6 @@ const closeMobileMenu = () => {
   height: 70px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 
 .logo {
@@ -96,6 +98,7 @@ const closeMobileMenu = () => {
   align-items: center;
   gap: 12px;
   text-decoration: none;
+  margin-right: auto;
   transition: opacity 0.2s;
 
   &:hover {
