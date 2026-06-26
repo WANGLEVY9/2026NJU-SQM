@@ -29,8 +29,8 @@ export const choiceQuestions = [
     type: 'choice',
     question: '以下描述中，不属于软件开发本质困难或者本质挑战的是：',
     options: ['A. 质量难题', 'B. 复杂性', 'C. 不可见', 'D. 一致性'],
-    correctAnswer: 'D',
-    explanation: '根据课程内容，软件开发的本质困难包括复杂性、不可见性、可变性和质量难题。一致性不属于课程所定义的软件开发本质困难或本质挑战。',
+    correctAnswer: 'A',
+    explanation: '根据 Brooks 在《没有银弹》中提出的理论，软件开发的四大本质困难是：复杂性（Complexity）、一致性（Conformity）、可变性（Changeability）、不可见性（Invisibility）。「质量难题」不属于四大本质困难，软件质量是衍生属性。一致性（Conformity）指软件必须与不断变化的外部世界、遗留系统和人为习惯保持对接，是四大本质困难之一。',
     topic: '软件发展'
   },
   {
@@ -208,8 +208,8 @@ export const choiceQuestions = [
     type: 'choice',
     question: '以下描述中，不属于软件开发本质困难或者本质挑战的是：',
     options: ['A. 质量难题', 'B. 复杂性', 'C. 不可见', 'D. 一致性'],
-    correctAnswer: 'D',
-    explanation: '一致性不属于课程所定义的软件开发本质困难或本质挑战。',
+    correctAnswer: 'A',
+    explanation: 'Brooks 四大本质困难为：复杂性、一致性、可变性、不可见性。「质量难题」不属于本质困难，软件质量是衍生属性。一致性指软件须与外部环境、遗留系统和人为习惯保持对接，是四大本质困难之一。',
     topic: '软件发展'
   },
   {
