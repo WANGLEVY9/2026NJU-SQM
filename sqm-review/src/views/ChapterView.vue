@@ -123,6 +123,7 @@ import { commentaryData } from '@/data/commentary'
 import ChapterNav from '@/components/course/ChapterNav.vue'
 import FlashCard from '@/components/course/FlashCard.vue'
 import ReviewDiagram from '@/components/review/ReviewDiagram.vue'
+import { renderMarkdown } from '@/utils/markdown'
 
 const route = useRoute()
 const router = useRouter()
@@ -138,72 +139,7 @@ const hasNextChapter = computed(() => currentIndex.value < courseStore.chapters.
 
 const formattedContent = computed(() => {
   if (!chapter.value?.content) return ''
-  let html = chapter.value.content
-
-  // Replace markdown headers
-  html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>')
-  html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>')
-  html = html.replace(/^#### (.*$)/gim, '<h4>$1</h4>')
-
-  // Replace bold text
-  html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-
-  // Replace blockquotes
-  html = html.replace(/^> (.*$)/gim, '<blockquote>$1</blockquote>')
-
-  // Handle code blocks
-  html = html.replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>')
-
-  // Replace numbered lists with styled items
-  html = html.replace(/^(\d+)\. (.*$)/gim, '<li class="numbered-item"><span class="number-badge">$1</span>$2</li>')
-  html = html.replace(/(<li class="numbered-item">.*<\/li>\n?)+/g, '<ol class="styled-list">$&</ol>')
-
-  // Replace bullet lists with styled items
-  html = html.replace(/^- (.*$)/gim, '<li class="bullet-item">$1</li>')
-  html = html.replace(/(<li class="bullet-item">.*<\/li>\n?)+/g, '<ul class="styled-list">$&</ul>')
-
-  // Handle table rows (simplified)
-  html = html.replace(/\|(.+)\|/g, (match) => {
-    const cells = match.split('|').filter(c => c.trim())
-    if (cells.length === 0) return match
-    const isHeader = cells.every(c => c.trim().match(/^[-:]+$/))
-    if (isHeader) return ''
-    const tag = match.includes('---') ? 'th' : 'td'
-    return `<tr>${cells.map(c => `<${tag}>${c.trim()}</${tag}>`).join('')}</tr>`
-  })
-
-  // Wrap consecutive lines in paragraphs
-  const lines = html.split('\n')
-  const result = []
-  let inParagraph = false
-
-  for (const line of lines) {
-    const trimmed = line.trim()
-    if (!trimmed) {
-      if (inParagraph) {
-        result.push('</p>')
-        inParagraph = false
-      }
-      continue
-    }
-
-    if (trimmed.startsWith('<')) {
-      if (inParagraph) {
-        result.push('</p>')
-        inParagraph = false
-      }
-      result.push(trimmed)
-    } else {
-      if (!inParagraph) {
-        result.push('<p>')
-        inParagraph = true
-      }
-      result.push(trimmed)
-    }
-  }
-  if (inParagraph) result.push('</p>')
-
-  return result.join('\n')
+  return renderMarkdown(chapter.value.content)
 })
 
 const goToPrevChapter = () => {
@@ -307,7 +243,8 @@ watch(chapterId, (id) => {
   line-height: 1.8;
   color: var(--text-secondary);
 
-  :deep(h2) {
+  // ===== 标题 =====
+  :deep(.md-h2) {
     font-family: $font-serif;
     font-size: 24px;
     font-weight: 600;
@@ -317,7 +254,7 @@ watch(chapterId, (id) => {
     border-bottom: 2px solid var(--accent);
   }
 
-  :deep(h3) {
+  :deep(.md-h3) {
     font-family: $font-serif;
     font-size: 20px;
     font-weight: 600;
@@ -325,32 +262,41 @@ watch(chapterId, (id) => {
     margin: 32px 0 12px;
   }
 
-  :deep(h4) {
+  :deep(.md-h4) {
     font-size: 17px;
     font-weight: 600;
     color: var(--accent);
     margin: 24px 0 10px;
   }
 
-  :deep(p) {
+  // ===== 段落 =====
+  :deep(.md-p) {
     margin-bottom: 16px;
   }
 
-  :deep(ul), :deep(ol) {
-    margin: 16px 0;
-    padding-left: 24px;
-  }
-
-  :deep(li) {
-    margin-bottom: 10px;
-  }
-
-  :deep(strong) {
+  // ===== 行内格式 =====
+  :deep(.md-strong) {
     color: var(--accent);
     font-weight: 600;
   }
 
-  :deep(blockquote) {
+  :deep(.md-em) {
+    color: var(--text-primary);
+    font-style: italic;
+  }
+
+  :deep(.inline-code) {
+    font-family: $font-mono;
+    font-size: 13px;
+    padding: 2px 6px;
+    background: rgba(214, 158, 46, 0.1);
+    border: 1px solid rgba(214, 158, 46, 0.2);
+    border-radius: 4px;
+    color: #f7af3f;
+  }
+
+  // ===== 引用块 =====
+  :deep(.md-blockquote) {
     margin: 20px 0;
     padding: 16px 20px;
     background: rgba(214, 158, 46, 0.06);
@@ -365,33 +311,30 @@ watch(chapterId, (id) => {
     }
   }
 
-  :deep(pre) {
-    margin: 20px 0;
-    padding: 16px;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
-    overflow-x: auto;
-
-    code {
-      font-family: $font-mono;
-      font-size: 13px;
-      color: var(--text-primary);
-      line-height: 1.6;
-    }
+  // ===== 分割线 =====
+  :deep(.md-hr) {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+    margin: 24px 0;
   }
 
-  :deep(.styled-list) {
-    margin: 16px 0;
-    padding-left: 0;
+  // ===== 无序列表 =====
+  :deep(.md-ul) {
     list-style: none;
+    padding: 0;
+    margin: 16px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 
-  :deep(.bullet-item) {
+  :deep(.ul-item) {
     position: relative;
     padding-left: 22px;
-    margin-bottom: 10px;
+    margin-bottom: 4px;
     line-height: 1.7;
+    color: var(--text-secondary);
 
     &::before {
       content: '';
@@ -406,13 +349,27 @@ watch(chapterId, (id) => {
     }
   }
 
-  :deep(.numbered-item) {
+  // ===== 有序列表 =====
+  :deep(.md-ol) {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+    counter-reset: ol-counter;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  :deep(.ol-item) {
     position: relative;
     padding-left: 32px;
-    margin-bottom: 10px;
+    margin-bottom: 4px;
     line-height: 1.7;
+    color: var(--text-secondary);
+    counter-increment: ol-counter;
 
-    .number-badge {
+    &::before {
+      content: counter(ol-counter);
       position: absolute;
       left: 0;
       top: 2px;
@@ -430,10 +387,17 @@ watch(chapterId, (id) => {
     }
   }
 
-  :deep(table) {
+  // ===== 表格（带包装器，支持横向滚动） =====
+  :deep(.md-table-wrapper) {
+    margin: 20px 0;
+    overflow-x: auto;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+  }
+
+  :deep(.md-table) {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
     font-size: 14px;
 
     th, td {
@@ -454,6 +418,48 @@ watch(chapterId, (id) => {
 
     tr:nth-child(even) {
       background: rgba(255, 255, 255, 0.02);
+    }
+  }
+
+  // ===== 代码块 =====
+  :deep(.md-code-block) {
+    margin: 20px 0;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 12px;
+      background: var(--bg-primary);
+      border-bottom: 1px solid var(--border-color);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .code-lang {
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    pre {
+      padding: 14px 16px;
+      margin: 0;
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-primary);
+      font-family: $font-mono;
+      background: transparent;
+      border: none;
+    }
+
+    code {
+      font-family: $font-mono;
+      color: var(--text-primary);
     }
   }
 }

@@ -175,6 +175,7 @@
 import { computed, ref } from 'vue'
 import { BookMarked, User, Tag, Zap, ListChecks, CheckCircle2, AlertCircle, ArrowRight, Target, FileText, Lightbulb, Sparkles, Eye, EyeOff, CheckCircle } from 'lucide-vue-next'
 import QuickFlashCard from './QuickFlashCard.vue'
+import { renderMarkdown } from '@/utils/markdown'
 
 const props = defineProps({
   item: { type: Object, required: true },
@@ -224,169 +225,10 @@ const chapterLabel = computed(() => {
   return map[props.item.chapter] || props.item.chapter
 })
 
-// ============================================
-// 高质量 Markdown 渲染器
-// ============================================
+// 使用共享 Markdown 渲染器
 const renderedContent = computed(() => {
-  if (!props.item.content) return ''
-  let text = props.item.content
-
-  // 1. 转义 HTML 特殊字符（防止 XSS）
-  text = escapeHtml(text)
-
-  // 2. 代码块（优先处理，避免内部被解析）
-  const codeBlocks = []
-  text = text.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
-    const id = `CODE_${codeBlocks.length}`
-    codeBlocks.push({ lang: lang || '', code: code.trim() })
-    return id
-  })
-
-  // 3. 行内代码
-  text = text.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>')
-
-  // 4. 表格（先处理，避免被列表解析干扰）
-  const tables = []
-  text = text.replace(/(\|[^\n]+\|)\n(\|[-:\| ]+\|)\n((?:\|[^\n]+\|\n?)+)/g, (match, headerLine, sepLine, bodyLines) => {
-    const id = `TABLE_${tables.length}`
-    const headers = headerLine.split('|').filter(c => c.trim() !== '').map(c => c.trim())
-    const rows = bodyLines.trim().split('\n').map(row =>
-      row.split('|').filter(c => c.trim() !== '').map(c => c.trim())
-    )
-    tables.push({ headers, rows })
-    return id
-  })
-
-  // 5. 标题
-  text = text.replace(/^## (.*$)/gim, '<h2 class="md-h2">$1</h2>')
-  text = text.replace(/^### (.*$)/gim, '<h3 class="md-h3">$1</h3>')
-  text = text.replace(/^#### (.*$)/gim, '<h4 class="md-h4">$1</h4>')
-
-  // 6. 粗体和斜体
-  text = text.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>')
-  text = text.replace(/\*\*(.+?)\*\*/g, '<strong class="md-strong">$1</strong>')
-  text = text.replace(/\*(.+?)\*/g, '<em class="md-em">$1</em>')
-
-  // 7. 引用块
-  text = text.replace(/^> (.*$)/gim, '<blockquote class="md-blockquote">$1</blockquote>')
-  // 合并相邻引用块
-  text = text.replace(/(<blockquote[^>]*>[\s\S]*?<\/blockquote>)(\s*<blockquote[^>]*>[\s\S]*?<\/blockquote>)+/g, (match) => {
-    const inner = match.replace(/<\/?blockquote[^>]*>/g, '').replace(/\n+/g, '<br>')
-    return `<blockquote class="md-blockquote">${inner}</blockquote>`
-  })
-
-  // 8. 有序列表
-  const olGroups = []
-  text = text.replace(/((?:^\d+\. .*\n?)+)/gm, (match) => {
-    const id = `OL_${olGroups.length}`
-    const items = match.trim().split('\n').map(line => {
-      const content = line.replace(/^\d+\.\s*/, '')
-      return `<li class="ol-item">${parseInline(content)}</li>`
-    }).join('')
-    olGroups.push(`<ol class="md-ol">${items}</ol>`)
-    return id
-  })
-
-  // 9. 无序列表
-  const ulGroups = []
-  text = text.replace(/((?:^- .*\n?)+)/gm, (match) => {
-    const id = `UL_${ulGroups.length}`
-    const items = match.trim().split('\n').map(line => {
-      const content = line.replace(/^-\s*/, '')
-      return `<li class="ul-item">${parseInline(content)}</li>`
-    }).join('')
-    ulGroups.push(`<ul class="md-ul">${items}</ul>`)
-    return id
-  })
-
-  // 10. 分割线
-  text = text.replace(/^---\s*$/gim, '<hr class="md-hr" />')
-
-  // 11. 段落处理
-  const lines = text.split('\n')
-  const result = []
-  let inParagraph = false
-
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i].trim()
-
-    if (!line) {
-      if (inParagraph) {
-        result.push('</p>')
-        inParagraph = false
-      }
-      continue
-    }
-
-    if (line.startsWith('<') || /^CODE_\d+$/.test(line) || /^TABLE_\d+$/.test(line) || /^OL_\d+$/.test(line) || /^UL_\d+$/.test(line)) {
-      if (inParagraph) {
-        result.push('</p>')
-        inParagraph = false
-      }
-      result.push(line)
-    } else {
-      if (!inParagraph) {
-        result.push('<p class="md-p">')
-        inParagraph = true
-      }
-      result.push(parseInline(line))
-    }
-  }
-  if (inParagraph) result.push('</p>')
-
-  text = result.join('\n')
-
-  // 12. 还原代码块
-  tables.forEach((table, i) => {
-    text = text.replace(`TABLE_${i}`, renderTable(table))
-  })
-  codeBlocks.forEach((block, i) => {
-    text = text.replace(`CODE_${i}`, renderCodeBlock(block))
-  })
-  olGroups.forEach((html, i) => {
-    text = text.replace(`OL_${i}`, html)
-  })
-  ulGroups.forEach((html, i) => {
-    text = text.replace(`UL_${i}`, html)
-  })
-
-  return text
+  return renderMarkdown(props.item.content)
 })
-
-function parseInline(text) {
-  // 处理行内的粗体、斜体、代码（已经在外层处理过，但这里做保险）
-  if (!text || typeof text !== 'string') return text
-  // 粗体+斜体
-  let result = text.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>')
-  // 粗体
-  result = result.replace(/\*\*(.+?)\*\*/g, '<strong class="md-strong">$1</strong>')
-  // 斜体
-  result = result.replace(/\*(.+?)\*/g, '<em class="md-em">$1</em>')
-  return result
-}
-
-function renderTable(table) {
-  const thead = `<thead><tr>${table.headers.map(h => `<th>${parseInline(h)}</th>`).join('')}</tr></thead>`
-  const tbody = `<tbody>${table.rows.map(row =>
-    `<tr>${row.map((cell, ci) => {
-      const tag = ci === 0 ? 'th' : 'td'
-      return `<${tag}>${parseInline(cell)}</${tag}>`
-    }).join('')}</tr>`
-  ).join('')}</tbody>`
-  return `<div class="md-table-wrapper"><table class="md-table">${thead}${tbody}</table></div>`
-}
-
-function renderCodeBlock(block) {
-  const langLabel = block.lang ? `<span class="code-lang">${block.lang}</span>` : ''
-  return `<div class="md-code-block"><div class="code-header">${langLabel}<span class="code-copy">代码</span></div><pre><code>${block.code}</code></pre></div>`
-}
-
-function escapeHtml(text) {
-  return text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-}
 </script>
 
 <style lang="scss" scoped>
