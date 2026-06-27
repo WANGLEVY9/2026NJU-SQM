@@ -2862,6 +2862,147 @@ PQI = 5 个数据的乘积（基准值作为 1，越接近 1 质量越高）：
                 fullQuestion: '举例说明验证和确认的区别和联系。',
                 answer: '区别：验证关注「是否按规格构建」，确认关注「是否满足用户需求」。例子：单元测试=验证（验证代码是否按设计正确实现）；验收测试=确认（确认系统是否满足用户业务需求）。联系：（1）验证是确认的基础——产品必须先按规格正确构建，才能谈得上满足用户需求；（2）确认是验证的导向——规格说明必须正确反映用户需求，验证才有意义；（3）两者共同构成质量保障体系——从编码到交付全链条的质量检查。',
                 analysis: '经典例子：单元测试=验证，验收测试=确认。核心区别：验证依据规格（内部标准），确认依据需求（外部标准）。'
+            },
+            // ===== 第六讲 PPT 课堂练习题（10题） =====
+            {
+                year: '第 6 讲 课堂',
+                type: '多选',
+                question: '典型客户需求辨析',
+                fullQuestion: '下面描述属于典型客户需求的是：\nA. 客户期望\nB. 预算限制\nC. 法律法规限制\nD. 系统功能描述',
+                options: [
+                    { label: 'A', text: '客户期望', isCorrect: true },
+                    { label: 'B', text: '预算限制', isCorrect: true },
+                    { label: 'C', text: '法律法规限制', isCorrect: true },
+                    { label: 'D', text: '系统功能描述', isCorrect: false }
+                ],
+                answer: 'ABC',
+                analysis: 'PPT原文：需求分为客户需求、产品需求、产品组件需求；客户需求包含客户期望、预算、工期、法律法规等外部约束；**系统功能描述属于产品需求**（开发转化后的技术需求），不属于客户原始诉求。\nA ✅ 客户直观期望是典型客户需求；\nB ✅ 预算属于客户给出的硬性约束，归客户需求；\nC ✅ 法规是客户/行业必须遵守的外部限制，属于客户需求范畴；\nD ❌ 系统功能是开发方整理后的产品需求，不是客户需求。'
+            },
+            {
+                year: '第 6 讲 课堂',
+                type: '多选',
+                question: '团队设计标准',
+                fullQuestion: '在团队设计活动中，应该注意设计标准，下列属于典型的设计标准应该约定的是：\nA. 命名规范\nB. 接口标准\nC. 出错或者异常处理信息\nD. 设计表示方式',
+                options: [
+                    { label: 'A', text: '命名规范', isCorrect: true },
+                    { label: 'B', text: '接口标准', isCorrect: true },
+                    { label: 'C', text: '出错或者异常处理信息', isCorrect: true },
+                    { label: 'D', text: '设计表示方式', isCorrect: true }
+                ],
+                answer: 'ABCD',
+                analysis: 'PPT原文明确列出团队设计标准四方面：**命名规范、接口标准、系统出错信息、设计表示标准**，四项全部是团队设计需要统一约定的规范。'
+            },
+            {
+                year: '第 6 讲 课堂',
+                type: '多选',
+                question: '团队设计活动关注点',
+                fullQuestion: '典型地，在团队设计活动中，应该注意哪些内容：\nA. 设计标准的应用\nB. 复用的考虑\nC. 可测试性支持\nD. 可用性支持',
+                options: [
+                    { label: 'A', text: '设计标准的应用', isCorrect: true },
+                    { label: 'B', text: '复用的考虑', isCorrect: true },
+                    { label: 'C', text: '可测试性支持', isCorrect: true },
+                    { label: 'D', text: '可用性支持', isCorrect: true }
+                ],
+                answer: 'ABCD',
+                analysis: 'PPT「团队设计」章节：团队设计额外考量点包含：团队智慧、**设计标准、设计复用、可测试性、可用性**，四个条目均为团队设计核心关注点。'
+            },
+            {
+                year: '第 6 讲 课堂',
+                type: '多选',
+                question: '集成策略辨析',
+                fullQuestion: '关于集成策略，下述描述中正确的是：\nA. 当待集成组件质量普遍不高的时候，不可以使用扁平化策略\nB. 当需要尽早获取可以工作的组件的时候，应该使用集簇式策略\nC. 当待集成组件质量普遍较高的时候，可以使用大爆炸式集成策略\nD. 持续集成本质上就是逐一添加策略',
+                options: [
+                    { label: 'A', text: '组件质量不高时不可以使用扁平化策略', isCorrect: false },
+                    { label: 'B', text: '需要尽早获取可工作组件时应用集簇式策略', isCorrect: true },
+                    { label: 'C', text: '组件质量较高时可使用大爆炸式集成', isCorrect: true },
+                    { label: 'D', text: '持续集成本质上就是逐一添加策略', isCorrect: true }
+                ],
+                answer: 'BCD',
+                analysis: 'A ❌ 扁平化是分层增量集成，组件质量差反而适合分步排查，并非不能使用；\nB ✅ 集簇集成按功能分组组装，能快速产出可运行功能簇，尽早获得可用组件；\nC ✅ 大爆炸一次性集成，仅适合所有组件单元测试充分、缺陷少的场景；\nD ✅ 逐一添加（增量集成）是持续集成CI的底层思想，CI自动化频繁增量合并。'
+            },
+            {
+                year: '第 6 讲 课堂',
+                type: '多选',
+                question: '集成策略选择依据',
+                fullQuestion: '当考虑集成策略的时候，应该注意如下哪些方面？\nA. 待集成组件的质量状态\nB. 待集成组件的获取方式\nC. 待集成组件的功能和关系\nD. 待集成组件的数量',
+                options: [
+                    { label: 'A', text: '待集成组件的质量状态', isCorrect: true },
+                    { label: 'B', text: '待集成组件的获取方式', isCorrect: false },
+                    { label: 'C', text: '待集成组件的功能和关系', isCorrect: true },
+                    { label: 'D', text: '待集成组件的数量', isCorrect: true }
+                ],
+                answer: 'ACD',
+                analysis: '选择集成策略的核心判断依据：\nA ✅ 组件质量（质量差优先增量，质量高可大爆炸）；\nB ❌ 组件如何获取不影响集成策略选择，无关；\nC ✅ 组件之间依赖/功能关系（决定集簇、扁平化分组）；\nD ✅ 组件总量（数量巨大不适合大爆炸）。'
+            },
+            {
+                year: '第 6 讲 课堂',
+                type: '多选',
+                question: '扁平化vs集簇式集成',
+                fullQuestion: '关于扁平化集成策略和集簇式集成策略，下述说法中正确的是：\nA. 扁平化策略可以较早地充分地暴露系统级别的错误\nB. 扁平化策略对于系统级别错误的暴露能力有限\nC. 集簇式集成策略有助于复用策略的实现\nD. 扁平化策略和集簇式策略的优缺点正好相反',
+                options: [
+                    { label: 'A', text: '扁平化可较早暴露系统级错误', isCorrect: false },
+                    { label: 'B', text: '扁平化对系统级错误暴露能力有限', isCorrect: true },
+                    { label: 'C', text: '集簇式有助于复用策略实现', isCorrect: true },
+                    { label: 'D', text: '两者优缺点正好相反', isCorrect: false }
+                ],
+                answer: 'BC',
+                analysis: 'A ❌ 扁平化逐层集成，仅暴露分层接口问题，全局系统缺陷难提前发现；\nB ✅ 扁平化分层隔离，系统整体级错误很难早期暴露；\nC ✅ 集簇按功能/复用模块分组集成，天然支撑组件复用管理；\nD ❌ 二者都是增量集成，只是分组逻辑不同，优缺点并非完全反向。'
+            },
+            {
+                year: '第 6 讲 课堂',
+                type: '多选',
+                question: '典型验证(Verification)活动',
+                fullQuestion: '下述活动是典型的验证（Verification）的是：\nA. 需求评审\nB. 详细设计评审\nC. 单元测试\nD. 试运行',
+                options: [
+                    { label: 'A', text: '需求评审', isCorrect: true },
+                    { label: 'B', text: '详细设计评审', isCorrect: true },
+                    { label: 'C', text: '单元测试', isCorrect: true },
+                    { label: 'D', text: '试运行', isCorrect: false }
+                ],
+                answer: 'ABC',
+                analysis: '核心定义（PPT原文）：**验证Verification**——做得对不对，检查产物是否符合上游规格（过程内部校验）；**确认Validation**——做的是不是用户要的，真实环境验证最终产品价值。\nA ✅ 需求评审：核对需求是否符合业务输入，验证；\nB ✅ 设计评审：核对设计是否匹配需求，验证；\nC ✅ 单元测试：核对代码是否匹配设计，验证；\nD ❌ 试运行：真实环境交付使用，属于确认活动。'
+            },
+            {
+                year: '第 6 讲 课堂',
+                type: '多选',
+                question: '典型确认(Validation)活动',
+                fullQuestion: '下述活动是典型的确认（Validation）的是：\nA. 验收测试\nB. 代码评审\nC. 系统测试\nD. 持续集成',
+                options: [
+                    { label: 'A', text: '验收测试', isCorrect: true },
+                    { label: 'B', text: '代码评审', isCorrect: false },
+                    { label: 'C', text: '系统测试', isCorrect: true },
+                    { label: 'D', text: '持续集成', isCorrect: false }
+                ],
+                answer: 'AC',
+                analysis: 'A ✅ 验收测试由用户/业务验证产品是否满足真实需求，典型确认；\nB ❌ 代码评审属于内部验证；\nC ✅ 系统测试在完整环境校验整体产品是否符合用户目标，确认；\nD ❌ CI自动构建单元/集成校验，属于验证活动。'
+            },
+            {
+                year: '第 6 讲 课堂',
+                type: '多选',
+                question: '确认(Validation)对象辨析',
+                fullQuestion: '下述产物中属于典型的确认（Validation）对象的是：\nA. 接口设计文档\nB. 源代码\nC. 用户手册\nD. 系统使用培训材料（视频、录像等）',
+                options: [
+                    { label: 'A', text: '接口设计文档', isCorrect: false },
+                    { label: 'B', text: '源代码', isCorrect: false },
+                    { label: 'C', text: '用户手册', isCorrect: true },
+                    { label: 'D', text: '系统使用培训材料（视频、录像等）', isCorrect: true }
+                ],
+                answer: 'CD',
+                analysis: '验证对象：中间技术产物（需求文档、设计、代码、接口文档）；确认面向**交付给最终用户的使用类产物**：用户手册、培训材料，检验是否匹配用户真实使用场景。\nA、B 属于开发内部技术文档，是验证对象；C、D 面向终端用户，属于确认对象。'
+            },
+            {
+                year: '第 6 讲 课堂',
+                type: '多选',
+                question: '需求开发描述辨析',
+                fullQuestion: '下述关于需求开发的描述中，哪些是正确的？\nA. 客户需求是指客户提出的关于软件功能的具体要求\nB. 工期或者预算往往都是客户需求的一个方面\nC. 产品需求需要跟客户充分讨论才能获取\nD. 客户应该在需求开发活动中起到主导作用',
+                options: [
+                    { label: 'A', text: '客户需求是指客户提出的关于软件功能的具体要求', isCorrect: false },
+                    { label: 'B', text: '工期或者预算往往都是客户需求的一个方面', isCorrect: true },
+                    { label: 'C', text: '产品需求需要跟客户充分讨论才能获取', isCorrect: true },
+                    { label: 'D', text: '客户应该在需求开发活动中起到主导作用', isCorrect: false }
+                ],
+                answer: 'BC',
+                analysis: 'A ❌ 客户需求不只是功能，还包含预算、法规、工期、性能约束等各类限制；\nB ✅ PPT明确客户限制（预算、工期）属于客户需求；\nC ✅ 产品需求是开发方结合客户诉求转化而来，必须和客户充分沟通确认；\nD ❌ 需求开发是团队协作，开发/需求工程师负责梳理、诱导隐藏需求，客户提供诉求，并非客户主导全部流程。'
             }
         ]
     },
