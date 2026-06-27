@@ -2530,6 +2530,161 @@ PQI = 5 个数据的乘积（基准值作为 1，越接近 1 质量越高）：
                 fullQuestion: '如果对质量追求无止境，不考虑资源成本，有哪些有效策略？',
                 answer: '有效策略（按优先级）：（1）测试文档化——将测试用例系统化、可重复；（2）小组评审——团队评审发现个人遗漏的缺陷；（3）个人评审——工程师个人对自己产物的评审；（4）重视设计——在设计阶段投入更多时间，减少后续缺陷；（5）设计验证——通过原型、评审、模拟等手段验证设计正确性。核心逻辑：先评审后编译→先个人后小组→先设计后编码→先预防后测试。',
                 analysis: '答题策略：按「预防优于检测」和「集体优于个人」的原则组织答案。注意：不考虑资源成本时，可以采用最全面的质量策略，实际项目中需权衡成本收益。'
+            },
+            // ===== 第五讲 PPT 课堂练习题（11题） =====
+            {
+                year: '第 5 讲 课堂',
+                type: '单选',
+                question: 'PSP质量管理策略',
+                fullQuestion: '关于PSP质量管理策略，下列说法中正确的是：\nA. 用缺陷管理替代质量管理，既有必要性，也有合理性\nB. 基本无缺陷的开发是通过开展高质量的评审来实现的\nC. 经过训练，评审是所有消除缺陷的手段当中最高效的\nD. PSP质量策略主要解决的是外部质量，而非内部质量',
+                options: [
+                    { label: 'A', text: '用缺陷管理替代质量管理，既有必要性，也有合理性', isCorrect: false },
+                    { label: 'B', text: '基本无缺陷的开发是通过开展高质量的评审来实现的', isCorrect: false },
+                    { label: 'C', text: '经过训练，评审是所有消除缺陷的手段当中最高效的', isCorrect: false },
+                    { label: 'D', text: 'PSP质量策略主要解决的是外部质量，而非内部质量', isCorrect: true }
+                ],
+                answer: 'D',
+                analysis: 'PSP质量策略的核心是「用缺陷管理替代质量管理」，先确保基本没有缺陷（内部质量），再考察其他目标（外部质量）。因此A、B、C三个选项都是PSP质量策略的正确描述。D错误：PSP质量策略主要解决的是**内部质量**（各组件基本无缺陷），而非外部质量。缺陷发现效率排序：代码评审 > 设计评审 > 设计检查 > 代码检查 > 单元测试 > 系统测试。'
+            },
+            {
+                year: '第 5 讲 课堂',
+                type: '单选',
+                question: 'DRL指标理解',
+                fullQuestion: '关于DRL，下列说法中不正确的是：\nA. 这是一种模块级开发中质量控制的指标\nB. DRL以单元测试每小时发现缺陷率作为基准，考察上游其他缺陷消除阶段的消除效率\nC. DRL以单元测试发现的缺陷个数作为基准，考察上游其他缺陷消除阶段消除缺陷的效率\nD. DRL只能预测，不能度量',
+                options: [
+                    { label: 'A', text: '这是一种模块级开发中质量控制的指标', isCorrect: false },
+                    { label: 'B', text: 'DRL以单元测试每小时发现缺陷率作为基准，考察上游其他缺陷消除阶段的消除效率', isCorrect: false },
+                    { label: 'C', text: 'DRL以单元测试发现的缺陷个数作为基准，考察上游其他缺陷消除阶段消除缺陷的效率', isCorrect: true },
+                    { label: 'D', text: 'DRL只能预测，不能度量', isCorrect: false }
+                ],
+                answer: 'C',
+                analysis: 'DRL（缺陷消除效率比）的计算基准是**单元测试每小时发现缺陷率**（缺陷数/小时），而非单纯的「缺陷个数」。DRL = 其他阶段每小时发现缺陷数 / 单元测试每小时发现缺陷数。选项C将「每小时缺陷率」错误地说成了「缺陷个数」，这是关键区分点。A正确：DRL是模块级指标；B正确：以单元测试每小时缺陷率为基准；D正确：DRL是基于历史数据的预测性指标。'
+            },
+            {
+                year: '第 5 讲 课堂',
+                type: '单选',
+                question: 'PQI指标理解',
+                fullQuestion: '关于PQI，下列说法中不正确的是：\nA. PQI表征模块级别开发中的过程规范化程度\nB. PQI越高越好，可以充分保障质量\nC. PQI越低越好\nD. PQI不能用作质量规划',
+                options: [
+                    { label: 'A', text: 'PQI表征模块级别开发中的过程规范化程度', isCorrect: false },
+                    { label: 'B', text: 'PQI越高越好，可以充分保障质量', isCorrect: false },
+                    { label: 'C', text: 'PQI越低越好', isCorrect: true },
+                    { label: 'D', text: 'PQI不能用作质量规划', isCorrect: false }
+                ],
+                answer: 'C',
+                analysis: 'PQI（过程质量指标）是5个数据的乘积（设计质量 × 设计评审质量 × 代码评审质量 × 代码质量 × 程序质量），每个因子取值0-1，乘积越接近1表示质量越好。PSP期望PQI ≥ 0.4。**PQI越高越好，而非越低越好**。D正确：PQI是事后统计指标，不能用于事前质量规划——只能用于评估已完成模块并指导后续改进。'
+            },
+            {
+                year: '第 5 讲 课堂',
+                type: '多选',
+                question: 'Yield指标理解',
+                fullQuestion: '关于Yield，下列说法中正确的是：\nA. Yield可以辅助判断模块开发质量\nB. Yield可以提供过程改进的依据\nC. Yield区分为Process Yield和Phase Yield\nD. Yield只能预测，不能度量',
+                options: [
+                    { label: 'A', text: 'Yield可以辅助判断模块开发质量', isCorrect: true },
+                    { label: 'B', text: 'Yield可以提供过程改进的依据', isCorrect: true },
+                    { label: 'C', text: 'Yield区分为Process Yield和Phase Yield', isCorrect: true },
+                    { label: 'D', text: 'Yield只能预测，不能度量', isCorrect: false }
+                ],
+                answer: 'ABC',
+                analysis: 'Yield指标度量各阶段消除缺陷的效率。Phase Yield = 100×(某阶段发现缺陷数/(注入数+遗留数))；Process Yield = 100×(第一次编译前发现缺陷数/第一次编译前注入缺陷数)，期望 ≥ 80%。Yield是**事后质量控制**手段，用于评估和过程改进。D错误：Yield是**可度量**的指标（基于实际数据统计），但精确度依赖注入缺陷数的估算。PPT指出它「只能估算不可精确度量」，但并非「只能预测」。'
+            },
+            {
+                year: '第 5 讲 课堂',
+                type: '多选',
+                question: 'Quality Journey',
+                fullQuestion: '关于Humphrey 梳理的Quality Journey，下列说法中正确的是：\nA. Quality Journey中列出的步骤可以在适当的时候更换顺序\nB. 由于需求是一切工程活动的基础，因此加强需求开发应该是Quality Journey早期的必备步骤\nC. Quality Journey仍然仅仅是在「用缺陷管理替代质量管理」这一基本策略之下进行讨论\nD. Quality Journey中测试应该先于评审得到贯彻和改善',
+                options: [
+                    { label: 'A', text: '步骤可更换顺序', isCorrect: false },
+                    { label: 'B', text: '加强需求开发是早期必备步骤', isCorrect: true },
+                    { label: 'C', text: '仍在「用缺陷管理替代质量管理」策略下', isCorrect: true },
+                    { label: 'D', text: '测试先于评审得到贯彻改善', isCorrect: true }
+                ],
+                answer: 'BCD',
+                analysis: 'Quality Journey 8步有**严格顺序**，不可随意更换：①各种测试 → ②进入测试前产物质量提升 → ③评审过程度量和稳定 → ④质量意识和主人翁态度 → ⑤个体review度量和稳定 → ⑥诉诸设计 → ⑦缺陷预防 → ⑧用户质量观。A错误。B正确：需求是所有工程活动基础。C正确：整个Journey框架仍基于缺陷管理替代质量管理。D正确：Journey Step 1是测试，Step 2才是评审相关内容。'
+            },
+            {
+                year: '第 5 讲 课堂',
+                type: '单选',
+                question: 'PSP设计模板 vs UML',
+                fullQuestion: '下述关于PSP四大设计模板和UML典型设计图的描述中完全正确的是：\nA. OST在UML中没有对应的设计图\nB. UML中的类结构以及类之间的关系，在PSP四大设计模板中无法体现\nC. LST在UML中可以通过类图来体现\nD. FST在UML中可以通过类图来体现',
+                options: [
+                    { label: 'A', text: 'OST在UML中没有对应的设计图', isCorrect: false },
+                    { label: 'B', text: '类结构及关系在PSP四大设计模板中无法体现', isCorrect: true },
+                    { label: 'C', text: 'LST在UML中可通过类图体现', isCorrect: false },
+                    { label: 'D', text: 'FST在UML中可通过类图体现', isCorrect: false }
+                ],
+                answer: 'B',
+                analysis: '对比关系：①**OST**（描述系统与外界交互）→ UML的**用例图+时序图**可对应；②**FST**（系统对外接口）→ UML类图记录方法型构但**缺少行为描述**；③**SST**（状态机）→ UML有状态机图但描述程度不同；④**LST**（内部静态逻辑，伪代码+形式化符号）→ UML**无对应**。PPT明确：UML类图+时序图描述的「类之间的关系以及对象间交互信息」在PSP四个模板中无对应内容，因此B完全正确。'
+            },
+            {
+                year: '第 5 讲 课堂',
+                type: '多选',
+                question: '设计验证手段对比',
+                fullQuestion: '下列关于各种设计验证手段的描述中正确的是：\nA. 执行表是唯一一种提供全面设计验证的手段\nB. 跟踪表是唯一一种提供全面设计验证的手段\nC. 受限于手工方式，都易于出错\nD. 符号化执行不适合复杂算法',
+                options: [
+                    { label: 'A', text: '执行表是唯一全面设计验证手段', isCorrect: false },
+                    { label: 'B', text: '跟踪表是唯一全面设计验证手段', isCorrect: false },
+                    { label: 'C', text: '受限于手工方式都易于出错', isCorrect: true },
+                    { label: 'D', text: '符号化执行不适合复杂算法', isCorrect: false }
+                ],
+                answer: 'C',
+                analysis: '五种设计验证手段：①状态机验证（验证状态转换完整性+正交性）、②符号化执行验证（用代数符号代换变量分析）、③执行表验证（跟踪单独用例）、④跟踪表验证（执行表+符号化，验证一般化行为）、⑤正确性验证（形式化推理）。PPT明确指出：**符号化验证**常常是唯一提供全面验证的方式（非执行表或跟踪表），且纯手工验证**容易引入人为错误**。D错误：符号化执行**适合复杂算法**，不适合的是「有复杂逻辑的场合」。'
+            },
+            {
+                year: '第 5 讲 课堂',
+                type: '多选',
+                question: '状态机正确性条件',
+                fullQuestion: '一个完全正确的状态机应该满足：\nA. 没有死循环和陷阱\nB. 状态转化条件满足正交性\nC. 状态转化条件满足完整性\nD. 状态转化条件满足独立性',
+                options: [
+                    { label: 'A', text: '没有死循环和陷阱', isCorrect: true },
+                    { label: 'B', text: '状态转化条件满足正交性', isCorrect: true },
+                    { label: 'C', text: '状态转化条件满足完整性', isCorrect: true },
+                    { label: 'D', text: '状态转化条件满足独立性', isCorrect: false }
+                ],
+                answer: 'ABC',
+                analysis: '完全正确的状态机需满足三个条件：①**无死循环**（不存在不能跳出的状态转换回路）和**无陷阱状态**（不存在无法到达结束状态的状态）；②**正交性**：任意两个转换条件不能同时为真，确保转换确定不冲突；③**完整性**：所有可能情况都有对应转换路径。PPT中不使用「独立性」术语——正交性本身已包含条件之间不相交、不重叠的含义。'
+            },
+            {
+                year: '第 5 讲 课堂',
+                type: '单选',
+                question: '质量概念辨析',
+                fullQuestion: '下述关于质量的描述中，哪些说法不正确的？\nA. 质量是一种多重属性的组合\nB. 最终用户一般不能感知内部质量\nC. 安全和保密一般不是质量要素\nD. 质量与主观感受有关',
+                options: [
+                    { label: 'A', text: '质量是一种多重属性的组合', isCorrect: false },
+                    { label: 'B', text: '最终用户一般不能感知内部质量', isCorrect: false },
+                    { label: 'C', text: '安全和保密一般不是质量要素', isCorrect: true },
+                    { label: 'D', text: '质量与主观感受有关', isCorrect: false }
+                ],
+                answer: 'C',
+                analysis: '根据ANSI/IEEE定义，软件质量是「特征或特性的全体」，具有多重属性（A正确）。内部质量特性如可扩展性、代码结构等不直接面向用户（B正确）。Weinberg强调质量是「对人的价值」，具有主观性——不同用户体验不同（D正确）。C错误：**安全和保密是重要的质量要素**，PPT中典型用户期望明确包括安全性、保密性。ISO 25010质量模型中安全性（Security）是八大质量特性之一。'
+            },
+            {
+                year: '第 5 讲 课堂',
+                type: '多选',
+                question: '质量控制指标辨析',
+                fullQuestion: '下述关于质量控制指标，哪些说法正确？\nA. A/FR应该是越高越好\nB. Yield是一种精确度量模块质量的手段\nC. 评审活动应该早于编译或者测试活动而开展\nD. PQI只能事后统计，不能用于指导质量计划',
+                options: [
+                    { label: 'A', text: 'A/FR应该是越高越好', isCorrect: false },
+                    { label: 'B', text: 'Yield是一种精确度量模块质量的手段', isCorrect: false },
+                    { label: 'C', text: '评审活动应早于编译或测试活动', isCorrect: true },
+                    { label: 'D', text: 'PQI只能事后统计，不能用于指导质量计划', isCorrect: true }
+                ],
+                answer: 'CD',
+                analysis: 'A错误：A/FR期望值=2.0，过高意味着评审过度、影响效率；B错误：Yield依赖注入缺陷数的估算，**只能估算不可精确度量**（PPT原话）；C正确：PSP强调**先评审后编译**（五大优势：节省编译时间、发现编译器遗漏、学习机会、成就感和评审心态）；D正确：PQI基于已完成模块的数据计算，是事后统计指标，不能用作事前计划但可用于过程改进。'
+            },
+            {
+                year: '第 5 讲 课堂',
+                type: '多选',
+                question: '设计验证手段辨析',
+                fullQuestion: '下述设计验证手段的描述，哪些是正确的？\nA. 符号化执行容易引入人为错误\nB. 状态机验证是唯一一种提供一般意义的上的正确性检验的验证手段\nC. 执行表的对设计缺陷的验证能力强于跟踪表\nD. 正确性检验是唯一可靠的设计验证手段',
+                options: [
+                    { label: 'A', text: '符号化执行容易引入人为错误', isCorrect: true },
+                    { label: 'B', text: '状态机验证是唯一提供一般意义上正确性检验的手段', isCorrect: false },
+                    { label: 'C', text: '执行表验证能力强于跟踪表', isCorrect: false },
+                    { label: 'D', text: '正确性检验是唯一可靠的设计验证手段', isCorrect: false }
+                ],
+                answer: 'A',
+                analysis: 'A正确：PPT指出纯手工验证「容易引入人为错误」。B错误：提供一般意义正确性检验的是**正确性检验**（将伪码当数学定理形式化推理），状态机验证有特定适用范围。C错误：**跟踪表**验证能力强于执行表——执行表只能验证单独用例，跟踪表应用符号化+用例识别可验证一般化行为。D错误：不存在「唯一可靠」的手段，不同方法适用不同场景，多层验证更可靠。'
             }
         ]
     },
