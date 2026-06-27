@@ -320,11 +320,11 @@
               </div>
               <div v-else class="answer-content">
                 <strong>参考答案：</strong>
-                <div class="answer-text">{{ q.answer }}</div>
+                <div class="answer-text" v-html="renderMarkdown(q.answer)"></div>
               </div>
               <div class="exam-explanation">
                 <Lightbulb :size="14" />
-                <span>{{ q.explanation }}</span>
+                <span v-html="renderInline(q.explanation)"></span>
               </div>
             </div>
           </article>
@@ -347,6 +347,7 @@ import { reviewData } from '@/data/review'
 import { pastExamData } from '@/data/pastExams'
 import MemorizationCard from '@/components/review/MemorizationCard.vue'
 import ReviewFlashcard from '@/components/review/ReviewFlashcard.vue'
+import { renderMarkdown, renderInline } from '@/utils/markdown'
 
 // === 顶层模式 ===
 const topMode = ref('knowledge')
@@ -1513,9 +1514,88 @@ function toggleReveal(id) {
 }
 
 .answer-text {
-  white-space: pre-wrap;
   line-height: 1.75;
   color: var(--text-secondary);
+
+  :deep(.md-strong) {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  :deep(.md-em) {
+    color: var(--text-primary);
+    font-style: italic;
+  }
+
+  :deep(.md-p) {
+    margin-bottom: 8px;
+  }
+
+  :deep(.md-ul) {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0;
+
+    .ul-item {
+      position: relative;
+      padding-left: 18px;
+      line-height: 1.7;
+      margin-bottom: 4px;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 9px;
+        width: 5px;
+        height: 5px;
+        background: var(--accent);
+        border-radius: 50%;
+      }
+    }
+  }
+
+  :deep(.md-ol) {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0;
+    counter-reset: ol-counter;
+
+    .ol-item {
+      position: relative;
+      padding-left: 24px;
+      line-height: 1.7;
+      margin-bottom: 4px;
+      counter-increment: ol-counter;
+
+      &::before {
+        content: counter(ol-counter);
+        position: absolute;
+        left: 0;
+        top: 2px;
+        width: 18px;
+        height: 18px;
+        background: var(--accent);
+        color: var(--bg-primary);
+        border-radius: 50%;
+        font-size: 10px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+
+  :deep(.inline-code) {
+    font-family: monospace;
+    font-size: 13px;
+    padding: 1px 5px;
+    background: rgba(214, 158, 46, 0.1);
+    border: 1px solid rgba(214, 158, 46, 0.2);
+    border-radius: 3px;
+    color: var(--accent);
+  }
 }
 
 .exam-explanation {
@@ -1533,6 +1613,11 @@ function toggleReveal(id) {
     color: var(--accent);
     flex-shrink: 0;
     margin-top: 2px;
+  }
+
+  :deep(.md-strong) {
+    color: var(--accent);
+    font-weight: 600;
   }
 }
 

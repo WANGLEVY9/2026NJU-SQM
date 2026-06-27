@@ -100,7 +100,7 @@
           <!-- 完整题目 -->
           <div class="past-exam-question">
             <span class="question-label">题目</span>
-            <div class="question-text">{{ p.fullQuestion || p.question }}</div>
+            <div class="question-text" v-html="renderInline(p.fullQuestion || p.question)"></div>
           </div>
 
           <!-- 选择题选项 -->
@@ -124,11 +124,11 @@
           <div v-if="revealedExams.has(idx)" class="past-exam-answer-panel" @click.stop>
             <div class="answer-block">
               <span class="answer-label"><CheckCircle :size="14" />参考答案</span>
-              <div class="answer-text">{{ p.answer }}</div>
+              <div class="answer-text" v-html="renderInline(p.answer)"></div>
             </div>
             <div v-if="p.analysis" class="analysis-block">
               <span class="analysis-label"><Lightbulb :size="14" />解析</span>
-              <div class="analysis-text">{{ p.analysis }}</div>
+              <div class="analysis-text" v-html="renderInline(p.analysis)"></div>
             </div>
             <button class="exam-hide-btn" @click="hideExam(idx)">
               <EyeOff :size="14" />
@@ -175,7 +175,7 @@
 import { computed, ref } from 'vue'
 import { BookMarked, User, Tag, Zap, ListChecks, CheckCircle2, AlertCircle, ArrowRight, Target, FileText, Lightbulb, Sparkles, Eye, EyeOff, CheckCircle } from 'lucide-vue-next'
 import QuickFlashCard from './QuickFlashCard.vue'
-import { renderMarkdown } from '@/utils/markdown'
+import { renderMarkdown, renderInline } from '@/utils/markdown'
 
 const props = defineProps({
   item: { type: Object, required: true },
@@ -913,6 +913,10 @@ const renderedContent = computed(() => {
     line-height: 1.8;
     color: #e2e8f0;
     font-weight: 500;
+
+    :deep(.md-strong) {
+      color: #f7af3f;
+    }
   }
 }
 
@@ -1056,6 +1060,11 @@ const renderedContent = computed(() => {
   .answer-text {
     color: #e2e8f0;
     font-weight: 500;
+
+    :deep(.md-strong) {
+      color: #68d391;
+      font-weight: 600;
+    }
   }
 }
 
@@ -1079,6 +1088,26 @@ const renderedContent = computed(() => {
 
   .analysis-text {
     color: #cbd5e0;
+
+    :deep(.md-strong) {
+      color: #f7af3f;
+      font-weight: 600;
+    }
+
+    :deep(.md-em) {
+      color: #e2e8f0;
+      font-style: italic;
+    }
+
+    :deep(.inline-code) {
+      font-family: $font-mono;
+      font-size: 13px;
+      padding: 1px 5px;
+      background: rgba(214, 158, 46, 0.1);
+      border: 1px solid rgba(214, 158, 46, 0.2);
+      border-radius: 3px;
+      color: #f7af3f;
+    }
   }
 }
 

@@ -23,7 +23,30 @@ function escapeHtml(text) {
     .replace(/>/g, '&gt;')
 }
 
-// 行内格式解析：粗斜体、粗体、斜体
+/**
+ * 行内格式解析：粗斜体、粗体、斜体（转义 HTML 后处理）
+ * 适用于短文本字段（如答案、解析），不处理标题/表格/列表等块级元素
+ * @param {string} text - 原始文本（可能含 **粗体**、*斜体* 等）
+ * @returns {string} - 渲染后的 HTML（已转义）
+ */
+export function renderInline(text) {
+  if (!text || typeof text !== 'string') return ''
+  // 先转义 HTML 特殊字符
+  let result = escapeHtml(text)
+  // ***粗斜体***
+  result = result.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>')
+  // **粗体**
+  result = result.replace(/\*\*(.+?)\*\*/g, '<strong class="md-strong">$1</strong>')
+  // *斜体*
+  result = result.replace(/\*(.+?)\*/g, '<em class="md-em">$1</em>')
+  // `行内代码`
+  result = result.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>')
+  // 换行处理
+  result = result.replace(/\n/g, '<br>')
+  return result
+}
+
+// 行内格式解析：粗斜体、粗体、斜体（不转义，用于已转义的内容）
 function parseInline(text) {
   if (!text || typeof text !== 'string') return text
   let result = text

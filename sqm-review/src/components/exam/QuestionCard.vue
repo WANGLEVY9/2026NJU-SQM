@@ -69,7 +69,7 @@
               <BookOpen :size="16" />
               <span>参考答案</span>
             </div>
-            <p class="answer-text">{{ question.answer }}</p>
+            <p class="answer-text" v-html="renderInline(question.answer)"></p>
           </div>
         </transition>
       </div>
@@ -81,7 +81,7 @@
           <Lightbulb :size="16" />
           <span>题目解析</span>
         </div>
-        <p class="analysis-text">{{ analysisText }}</p>
+        <div class="analysis-text" v-html="renderInline(analysisText)"></div>
       </div>
     </transition>
 
@@ -109,6 +109,7 @@
 <script setup>
 import { computed } from 'vue'
 import { CheckCircle, XCircle, Eye, EyeOff, Lightbulb, BookOpen } from 'lucide-vue-next'
+import { renderInline } from '@/utils/markdown'
 
 const props = defineProps({
   question: {
@@ -482,7 +483,11 @@ const handleJudgmentClick = (value) => {
   font-size: 15px;
   line-height: 1.8;
   color: var(--text-primary);
-  white-space: pre-wrap;
+
+  :deep(.md-strong) {
+    color: var(--success);
+    font-weight: 600;
+  }
 }
 
 .analysis-section {
@@ -505,7 +510,26 @@ const handleJudgmentClick = (value) => {
   font-size: 14px;
   line-height: 1.7;
   color: var(--text-secondary);
-  white-space: pre-wrap;
+
+  :deep(.md-strong) {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  :deep(.md-em) {
+    color: var(--text-primary);
+    font-style: italic;
+  }
+
+  :deep(.inline-code) {
+    font-family: monospace;
+    font-size: 13px;
+    padding: 1px 5px;
+    background: rgba(214, 158, 46, 0.1);
+    border: 1px solid rgba(214, 158, 46, 0.2);
+    border-radius: 3px;
+    color: var(--accent);
+  }
 }
 
 .question-footer {
