@@ -1035,6 +1035,379 @@ export const examPapers = [
         ]
     },
     {
+        id: 'exam2025',
+        title: '2025年期末真题（回忆版）',
+        year: 2025,
+        type: 'final',
+        source: '2025年6月18日 考试回忆版（349字笔记）',
+        description: '2025年软件质量管理期末考试真题回忆版。20道选择题(40分) + 6道简答题(60分)。选择题均为概念理解类：PO职责、Scrum框架、Scrum三大支柱、CI、WIP、EVM、Yield、PQI、质量、Quality Journey、麦克勒格Y理论、measure twice cut once、XP变更成本曲线、XP简单设计原则、IaC、DORA、适应性与预见性、软件项目管理三大目标、CMMI。',
+        questions: [
+            // ========== 选择题（20题，基于考点还原） ==========
+            {
+                id: 'q2025-c1',
+                type: 'choice',
+                question: '关于Product Owner（PO）的职责，下列说法中正确的是：',
+                options: [
+                    'A. PO负责确保Scrum团队按计划完成Sprint任务',
+                    'B. PO是唯一对Product Backlog排序负责的人，致力于最大化产品价值',
+                    'C. PO在Daily Scrum中分配当天的开发任务给每个成员',
+                    'D. PO需要审批每一个代码提交'
+                ],
+                correctAnswer: 'B',
+                explanation: 'PO的核心职责是将产品价值最大化，是Product Backlog的唯一负责人。PO不是委员会而是一个人。A属于SM/团队职责；C违背了团队自管理原则；D是SM或团队的职责范围。',
+                year: 2025,
+                topic: 'Scrum'
+            },
+            {
+                id: 'q2025-c2',
+                type: 'choice',
+                question: '下列关于Scrum的描述中，正确的是：',
+                options: [
+                    'A. Scrum是一种详细的软件开发过程和方法论',
+                    'B. Scrum是一个框架，可以在此框架内应用各种流程和技术',
+                    'C. Scrum只适用于小型敏捷团队',
+                    'D. Scrum规定了具体的编码和测试实践'
+                ],
+                correctAnswer: 'B',
+                explanation: 'Scrum定义明确指出：Scrum不是构建产品的过程或技术，而是一个框架，在这个框架里可以应用各种流程和技术。A错误——Scrum不规定具体过程；C错误——Scrum可应用于任何规模；D错误——具体工程实践由团队自行选择。',
+                year: 2025,
+                topic: 'Scrum'
+            },
+            {
+                id: 'q2025-c3',
+                type: 'choice',
+                question: 'Scrum的三大理论支柱是：',
+                options: [
+                    'A. 承诺、专注、开放',
+                    'B. 透明、检视、适应',
+                    'C. 计划、执行、检查',
+                    'D. 需求、设计、编码'
+                ],
+                correctAnswer: 'B',
+                explanation: 'Scrum三大支柱：透明(Transparency)——过程和工作对所有人都可见；检视(Inspection)——经常勤勉地检视Scrum工件和进展；适应(Adaptation)——超出可接受范围必须及时调整。三者关系：透明使检视成为可能，检视使适应成为可能。',
+                year: 2025,
+                topic: 'Scrum'
+            },
+            {
+                id: 'q2025-c4',
+                type: 'choice',
+                question: '关于持续集成（CI），下列说法中正确的是：',
+                options: [
+                    'A. CI要求团队成员每天至少向主线提交一次代码',
+                    'B. CI的构建时间超过30分钟也是可以接受的',
+                    'C. CI只需要在feature branch上运行自动化测试即可',
+                    'D. CI的主要目的是减少代码审查的工作量'
+                ],
+                correctAnswer: 'A',
+                explanation: 'CI十大核心实践之一就是每人每天向主线提交。B错误——保持构建快速(<10分钟)；C错误——CI要求合并入主线而非feature branch；D错误——CI主要目的是早期发现集成问题。',
+                year: 2025,
+                topic: 'DevOps'
+            },
+            {
+                id: 'q2025-c5',
+                type: 'choice',
+                question: 'WIP（Work In Progress）限制在Kanban中的作用主要是：',
+                options: [
+                    'A. 增加团队成员的并行工作能力',
+                    'B. 减少在制品数量，缩短交付周期，暴露瓶颈',
+                    'C. 确保每个成员都有足够的工作量',
+                    'D. 提高代码复用率'
+                ],
+                correctAnswer: 'B',
+                explanation: 'WIP限制是看板方法的核心实践之一，目的是限制同时进行中的工作数量，从而减少上下文切换成本、缩短前置时间、尽早发现瓶颈（Little定律）。',
+                year: 2025,
+                topic: 'Kanban'
+            },
+            {
+                id: 'q2025-c6',
+                type: 'choice',
+                question: '关于EVM（挣值管理），下列说法中正确的是：',
+                options: [
+                    'A. EVM可以直接用于软件质量管理',
+                    'B. EVM的中级实现中引入了成本信息',
+                    'C. EVM不需要准确的估算就能有效使用',
+                    'D. SPI和CPI大于1表示项目进度落后和超支'
+                ],
+                correctAnswer: 'B',
+                explanation: 'EVM初级实现只用进度信息，中级引入成本信息。A错误——EVM不能用于质量管理；C错误——EVM高度依赖估算准确；D错误——SPI>1表示进度超前，CPI>1表示成本节约。',
+                year: 2025,
+                topic: '项目管理'
+            },
+            {
+                id: 'q2025-c7',
+                type: 'choice',
+                question: '关于Yield指标，下列说法中正确的是：',
+                options: [
+                    'A. Yield只能预测，不能度量',
+                    'B. Yield可以辅助判断模块开发质量',
+                    'C. Yield区分为Process Yield和Phase Yield',
+                    'D. Yield值越高越好，没有上限'
+                ],
+                correctAnswer: 'BC',
+                explanation: 'B ✅ Yield反映各阶段缺陷消除效率，可辅助判断模块开发质量；C ✅ Yield区分为Process Yield（过程级）和Phase Yield（阶段级）；A ❌ Yield可以基于缺陷日志进行度量；D ❌ Yield有合理上限。',
+                year: 2025,
+                topic: '质量管理'
+            },
+            {
+                id: 'q2025-c8',
+                type: 'choice',
+                question: '关于PQI（Process Quality Index），下列说法中不正确的是：',
+                options: [
+                    'A. PQI表征模块级别开发中的过程规范化程度',
+                    'B. PQI可以提供过程改进依据',
+                    'C. PQI越高越好，越大越能保障质量',
+                    'D. PQI可以用作质量规划'
+                ],
+                correctAnswer: 'C',
+                explanation: 'PQI并非越高越好，通常0.4以上即可满足要求，过高的PQI意味着过度过程规范反而增加成本。A/B/D均正确。',
+                year: 2025,
+                topic: '质量管理'
+            },
+            {
+                id: 'q2025-c9',
+                type: 'choice',
+                question: 'Humphrey梳理的Quality Journey（质量之旅）描述的是：',
+                options: [
+                    'A. 从需求到交付的软件开发全生命周期',
+                    'B. 从个人自律到团队规范的质量提升路径',
+                    'C. 从瀑布到敏捷的方法演进历程',
+                    'D. 各种质量管理工具的分类和使用指南'
+                ],
+                correctAnswer: 'B',
+                explanation: 'Quality Journey是Humphrey提出的质量提升路线图，从个人层面的PSP（个人软件过程）→ 团队层面的TSP → 组织层面的CMM/CMMI，强调逐步建立纪律和质量意识。',
+                year: 2025,
+                topic: '质量管理'
+            },
+            {
+                id: 'q2025-c10',
+                type: 'choice',
+                question: '麦克勒格（McGregor）Y理论适用于以下哪种激励场景：',
+                options: [
+                    'A. 用严格的考勤制度管理员工出勤',
+                    'B. 给予员工充分的自主权和技术挑战',
+                    'C. 主要通过奖金和惩罚来驱动行为',
+                    'D. 认为员工天生懒惰，需要外部监督'
+                ],
+                correctAnswer: 'B',
+                explanation: 'Y理论认为人能够自我约束、自我导向与控制、渴望承担责任，应给予适当激励和支持达到高绩效。用马斯洛高层需求（自尊+自我实现）激励。A/C/D均为X理论的典型特征。',
+                year: 2025,
+                topic: '团队管理'
+            },
+            {
+                id: 'q2025-c11',
+                type: 'choice',
+                question: '"Measure twice, cut once"（三思而后行）最贴切对应下述哪个场景：',
+                options: [
+                    'A. 软件架构设计',
+                    'B. 代码评审（Code Review）',
+                    'C. 需求分析',
+                    'D. 验证与确认(V&V)'
+                ],
+                correctAnswer: 'B',
+                explanation: '该谚语强调在行动前仔细检查和验证。代码评审正是这一理念的最佳体现——在提交代码前仔细审查，避免引入缺陷。与TDD的红绿循环理念一致。',
+                year: 2025,
+                topic: '软件发展'
+            },
+            {
+                id: 'q2025-c12',
+                type: 'choice',
+                question: '关于XP的变更成本曲线理论，下列说法中正确的是：',
+                options: [
+                    'A. 变更成本随项目进展呈指数增长，这是不可改变的自然规律',
+                    'B. 通过TDD+持续集成+重构，可以将变更成本曲线压平为缓慢上升',
+                    'C. XP认为变更成本在任何阶段都基本不变',
+                    'D. 变更成本曲线只对瀑布模型有意义，对敏捷模型不适用'
+                ],
+                correctAnswer: 'B',
+                explanation: 'Kent Beck 1996年提出反命题：传统瀑布模型中变更成本呈指数增长(1→5→10→20→100)，但通过TDD、CI和重构三大工程实践，可将曲线从「指数增长」压平为「缓慢上升」。这使得「重大决策尽量晚做」成为可能策略。',
+                year: 2025,
+                topic: 'XP'
+            },
+            {
+                id: 'q2025-c13',
+                type: 'choice',
+                question: 'XP简单设计四准则的正确优先级顺序是：',
+                options: [
+                    'A. 表达意图→无重复→测试通过→最少元素',
+                    'B. 测试通过→无重复→表达意图→最少元素',
+                    'C. 最少元素→测试通过→无重复→表达意图',
+                    'D. 无重复→测试通过→表达意图→最少元素'
+                ],
+                correctAnswer: 'B',
+                explanation: '简单设计四准则优先级（从高到低）：①测试通过(Passes its tests) → ②无重复(No duplication) → ③表达意图(Reveals intention) → ④最少元素(Fewest elements)。口诀：「测重表少」。',
+                year: 2025,
+                topic: 'XP'
+            },
+            {
+                id: 'q2025-c14',
+                type: 'choice',
+                question: 'IaC（Infrastructure as Code，基础设施即代码）的核心思想是：',
+                options: [
+                    'A. 用代码来编写应用程序的逻辑',
+                    'B. 用配置文件和脚本管理和部署基础设施，使其版本可控、可重复、可自动化',
+                    'C. 将所有基础设施迁移到云端',
+                    'D. 用代码生成文档'
+                ],
+                correctAnswer: 'B',
+                explanation: 'IaC是用代码（如Terraform、Ansible等）来定义和管理IT基础设施，使得基础设施像应用代码一样版本控制、自动部署、可审计、可重现。是DevOps的关键实践之一。',
+                year: 2025,
+                topic: 'DevOps'
+            },
+            {
+                id: 'q2025-c15',
+                type: 'choice',
+                question: 'DORA（DevOps Research and Assessment）提出的四大关键指标不包括：',
+                options: [
+                    'A. 部署频率（Deployment Frequency）',
+                    'B. 变更前置时间（Lead Time for Changes）',
+                    'C. 平均恢复时间（Mean Time to Recovery）',
+                    'D. 代码覆盖率（Code Coverage）'
+                ],
+                correctAnswer: 'D',
+                explanation: 'DORA四大指标：①部署频率、②变更前置时间、③变更失败率（Change Failure Rate）、④平均恢复时间(MTTR)。代码覆盖率不属于DORA指标体系。',
+                year: 2025,
+                topic: 'DevOps'
+            },
+            {
+                id: 'q2025-c16',
+                type: 'choice',
+                question: '在软件过程中，「适应性」与「预见性（预测性）」的关系是：',
+                options: [
+                    'A. 适应性和预见性互相排斥，只能选其一',
+                    'B. 所有正式项目都是计划驱动的（预见性），敏捷方法强调适应性',
+                    'C. 敏捷方法完全不需要计划和预见',
+                    'D. 传统方法只关注适应性，不关心预见性'
+                ],
+                correctAnswer: 'B',
+                explanation: '关键认知：所有软件工程方法都是限制和管理变更的，所有正式项目都是计划驱动的。敏捷方法的本质是在预见性的基础上增强适应性——计划暂时可调，根据实际不断修正。二者并非对立，而是互补。',
+                year: 2025,
+                topic: '敏捷概述'
+            },
+            {
+                id: 'q2025-c17',
+                type: 'choice',
+                question: '软件项目管理的「三大目标」是指：',
+                options: [
+                    'A. 范围、质量、风险',
+                    'B. 进度、成本、范围（铁三角）',
+                    'C. 人员、过程、技术',
+                    'D. 需求、设计、测试'
+                ],
+                correctAnswer: 'B',
+                explanation: '软件项目管理铁三角三大目标：进度（Time/Schedule）、成本（Cost/Resources）、范围（Scope）。三者相互制约，调整任一目标必然影响其他两者。质量通常被视为第四个维度或约束条件。',
+                year: 2025,
+                topic: '项目管理'
+            },
+            {
+                id: 'q2025-c18',
+                type: 'choice',
+                question: '关于CMMI（Capability Maturity Model Integration），下列说法中正确的是：',
+                options: [
+                    'A. CMMI是用来做项目管理的工具',
+                    'B. CMMI不适合当今互联网环境的项目管理需求',
+                    'C. CMMI是用来做过程管理和改进的模型',
+                    'D. 达到CMMI 5级意味着产品质量一定最好'
+                ],
+                correctAnswer: 'C',
+                explanation: 'CMMI/CMM是过程管理和过程改进模型，根本不是满足项目管理需求的手段。A错误——它管的是过程而非项目；B说法过于绝对；D错误——高成熟度≠高质量，只是过程更规范。',
+                year: 2025,
+                topic: '过程改进'
+            },
+            {
+                id: 'q2025-c19',
+                type: 'choice',
+                question: '关于软件「质量」，下列理解中最准确的是：',
+                options: [
+                    'A. 质量就是零缺陷',
+                    'B. 质量是产品满足明确需求和隐含需求的能力的总和（Juran适用性质量观）',
+                    'C. 质量完全由测试部门决定',
+                    'D. 高质量意味着更多的功能和更复杂的系统'
+                ],
+                correctAnswer: 'B',
+                explanation: 'Juran的定义被广泛采用：质量是产品满足明确需求和隐含需求的能力的总和。A(Crosby零缺陷)过于绝对；C错误——质量是每个人的责任；D错误——质量≠功能多。',
+                year: 2025,
+                topic: '质量管理'
+            },
+            {
+                id: 'q2025-c20',
+                type: 'choice',
+                question: '以下哪项不是Scrum框架中明确定义的要素：',
+                options: [
+                    'A. Product Backlog',
+                    'B. User Story',
+                    'C. Sprint Retrospective',
+                    'D. Definition of Done'
+                ],
+                correctAnswer: 'B',
+                explanation: 'Scrum 33355框架中明确定义的是：3角色(PO/SM/Developers)、3工件(Product Backlog/Sprint Backlog/Increment)、5事件(Sprint/Planning/Daily/Review/Retrospective)、DoD。User Story是敏捷实践中常用的需求格式，但不在Scrum官方定义中。',
+                year: 2025,
+                topic: 'Scrum'
+            },
+
+            // ========== 简答题（6题，60分） ==========
+            {
+                id: 'q2025-e1',
+                type: 'essay',
+                question: 'CI是什么？有什么好处（至少三点）？',
+                answer: 'CI（Continuous Integration，持续集成）是一种软件开发实践，项目成员频繁集成，通常每个成员每天都会做集成工作。\n\n好处（至少三点）：\n1. **早期发现问题**：频繁集成意味着每次集成的改动量小，问题更容易定位和修复（缩小怀疑半径）。\n2. **减少「集成地狱」**：避免了传统开发中长期不集成导致的「难定位的错误、上下文切换开销大、不敢重构」三大问题。\n3. **保持构建始终处于可发布状态**：每次提交都触发自动化构建和测试，确保主线代码随时可用。\n4. **提高团队信心**：快速的反馈循环让开发者敢于做出改动，因为任何问题都能立即被发现。\n5. **促进沟通协作**：每日集成迫使团队成员经常同步工作，减少分支偏离。\n6. **降低回归风险**：全面的自动化测试套件确保新改动不会破坏已有功能。',
+                explanation: 'CI核心定义 + 十条实践的显性收益。重点回答：早期发现、减少集成地狱、保持可发布状态、提高团队信心。',
+                score: 10,
+                year: 2025,
+                topic: 'DevOps'
+            },
+            {
+                id: 'q2025-e2',
+                type: 'essay',
+                question: '敏捷宣言包含四大价值观，请选其中一点，谈谈其在现代软件开发中的意义（对比传统软件开发）。',
+                answer: '**以「个体和互动高于流程和工具」为例：**\n\n传统软件开发的困境：过度依赖流程和工具（如厚重的文档模板、僵化的审批流、复杂的工具链），将开发者视为可替换的「部件」。结果是人被流程绑架，创新被规则扼杀。\n\n现代软件开发的意义：\n1. **人是项目成功决定性因素**（Cockburn观点）：优秀的工程师 + 简单的工具 > 平庸的工程师 + 昂贵的工具链。\n2. **AI时代的强化**：LLM时代，人的判断力、创造力、领域知识变得更加稀缺和重要——工具（包括AI）越来越强，但「知道做什么」的人永远不可替代。\n3. **团队动力学支撑**：TSP/Scrum都强调自主团队和信任文化，这正是「重视个体」的具体落地形式。\n\n**其他可选角度：**\n- 「工作的软件 > 详尽的文档」：在LLM自动生成文档的时代，可运行的代码比过时的文档更有价值\n- 「客户合作 > 合同谈判」：SaaS/订阅制模式下，客户关系从一次性交付变为持续共创\n- 「响应变化 > 遵循计划」：AI技术每半年就颠覆一次开发范式，唯有适应才能生存',
+                explanation: '四大价值观选一展开论述。推荐结合AI时代背景作答，体现时代感。关键句：「尽管右项有其价值，我们更重视左项的价值」。',
+                score: 10,
+                year: 2025,
+                topic: '敏捷概述'
+            },
+            {
+                id: 'q2025-e3',
+                type: 'essay',
+                question: 'TSP和Scrum有什么类似的理念和实践？（五点）',
+                answer: 'TSP（Team Software Process，团队软件过程）与Scrum虽来自不同传统（前者重计划/后者重敏捷），但共享大量核心理念和实践：\n\n1. **自管理/自主团队**：TSP强调团队自我管理（self-directed team），Scrum强调自组织团队（self-organizing team）。二者都认为一线团队最有能力做出最佳决策。\n\n2. **角色分工明确**：TSP定义六大角色（组长/计划/开发/质量/过程/支持经理），Scrum定义三角色（PO/SM/Developers）。都通过清晰的角色划分实现专业化协作。\n\n3. **迭代/增量推进**：TSP通过九次会议分阶段制定和调整计划（目标→角色→策略→计划→...），Scrum通过固定长度的Sprint迭代持续交付价值。都是「小步快跑、持续校准」。\n\n4. **数据驱动的决策和跟踪**：TSP依赖详细的过程数据和PROBE估算来做决策；Scrum通过Burndown Chart/Velocity等度量跟踪进展。都反对凭直觉拍脑袋。\n\n5. **重视质量内建**：TSP设立专职质量经理，有独立的质量计划会议；Scrum通过Definition of Done和Sprint Review确保每个增量都达到质量标准。都将质量视为每个人的职责而非事后检查。',
+                explanation: 'TSP与Scrum的五大共性：自主团队、角色分工、迭代推进、数据驱动、质量内建。注意区分二者的差异（TSP重前期计划，Scrum重适应变化），但题目问的是相似之处。',
+                score: 10,
+                year: 2025,
+                topic: '团队管理'
+            },
+            {
+                id: 'q2025-e4',
+                type: 'essay',
+                question: '知识工作者的激励类型有哪些？结合马斯洛需求层次理论说明不同类型激励方式下的团队特征。',
+                answer: '**一、知识工作者的三种激励类型**\n\n1. **威逼型（Coercive）**：以惩罚威胁为主\n2. **利诱型（Transactional）**：以物质奖励为主（薪金、奖金、福利）\n3. **鼓励承诺型（Transformational）**：以内在激励为主（信任、授权、成长空间）\n\n**二、结合马斯洛需求层次的团队特征**\n\n| 激励类型 | 对应马斯洛层级 | 团队特征 |\n|----------|--------------|---------|\n| **威逼型** | 底层（生理/安全）| 成员恐惧、被动执行、缺乏创造力、离职率高、只做最低限度的工作 |\n| **利诱型** | 中层（安全/归属）| 成员按酬劳办事、「给多少钱干多少活」、缺乏主动性、短期行为倾向 |\n| **鼓励承诺型** | 高层（尊重/自我实现）| 成员主动投入、富有创造力、愿意承担责任、团队凝聚力强、追求卓越 |\n\n**三、X-Y理论与马斯洛的对应**\n- X理论（人性本恶）：用威逼/利诱（底层需求）→ 独裁式管理\n- Y理论（人性本善）：用鼓励承诺（高层需求）→ 民主式管理\n- 海兹伯格双因素理论：利诱=保健因素（不满意→没有不满意），鼓励承诺=激励因素（满意→满意）\n\n**结论**：知识工作者主要受高层次需求驱动（尊重+自我实现），管理者应更多采用鼓励承诺型的激励方式。',
+                explanation: '三种激励类型（威逼/利诱/鼓励承诺）× 马斯洛五层 × X-Y理论 × 海兹伯格双因素的综合论述题。核心结论：知识工作者需高层需求激励。',
+                score: 10,
+                year: 2025,
+                topic: '团队管理'
+            },
+            {
+                id: 'q2025-e5',
+                type: 'essay',
+                question: '估算的要点是什么？TSP和Scrum分别是怎么体现的？',
+                answer: '**一、估算的四要点**\n1. **尽可能划分详细一些**：拆分成多个小部件分别估算，总误差比各部件误差之和小（误差趋于抵消）\n2. **建立对结果的信心**：给出概率区间而非单点数值\n3. **依赖数据**：用历史数据说话，而非拍脑袋\n4. **估算要的是过程而非结果**：估算是干系人达成共识的过程\n口诀：**「详细、信心、数据、过程非结果」**\n\n**二、TSP如何体现估算要点**\n1. **详细划分**：通过WBS将项目分解为组件级，逐个估算规模\n2. **依赖数据**：采用PROBE方法，用历史项目的代理对象（Proxy）做相对估算+线性回归\n3. **过程重于结果**：九次会议中有专门的「整体计划」「个人计划」会议，全员参与讨论达成共识\n4. **平衡计划**：第6次会议做个人计划平衡，确保总工作量与团队能力匹配\n\n**三、Scrum如何体现估算要点**\n1. **详细划分**：将Product Backlog拆分为小的User Story（INVEST标准），逐个估算\n2. **依赖数据/群体智慧**：使用计划扑克（Planning Poker），每人独立估算后展示并讨论差异\n3. **过程重于结果**：Sprint Planning是团队共同参与的计划活动，通过讨论达成共识\n4. **相对估算**：使用故事点（Story Point）做相对大小估算，避免绝对值的不确定性\n5. **持续修正**：每个Sprint结束后通过Velocity反馈修正后续估算\n\n**对比总结**：TSP偏向「精确的前期估算」（PROBE+WBS+线性回归），Scrum偏向「持续的相对估算」（计划扑克+故事点+Velocity回顾）。',
+                explanation: '估算四要点是骨架，TSP侧重PROBE/WBS/线性回归，Scrum侧重计划扑克/故事点/Velocity。两者核心理念一致：详细拆分+数据驱动+共识过程。',
+                score: 10,
+                year: 2025,
+                topic: '项目管理'
+            },
+            {
+                id: 'q2025-e6',
+                type: 'essay',
+                question: '本门课学到的实践和方法中，有哪些可以被LLM（大语言模型）替代或增强？请选两点论述。',
+                answer: '**一、TDD（测试驱动开发）→ LLM增强**\n\n**可被增强的点**：\n- 「红」阶段：LLM可以根据自然语言需求描述自动生成单元测试初稿，大幅降低编写测试的门槛\n- 「绿」阶段：LLM可以快速生成使测试通过的初始代码实现\n- 重构阶段：LLM可以在测试保护下安全地进行代码重构建议\n\n**为什么不能被替代**：TDD的真正价值不在写代码的速度，而在「先想清楚再动手」的思维训练。LLM生成的测试不一定覆盖边界情况，仍需人类审查。TDD是AI生成代码的**质量护栏**。\n\n---\n\n**二、代码评审（Code Review / Measure Twice Cut Once）→ LLM增强**\n\n**可被增强的点**：\n- LLM可以作为「永不疲倦的评审者」自动检查代码规范、潜在缺陷、安全问题\n- 在提交前（pre-commit hook）自动运行LLM审查，即时反馈\n- 可以检测人类容易遗漏的模式（如空指针、资源泄漏、SQL注入）\n\n**局限性**：LLM无法理解业务逻辑上下文，无法替代人类评审者对「设计意图」和「架构一致性」的判断。最佳模式是**人机结对**：LLM做机械性检查，人类做语义性评审。\n\n---\n\n**其他可选角度**：\n- **文档生成**：LLM可大幅增强API文档、注释、README的生成效率（但需人工核实准确性）\n- **结对编程升级**：传统「人+人」结对 → 「人(Driver)+AI(Navigator)+人(Reviewer)」三方协作\n- **持续集成**：LLM可用于CI流水线中的自动失败分析和修复建议\n- **需求分析**：LLM可帮助将模糊的需求描述转化为结构化的User Story和验收标准',
+                explanation: '开放性论述题，任选两点。推荐TDD+Code Review组合，紧扣课程核心概念。关键观点：LLM是增强工具而非替代品，人类的判断力、领域知识和设计意图仍是不可替代的核心竞争力。',
+                score: 10,
+                year: 2025,
+                topic: '前沿话题'
+            }
+        ]
+    },
+    {
         id: 'exam2020mid',
         title: '2020年期中试卷',
         year: 2020,
