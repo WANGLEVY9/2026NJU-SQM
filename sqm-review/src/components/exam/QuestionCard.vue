@@ -19,7 +19,7 @@
           :class="{
             'is-selected': isSelected(index),
             'is-correct': showAnswer && isCorrect(index),
-            'is-wrong': showAnswer && isSelected(index) && !isCorrect(index)
+            'is-wrong': showResult && showAnswer && isSelected(index) && !isCorrect(index)
           }"
           @click="handleOptionClick(index)"
         >
@@ -88,14 +88,23 @@
     <div class="question-footer">
       <button
         v-if="!showAnswer"
-        class="btn btn-secondary"
-        @click="$emit('toggle-answer')"
+        class="btn btn-primary"
+        @click="$emit('check')"
+        :disabled="hasUserAnswer === false"
       >
-        <Eye :size="16" />
-        查看答案
+        <CheckCircle :size="16" />
+        校对答案
       </button>
       <button
-        v-else
+        v-if="!showAnswer"
+        class="btn btn-secondary"
+        @click="$emit('view')"
+      >
+        <Eye :size="16" />
+        直接查看答案
+      </button>
+      <button
+        v-if="showAnswer"
         class="btn btn-ghost"
         @click="$emit('toggle-answer')"
       >
@@ -123,10 +132,26 @@ const props = defineProps({
   showAnswer: {
     type: Boolean,
     default: false
+  },
+  showResult: {
+    type: Boolean,
+    default: false
   }
 })
 
-const emit = defineEmits(['select', 'toggle-answer'])
+const emit = defineEmits(['select', 'toggle-answer', 'check', 'view'])
+
+// ========== 用户是否已选择答案 ==========
+const hasUserAnswer = computed(() => {
+  if (isChoiceType.value || isJudgmentType.value) {
+    if (isMultipleChoice.value) {
+      return Array.isArray(props.selectedAnswer) && props.selectedAnswer.length > 0
+    }
+    return props.selectedAnswer !== null && props.selectedAnswer !== undefined
+  }
+  // essay: always allow checking (user may type text)
+  return true
+})
 
 // ========== 类型判断 ==========
 const isChoiceType = computed(() => {
@@ -536,6 +561,56 @@ const handleJudgmentClick = (value) => {
   padding: 16px 20px;
   border-top: 1px solid var(--border-color);
   @include flex-center;
+  gap: 12px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg-primary);
+
+  &:hover:not(:disabled) {
+    background: var(--accent-light);
+    border-color: var(--accent-light);
+  }
+}
+
+.btn-secondary {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+
+  &:hover:not(:disabled) {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--text-muted);
+
+  &:hover:not(:disabled) {
+    color: var(--text-primary);
+  }
 }
 
 // 过渡动画

@@ -78,9 +78,12 @@
         <QuestionCard
           :question="formatQuestion(currentQuestion)"
           :selectedAnswer="choiceStore.answers[currentQuestion.id]"
-          :showAnswer="choiceStore.showAnswer[currentQuestion.id] || choiceStore.showAllAnswers"
+          :showAnswer="!!(choiceStore.showAnswer[currentQuestion.id] || choiceStore.showAllAnswers)"
+          :showResult="!!choiceStore.checked[currentQuestion.id]"
           @select="(ans) => choiceStore.setAnswer(currentQuestion.id, ans)"
-          @toggle-answer="choiceStore.toggleAnswer(currentQuestion.id)"
+          @check="choiceStore.checkAnswer(currentQuestion.id)"
+          @view="choiceStore.viewAnswer(currentQuestion.id)"
+          @toggle-answer="choiceStore.hideAnswer(currentQuestion.id)"
         />
       </div>
 
@@ -179,12 +182,14 @@ const accuracy = computed(() => {
 })
 
 function isAnsweredCorrect(q) {
+  if (!choiceStore.checked[q.id]) return false
   const ans = choiceStore.answers[q.id]
   if (ans === undefined) return false
   return isCorrect(q, ans)
 }
 
 function isAnsweredWrong(q) {
+  if (!choiceStore.checked[q.id]) return false
   const ans = choiceStore.answers[q.id]
   if (ans === undefined) return false
   return !isCorrect(q, ans)

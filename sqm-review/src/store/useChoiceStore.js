@@ -5,12 +5,13 @@ export const useChoiceStore = defineStore('choice', {
     state: () => ({
         questions: choiceQuestions,
         currentIndex: 0,
-        answers: {},
-        showAnswer: {},
+        answers: {},        // user's selected answer per question
+        showAnswer: {},     // whether to show answer panel per question
+        checked: {},        // whether user has "checked" (=> stats count)
         showAllAnswers: false,
         selectedTopic: '全部',
         isRandomMode: false,
-        filterMode: 'all', // all, unanswered, wrong
+        filterMode: 'all',
         shuffledIndices: []
     }),
 
@@ -35,12 +36,13 @@ export const useChoiceStore = defineStore('choice', {
         totalCount: (state) => state.filteredQuestions.length,
 
         answeredCount: (state) => {
-            return Object.keys(state.answers).length
+            return Object.keys(state.checked).length
         },
 
         correctCount: (state) => {
             let correct = 0
             state.filteredQuestions.forEach(q => {
+                if (!state.checked[q.id]) return
                 const ans = state.answers[q.id]
                 if (ans === undefined) return
                 if (isCorrectAnswer(q, ans)) correct++
@@ -51,6 +53,7 @@ export const useChoiceStore = defineStore('choice', {
         wrongCount: (state) => {
             let wrong = 0
             state.filteredQuestions.forEach(q => {
+                if (!state.checked[q.id]) return
                 const ans = state.answers[q.id]
                 if (ans === undefined) return
                 if (!isCorrectAnswer(q, ans)) wrong++
@@ -65,19 +68,36 @@ export const useChoiceStore = defineStore('choice', {
 
         wrongQuestions: (state) => {
             return state.filteredQuestions.filter(q => {
+                if (!state.checked[q.id]) return false
                 const ans = state.answers[q.id]
                 return ans !== undefined && !isCorrectAnswer(q, ans)
             })
         },
 
         unansweredQuestions: (state) => {
-            return state.filteredQuestions.filter(q => state.answers[q.id] === undefined)
+            return state.filteredQuestions.filter(q => !state.checked[q.id])
         }
     },
 
     actions: {
         setAnswer(questionId, answer) {
             this.answers[questionId] = answer
+        },
+
+        // 校对答案：锁定答案，显示正误，计入统计
+        checkAnswer(questionId) {
+            this.checked[questionId] = true
+            this.showAnswer[questionId] = true
+        },
+
+        // 直接查看答案：显示答案面板，不计入统计，不显示对错
+        viewAnswer(questionId) {
+            this.showAnswer[questionId] = true
+        },
+
+        // 隐藏答案
+        hideAnswer(questionId) {
+            this.showAnswer[questionId] = false
         },
 
         toggleAnswer(questionId) {
@@ -132,7 +152,6 @@ export const useChoiceStore = defineStore('choice', {
 
         shuffle() {
             const indices = Array.from({ length: this.filteredQuestions.length }, (_, i) => i)
-            // Fisher-Yates shuffle
             for (let i = indices.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1))
                 ;[indices[i], indices[j]] = [indices[j], indices[i]]
@@ -144,6 +163,7 @@ export const useChoiceStore = defineStore('choice', {
             this.currentIndex = 0
             this.answers = {}
             this.showAnswer = {}
+            this.checked = {}
             this.showAllAnswers = false
             this.shuffledIndices = []
         },
@@ -151,6 +171,7 @@ export const useChoiceStore = defineStore('choice', {
         clearAnswers() {
             this.answers = {}
             this.showAnswer = {}
+            this.checked = {}
             this.showAllAnswers = false
         }
     }
@@ -158,16 +179,12 @@ export const useChoiceStore = defineStore('choice', {
 
 function isCorrectAnswer(question, userAnswer) {
     const ca = question.correctAnswer
-    // Boolean (judge questions)
     if (typeof ca === 'boolean') return userAnswer === ca
-    // String correctAnswer (letter-based, e.g., 'ABD' or 'C')
     if (typeof ca === 'string') {
         if (ca.length <= 1) {
-            // Single choice: userAnswer is a number (index)
             const correctIndex = ca.charCodeAt(0) - 65
             return userAnswer === correctIndex
         } else {
-            // Multiple choice: userAnswer is an array of indices
             if (!Array.isArray(userAnswer)) return false
             const correctIndices = ca.split('').map(l => l.charCodeAt(0) - 65).sort((a, b) => a - b)
             const sortedUser = [...userAnswer].sort((a, b) => a - b)
