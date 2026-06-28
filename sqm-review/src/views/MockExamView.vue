@@ -28,8 +28,11 @@
           <QuestionCard
             :question="question"
             :selectedAnswer="getAnswer(question.id)"
-            :showAnswer="false"
+            :showAnswer="isQuestionVisible(question.id) || false"
+            :showResult="mockStore.isQuestionChecked(question.id)"
             @select="(answer) => setAnswer(question.id, answer)"
+            @check="mockStore.checkAnswer(question.id)"
+            @view="mockStore.viewAnswer(question.id)"
           />
         </div>
 
@@ -103,7 +106,7 @@ const mockStore = useMockStore()
 const paperId = computed(() => route.params.id)
 const paper = computed(() => mockStore.getPaperById(paperId.value))
 const timeRemaining = computed(() => mockStore.timeRemaining)
-const isPaused = ref(false)
+const isPaused = computed(() => mockStore.isTimerPaused)
 const currentQuestionIndex = ref(0)
 
 onMounted(() => {
@@ -122,6 +125,10 @@ const setAnswer = (questionId, answer) => {
 
 const isAnswered = (questionId) => {
   return mockStore.answers[questionId] !== undefined
+}
+
+const isQuestionVisible = (questionId) => {
+  return mockStore.isQuestionChecked(questionId) || mockStore.isQuestionViewed(questionId)
 }
 
 // essay题型不纳入答题统计（需人工自评）
@@ -155,7 +162,11 @@ const goToQuestion = (index) => {
 }
 
 const togglePause = () => {
-  isPaused.value = !isPaused.value
+  if (mockStore.isTimerPaused) {
+    mockStore.resumeTimer()
+  } else {
+    mockStore.pauseTimer()
+  }
 }
 
 const confirmSubmit = () => {

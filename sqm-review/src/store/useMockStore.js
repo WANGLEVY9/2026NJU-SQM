@@ -9,8 +9,12 @@ export const useMockStore = defineStore('mock', {
         timeRemaining: 0,
         isExamStarted: false,
         isExamFinished: false,
+        isTimerPaused: false,
         examStartTime: null,
-        timerInterval: null
+        timerInterval: null,
+        // Per-question answer visibility for exam mode
+        checkedQuestions: {},
+        viewedQuestions: {}
     }),
 
     getters: {
@@ -102,6 +106,43 @@ export const useMockStore = defineStore('mock', {
             this.isExamFinished = true
         },
 
+        pauseTimer() {
+            if (this.timerInterval && !this.isTimerPaused) {
+                clearInterval(this.timerInterval)
+                this.timerInterval = null
+                this.isTimerPaused = true
+            }
+        },
+
+        resumeTimer() {
+            if (!this.timerInterval && this.isTimerPaused && !this.isExamFinished && this.timeRemaining > 0) {
+                this.timerInterval = setInterval(() => {
+                    if (this.timeRemaining > 0) {
+                        this.timeRemaining--
+                    } else {
+                        this.finishExam()
+                    }
+                }, 1000)
+                this.isTimerPaused = false
+            }
+        },
+
+        checkAnswer(questionId) {
+            this.checkedQuestions[questionId] = true
+        },
+
+        viewAnswer(questionId) {
+            this.viewedQuestions[questionId] = true
+        },
+
+        isQuestionChecked: (state) => (questionId) => {
+            return !!state.checkedQuestions[questionId]
+        },
+
+        isQuestionViewed: (state) => (questionId) => {
+            return !!state.viewedQuestions[questionId]
+        },
+
         resetExam() {
             if (this.timerInterval) {
                 clearInterval(this.timerInterval)
@@ -112,7 +153,10 @@ export const useMockStore = defineStore('mock', {
             this.timeRemaining = 0
             this.isExamStarted = false
             this.isExamFinished = false
+            this.isTimerPaused = false
             this.examStartTime = null
+            this.checkedQuestions = {}
+            this.viewedQuestions = {}
         }
     }
 })
