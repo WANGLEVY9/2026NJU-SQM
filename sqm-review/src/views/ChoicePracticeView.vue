@@ -74,6 +74,14 @@
           <Shuffle :size="16" />
           {{ choiceStore.isRandomMode ? '随机模式' : '顺序模式' }}
         </button>
+        <button
+          class="mode-btn"
+          :class="{ 'is-active': choiceStore.isOptionShuffle }"
+          @click="choiceStore.toggleOptionShuffle"
+        >
+          <ArrowLeftRight :size="16" />
+          {{ choiceStore.isOptionShuffle ? '选项乱序开' : '选项乱序关' }}
+        </button>
         <button class="mode-btn" @click="resetPractice">
           <RotateCcw :size="16" />
           重置进度
@@ -178,7 +186,7 @@ import { useChoiceStore } from '@/store/useChoiceStore'
 import QuestionCard from '@/components/exam/QuestionCard.vue'
 import {
   ChevronLeft, ChevronRight, Shuffle, RotateCcw,
-  Eye, EyeOff, FileQuestion
+  Eye, EyeOff, FileQuestion, ArrowLeftRight
 } from 'lucide-vue-next'
 
 const choiceStore = useChoiceStore()
@@ -239,12 +247,16 @@ function isCorrect(question, userAnswer) {
 }
 
 function formatQuestion(q) {
+  // 优先使用洗牌后的数据（如果开启了选项乱序）
+  const shuffled = choiceStore.getShuffledQuestionData(q)
+  const data = shuffled || q
+
   return {
-    ...q,
-    type: q.type === 'judge' ? 'judge' : (q.correctAnswer.length > 1 ? 'multiple' : 'choice'),
-    answer: q.type === 'judge'
-      ? q.correctAnswer
-      : q.correctAnswer.split('').map(l => l.charCodeAt(0) - 65)
+    ...data,
+    type: data.type === 'judge' ? 'judge' : (data.correctAnswer.length > 1 ? 'multiple' : 'choice'),
+    answer: data.type === 'judge'
+      ? data.correctAnswer
+      : data.correctAnswer.split('').map(l => l.charCodeAt(0) - 65)
   }
 }
 
