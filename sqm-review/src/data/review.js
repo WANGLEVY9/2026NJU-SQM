@@ -2531,7 +2531,7 @@ PQI = 5 个数据的乘积（基准值作为 1，越接近 1 质量越高）：
                 answer: '有效策略（按优先级）：（1）测试文档化——将测试用例系统化、可重复；（2）小组评审——团队评审发现个人遗漏的缺陷；（3）个人评审——工程师个人对自己产物的评审；（4）重视设计——在设计阶段投入更多时间，减少后续缺陷；（5）设计验证——通过原型、评审、模拟等手段验证设计正确性。核心逻辑：先评审后编译→先个人后小组→先设计后编码→先预防后测试。',
                 analysis: '答题策略：按「预防优于检测」和「集体优于个人」的原则组织答案。注意：不考虑资源成本时，可以采用最全面的质量策略，实际项目中需权衡成本收益。'
             },
-            // ===== 第五讲 PPT 课堂练习题（11题） =====
+            // ===== 第五讲 PPT 课堂练习题 =====
             {
                 year: '第 5 讲 课堂',
                 type: '多选',
@@ -2540,11 +2540,11 @@ PQI = 5 个数据的乘积（基准值作为 1，越接近 1 质量越高）：
                 options: [
                     { label: 'A', text: '用缺陷管理替代质量管理，既有必要性，也有合理性', isCorrect: true },
                     { label: 'B', text: '基本无缺陷的开发是通过开展高质量的评审来实现的', isCorrect: true },
-                    { label: 'C', text: '经过训练，评审是所有消除缺陷的手段当中最高效的', isCorrect: true },
-                    { label: 'D', text: 'PSP质量策略主要解决的是外部质量，而非内部质量', isCorrect: false }
+                    { label: 'C', text: '经过训练，评审是所有消除缺陷的手段当中最高效的', isCorrect: false },
+                    { label: 'D', text: 'PSP质量策略主要解决的是外部质量，而非内部质量', isCorrect: true }
                 ],
-                answer: 'ABC',
-                analysis: 'A ✅ PPT原文明确PSP核心策略：**用缺陷管理替代质量管理**，缺陷可量化、可追溯，具备落地合理性；\nB ✅ PPT原文：组件高质量依靠高质量评审实现；\nC ✅ 图表数据：评审消除缺陷耗时远低于系统测试，同等时间检出缺陷更多，效率最高；\nD ❌ PSP管控设计、编码、评审等内部开发过程，重点解决**内部质量**，内部质量达标才能保障外部质量。'
+                answer: 'ABD',
+                analysis: 'A ✅ PPT原文明确PSP核心策略：**用缺陷管理替代质量管理**；\nB ✅ 组件高质量依靠高质量评审实现；\nC ❌ **编译**是最高效的缺陷消除手段，不是评审；\nD ✅ PSP使用面向用户的视图，主要解决**外部质量**。'
             },
             {
                 year: '第 5 讲 课堂',
@@ -2558,12 +2558,12 @@ PQI = 5 个数据的乘积（基准值作为 1，越接近 1 质量越高）：
                     { label: 'D', text: 'DRL只能预测，不能度量', isCorrect: true }
                 ],
                 answer: 'CD',
-                analysis: 'A ✅ DRL用于模块开发缺陷消除效率度量；\nB ✅ PPT定义：DRL=其他阶段**每小时缺陷数** ÷ 单元测试**每小时缺陷数**；\nC ❌ 基准是**单位小时缺陷产出**，不是缺陷总个数；\nD ❌ DRL可通过缺陷日志、工时数据直接统计度量，不只是预测。'
+                analysis: 'A ✅ DRL用于模块开发缺陷消除效率度量；\nB ✅ PPT定义：DRL=其他阶段**每小时缺陷数** ÷ 单元测试**每小时缺陷数**；\nC ❌ 基准是**每小时缺陷率**，不是缺陷总个数；\nD ❌ DRL**只能度量，不能预测**。'
             },
             {
                 year: '第 5 讲 课堂',
                 type: '多选',
-                question: 'PQI指标理解',
+                question: 'PQI指标理解(不正确)',
                 fullQuestion: '关于PQI，下列说法中不正确的是：\nA. PQI表征模块级别开发中的过程规范化程度\nB. PQI越高越好，可以充分保障质量\nC. PQI越低越好\nD. PQI不能用作质量规划',
                 options: [
                     { label: 'A', text: 'PQI表征模块级别开发中的过程规范化程度', isCorrect: false },
@@ -2572,7 +2572,21 @@ PQI = 5 个数据的乘积（基准值作为 1，越接近 1 质量越高）：
                     { label: 'D', text: 'PQI不能用作质量规划', isCorrect: true }
                 ],
                 answer: 'BCD',
-                analysis: 'A ✅ PQI由5项开发规范指标相乘，衡量模块开发流程规范度；\nB ❌ PQI高代表缺陷少，但过高意味着评审投入过量、开发效率大幅下降，无法"充分保障"无缺陷；\nC ❌ PQI越低，集成/交付缺陷密度越高（PPT图表PQI=0.04存在3个测试缺陷）；\nD ❌ 可提前设定PQI目标值，反向规划评审、设计工时，用于事前质量规划。'
+                analysis: 'A ✅ PQI由5项开发规范指标相乘，衡量模块开发流程规范度；\nB ❌ PQI大于0.4即可，过大成本太高；\nC ❌ PQI越低，缺陷密度越高；\nD ❌ PQI可以用作**质量规划和过程改进**。'
+            },
+            {
+                year: '第 5 讲 课堂',
+                type: '多选',
+                question: 'PQI指标理解(正确)',
+                fullQuestion: '关于PQI，下列说法中正确的是：\nA. PQI可以辅助判断模块开发质量\nB. PQI可以提供过程改进的依据\nC. PQI确保大于1，从而确保开发质量\nD. PQI只能预测，不能度量',
+                options: [
+                    { label: 'A', text: 'PQI可以辅助判断模块开发质量', isCorrect: true },
+                    { label: 'B', text: 'PQI可以提供过程改进的依据', isCorrect: true },
+                    { label: 'C', text: 'PQI确保大于1，从而确保开发质量', isCorrect: false },
+                    { label: 'D', text: 'PQI只能预测，不能度量', isCorrect: false }
+                ],
+                answer: 'AB',
+                analysis: 'A ✅ PQI辅助判断模块开发质量；\nB ✅ PQI提供过程改进依据；\nC ❌ PQI是0-1之间的乘积，不可能大于1；\nD ❌ PQI可以度量。'
             },
             {
                 year: '第 5 讲 课堂',
@@ -2583,24 +2597,53 @@ PQI = 5 个数据的乘积（基准值作为 1，越接近 1 质量越高）：
                     { label: 'A', text: 'Yield可以辅助判断模块开发质量', isCorrect: true },
                     { label: 'B', text: 'Yield可以提供过程改进的依据', isCorrect: true },
                     { label: 'C', text: 'Yield区分为Process Yield和Phase Yield', isCorrect: true },
-                    { label: 'D', text: 'Yield只能预测，不能度量', isCorrect: false }
+                    { label: 'D', text: 'Yield只能预测，不能度量', isCorrect: true }
                 ],
-                answer: 'ABC',
-                analysis: 'A ✅ 各阶段Yield越低代表该阶段自查能力差，模块质量差；\nB ✅ 编码Yield极低则说明要强化代码评审，作为改进依据；\nC ✅ PPT明确定义两类Yield：阶段产出Phase Yield、编译前总Process Yield；\nD ❌ Yield依靠缺陷日志统计，属于事后可精确度量指标。'
+                answer: 'ABCD',
+                analysis: 'A ✅ 各阶段Yield越低代表该阶段自查能力差；\nB ✅ 编码Yield极低说明要强化代码评审；\nC ✅ PPT明确定义两类Yield：Phase Yield和Process Yield；\nD ✅ Yield**只能预测，不能度量**（依赖注入缺陷数的估算）。'
             },
             {
                 year: '第 5 讲 课堂',
                 type: '单选',
+                question: '评审速度',
+                fullQuestion: '关于评审速度，下列说法中正确的是：\nA. 进行代码评审的时候，控制评审速度不超过每小时1000LOC就能实现大部分质量要求\nB. 实战中，评审速度应该根据资源水平而定，时间充分就评审慢一些\nC. 文档评审速度应该控制每小时不超过4页\nD. 评审速度与人的技能有关，技能强的人可以突破每小时1000LOC代码这个限制',
+                options: [
+                    { label: 'A', text: '控制评审速度不超过每小时1000LOC就能实现大部分质量要求', isCorrect: false },
+                    { label: 'B', text: '评审速度应该根据资源水平而定', isCorrect: false },
+                    { label: 'C', text: '文档评审速度应该控制每小时不超过4页', isCorrect: true },
+                    { label: 'D', text: '技能强的人可以突破每小时1000LOC限制', isCorrect: false }
+                ],
+                answer: 'C',
+                analysis: 'A ❌ 不超过1000LOC不能保证大部分质量要求；\nB ❌ 评审速度应该基于项目的需求和时间限制，不是资源水平；\nC ✅ 文档评审速度应控制每小时不超过4页；\nD ❌ 评审速度与人的技能无关。'
+            },
+            {
+                year: '第 5 讲 课堂',
+                type: '多选',
                 question: 'Quality Journey',
-                fullQuestion: '关于Humphrey Quality Journey（质量路径），下列说法中正确的是：\nA. Quality Journey中列出的步骤可以在适当的时候更换顺序\nB. 由于需求是一切工程活动的基础，因此加强需求开发应该是Quality Journey早期的必备步骤\nC. Quality Journey仍然仅仅是在「用缺陷管理替代质量管理」这一基本策略之下进行讨论\nD. Quality Journey中测试应该先于评审得到贯彻和改善',
+                fullQuestion: '关于Humphrey梳理的Quality Journey，下列说法中正确的是：\nA. Quality Journey中列出的步骤可以在适当的时候更换顺序\nB. 由于需求是一切工程活动的基础，因此加强需求开发应该是Quality Journey早期的必备步骤\nC. Quality Journey仍然仅仅是在"用缺陷管理替代质量管理"这一基本策略之下进行讨论\nD. Quality Journey中测试应该先于评审得到贯彻和改善\nE. 加强团队评审是QJ后期的步骤',
                 options: [
                     { label: 'A', text: '步骤可更换顺序', isCorrect: false },
                     { label: 'B', text: '加强需求开发是早期必备步骤', isCorrect: false },
                     { label: 'C', text: '仍在「用缺陷管理替代质量管理」策略下', isCorrect: true },
-                    { label: 'D', text: '测试先于评审得到贯彻改善', isCorrect: false }
+                    { label: 'D', text: '测试先于评审得到贯彻改善', isCorrect: true },
+                    { label: 'E', text: '加强团队评审是QJ后期的步骤', isCorrect: false }
                 ],
-                answer: 'C',
-                analysis: 'A ❌ 8个步骤是递进提升逻辑，顺序固定（测试→前置产物→评审→意识→个人评审→设计→缺陷预防→用户质量）；\nB ❌ 8步无需求开发环节，早期第一步是测试；\nC ✅ 全路径全程围绕缺陷识别、消除、预防，核心底层策略仍是缺陷管理；\nD ❌ 路径逻辑：先改善前置评审，再减轻测试压力，评审优先级高于测试。'
+                answer: 'CD',
+                analysis: 'A ❌ 先后顺序**不能改变**；\nB ❌ QJ**并不包括需求开发**；\nC ✅ 全路径围绕缺陷管理；\nD ✅ 测试先于评审得到贯彻和改善；\nE ❌ 团队评审不在QJ后期步骤中。'
+            },
+            {
+                year: '第 5 讲 课堂',
+                type: '单选',
+                question: 'PSP设计模板记录内部动态信息',
+                fullQuestion: '下述设计模板中用来记录内部动态信息的是：\nA. OST\nB. SST\nC. LST\nD. FST',
+                options: [
+                    { label: 'A', text: 'OST', isCorrect: false },
+                    { label: 'B', text: 'SST', isCorrect: true },
+                    { label: 'C', text: 'LST', isCorrect: false },
+                    { label: 'D', text: 'FST', isCorrect: false }
+                ],
+                answer: 'B',
+                analysis: 'SST（State Specification Template，状态规格模板）用于记录**内部动态信息**——状态机的状态转换。OST记录操作规格，FST记录功能规格，LST记录逻辑规格。'
             },
             {
                 year: '第 5 讲 课堂',
@@ -2609,40 +2652,42 @@ PQI = 5 个数据的乘积（基准值作为 1，越接近 1 质量越高）：
                 fullQuestion: '下述关于PSP四大设计模板和UML典型设计图的描述中完全正确的是：\nA. OST在UML中没有对应的设计图\nB. UML中的类结构以及类之间的关系，在PSP四大设计模板中无法体现\nC. LST在UML中可以通过类图来体现\nD. FST在UML中可以通过类图来体现',
                 options: [
                     { label: 'A', text: 'OST在UML中没有对应的设计图', isCorrect: false },
-                    { label: 'B', text: '类结构及关系在PSP四大设计模板中无法体现', isCorrect: false },
+                    { label: 'B', text: '类结构及关系在PSP四大设计模板中无法体现', isCorrect: true },
                     { label: 'C', text: 'LST在UML中可通过类图体现', isCorrect: false },
-                    { label: 'D', text: 'FST在UML中可通过类图体现', isCorrect: true }
+                    { label: 'D', text: 'FST在UML中可通过类图体现', isCorrect: false }
                 ],
-                answer: 'D',
-                analysis: 'A ❌ OST描述用户交互，UML用例图、时序图可对应；\nB ❌ FST专门描述类、继承、外部接口，可体现UML类结构；\nC ❌ LST描述**内部静态算法逻辑**，UML无对应图形；\nD ✅ FST承载类、外部属性、方法定义，与UML类图表达信息匹配。'
+                answer: 'B',
+                analysis: 'A ❌ OST对应用例图和时序图；\nB ✅ UML中的类结构以及类之间的关系，在PSP四大设计模板中**无法体现**；\nC ❌ LST在UML中**无对应**体现；\nD ❌ FST体现了方法的行为而类图不能。'
             },
             {
                 year: '第 5 讲 课堂',
                 type: '单选',
                 question: '设计验证手段对比',
-                fullQuestion: '下列关于各种设计验证手段的描述中正确的是：\nA. 执行表是唯一一种提供全面设计验证的手段\nB. 跟踪表是唯一一种提供全面设计验证的手段\nC. 受限于手工方式，都易于出错\nD. 符号化执行不适合复杂算法',
+                fullQuestion: '下列关于各种设计验证手段的描述中正确的是：\nA. 执行表是唯一一种提供全面设计验证的手段\nB. 跟踪表是唯一一种提供全面设计验证的手段\nC. 受限于手工方式，都易于出错\nD. 符号化执行不适合复杂算法\nE. 执行表是跟踪表的扩展',
                 options: [
                     { label: 'A', text: '执行表是唯一全面设计验证手段', isCorrect: false },
                     { label: 'B', text: '跟踪表是唯一全面设计验证手段', isCorrect: false },
                     { label: 'C', text: '受限于手工方式都易于出错', isCorrect: true },
-                    { label: 'D', text: '符号化执行不适合复杂算法', isCorrect: false }
+                    { label: 'D', text: '符号化执行不适合复杂算法', isCorrect: false },
+                    { label: 'E', text: '执行表是跟踪表的扩展', isCorrect: false }
                 ],
                 answer: 'C',
-                analysis: 'A/B ❌ 不存在"唯一全面验证手段"，各工具适用场景不同；\nC ✅ PPT原文：符号化、执行表、跟踪表均为手工推演，容易引入人为错误；\nD ❌ 符号化执行恰恰适合复杂算法、遗留逻辑校验。'
+                analysis: 'A/B ❌ **符号化验证**才是唯一一种提供全面设计验证的手段；\nC ✅ PPT原文：手工推演容易引入人为错误；\nD ❌ 符号化验证**适合复杂的计算过程**，不适合的是复杂的逻辑；\nE ❌ 跟踪表是执行表的扩展，不是反过来。'
             },
             {
                 year: '第 5 讲 课堂',
                 type: '多选',
                 question: '状态机正确性条件',
-                fullQuestion: '一个完全正确的状态机应该满足：\nA. 没有死循环和陷阱\nB. 状态转化条件满足正交性\nC. 状态转化条件满足完整性\nD. 状态转化条件满足独立性',
+                fullQuestion: '一个完全正确的状态机应该满足：\nA. 没有死循环和陷阱\nB. 状态转化条件满足正交性\nC. 状态转化条件满足完整性\nD. 状态转化条件满足独立性\nE. 符合设计意图',
                 options: [
                     { label: 'A', text: '没有死循环和陷阱', isCorrect: true },
                     { label: 'B', text: '状态转化条件满足正交性', isCorrect: true },
                     { label: 'C', text: '状态转化条件满足完整性', isCorrect: true },
-                    { label: 'D', text: '状态转化条件满足独立性', isCorrect: false }
+                    { label: 'D', text: '状态转化条件满足独立性', isCorrect: false },
+                    { label: 'E', text: '符合设计意图', isCorrect: true }
                 ],
-                answer: 'ABC',
-                analysis: 'A ✅ 验证第一条：消除死循环、陷阱状态；\nB ✅ 正交：任意时刻仅一条转换条件成立，无冲突；\nC ✅ 完整：所有输入场景均覆盖，无遗漏场景；\nD ❌ 教材/PPT无"独立性"要求，不属于状态机三要素。'
+                answer: 'ABCE',
+                analysis: 'A ✅ 消除死循环、陷阱状态；\nB ✅ 正交：任意时刻仅一条转换条件成立；\nC ✅ 完整：所有输入场景均覆盖；\nD ❌ PPT无"独立性"要求；\nE ✅ 符合设计意图也是正确状态机的条件。'
             },
             {
                 year: '第 5 讲 课堂',
@@ -2656,21 +2701,21 @@ PQI = 5 个数据的乘积（基准值作为 1，越接近 1 质量越高）：
                     { label: 'D', text: '质量与主观感受有关', isCorrect: false }
                 ],
                 answer: 'C',
-                analysis: 'A ✅ 质量包含性能、安全、可维护等多重属性；\nB ✅ 内外质量划分：外部（用户可见速度、易用性），内部（代码结构、复杂度用户无法感知）；\nC ❌ 用户质量期望明确包含安全性、保密性，是核心质量要素；\nD ✅ Gerald Weinberg观点：质量具备主观性，不同用户评价不同。'
+                analysis: 'A ✅ 质量包含性能、安全、可维护等多重属性；\nB ✅ 内部质量（代码结构、复杂度）用户无法感知；\nC ❌ 安全和保密**是**核心质量要素；\nD ✅ Gerald Weinberg观点：质量具备主观性。'
             },
             {
                 year: '第 5 讲 课堂',
-                type: '多选',
+                type: '单选',
                 question: '质量控制指标辨析',
                 fullQuestion: '下述关于质量控制指标，哪些说法正确？\nA. A/FR应该是越高越好\nB. Yield是一种精确度量模块质量的手段\nC. 评审活动应该早于编译或者测试活动而开展\nD. PQI只能事后统计，不能用于指导质量计划',
                 options: [
                     { label: 'A', text: 'A/FR应该是越高越好', isCorrect: false },
-                    { label: 'B', text: 'Yield是一种精确度量模块质量的手段', isCorrect: true },
+                    { label: 'B', text: 'Yield是一种精确度量模块质量的手段', isCorrect: false },
                     { label: 'C', text: '评审活动应早于编译或测试活动', isCorrect: true },
                     { label: 'D', text: 'PQI只能事后统计，不能用于指导质量计划', isCorrect: false }
                 ],
-                answer: 'BC',
-                analysis: 'A ❌ A/FR理想值为2，过高代表评审冗余、效率降低，不是越高越好；\nB ✅ Yield依靠缺陷日志精准统计各阶段缺陷消除效率，量化模块质量；\nC ✅ PPT评审时机：评审放在编译、单元测试之前，提前低成本消缺；\nD ❌ PQI可预先设定目标，用于开发前质量规划，不只是事后统计。'
+                answer: 'C',
+                analysis: 'A ❌ A/FR达到**2.0**即可，不是越高越好；\nB ❌ Yield是**估计度量**，不可能精确度量；\nC ✅ 先评审后编译可以减少编译和测试的时间；\nD ❌ PQI可以预测和度量，可以指导质量计划。'
             },
             {
                 year: '第 5 讲 课堂',
@@ -2684,7 +2729,21 @@ PQI = 5 个数据的乘积（基准值作为 1，越接近 1 质量越高）：
                     { label: 'D', text: '正确性检验是唯一可靠的设计验证手段', isCorrect: false }
                 ],
                 answer: 'A',
-                analysis: 'A ✅ PPT原文：手工符号化推演容易产生人为错误；\nB ❌ 不是唯一，正确性检验、跟踪表均可做通用验证；\nC ❌ 跟踪表是执行表的扩充，验证覆盖范围更强；\nD ❌ 不存在单一绝对可靠的验证方式，多种手段结合使用。'
+                analysis: 'A ✅ PPT原文：手工符号化推演容易产生人为错误；\nB ❌ 不是唯一，正确性检验、跟踪表均可做通用验证；\nC ❌ 跟踪表是执行表的扩充，验证覆盖范围更强；\nD ❌ 不存在单一绝对可靠的验证方式。'
+            },
+            {
+                year: '第 5 讲 课堂',
+                type: '多选',
+                question: 'while-do循环正确性证明',
+                fullQuestion: '关于使用程序正确性证明手段验证while-do循环设计的描述中，正确的是：\nA. 如果设计是正确的，那么应满足的条件之一是循环判断条件最后一定可以变为false\nB. 如果设计是正确的，那么应满足的条件之一是循环判断条件为真的时候，单独的循环结构执行结果与循环体再加一个循环结构，其执行结果一致\nC. 如果设计是正确的，那么应满足的条件之一是循环判断条件为false的时候，循环体内所有变量不能被修改\nD. 该方法并不能保证循环体算法实现设计意图',
+                options: [
+                    { label: 'A', text: '循环判断条件最后一定可以变为false', isCorrect: true },
+                    { label: 'B', text: '循环条件为真时单独循环结构与循环体+循环结构执行结果一致', isCorrect: true },
+                    { label: 'C', text: '循环条件为false时循环体内所有变量不能被修改', isCorrect: true },
+                    { label: 'D', text: '该方法并不能保证循环体算法实现设计意图', isCorrect: true }
+                ],
+                answer: 'ABCD',
+                analysis: '程序正确性证明验证while-do循环需满足：\nA ✅ **终止性**：循环判断条件最终一定可以变为false（循环可终止）；\nB ✅ **不变式**：循环条件为真时，单独循环结构与循环体+循环结构执行结果一致；\nC ✅ 循环条件为false时，循环体内所有变量不能被修改；\nD ✅ 正确性证明只验证程序逻辑正确性，**不保证算法实现设计意图**。'
             }
         ]
     },
@@ -2927,12 +2986,12 @@ PQI = 5 个数据的乘积（基准值作为 1，越接近 1 质量越高）：
                 fullQuestion: '当考虑集成策略的时候，应该注意如下哪些方面？\nA. 待集成组件的质量状态\nB. 待集成组件的获取方式\nC. 待集成组件的功能和关系\nD. 待集成组件的数量',
                 options: [
                     { label: 'A', text: '待集成组件的质量状态', isCorrect: true },
-                    { label: 'B', text: '待集成组件的获取方式', isCorrect: false },
+                    { label: 'B', text: '待集成组件的获取方式', isCorrect: true },
                     { label: 'C', text: '待集成组件的功能和关系', isCorrect: true },
                     { label: 'D', text: '待集成组件的数量', isCorrect: true }
                 ],
-                answer: 'ACD',
-                analysis: '选择集成策略的核心判断依据：\nA ✅ 组件质量（质量差优先增量，质量高可大爆炸）；\nB ❌ 组件如何获取不影响集成策略选择，无关；\nC ✅ 组件之间依赖/功能关系（决定集簇、扁平化分组）；\nD ✅ 组件总量（数量巨大不适合大爆炸）。'
+                answer: 'ABCD',
+                analysis: '选择集成策略的核心判断依据：\nA ✅ 组件质量（质量差优先增量，质量高可大爆炸）；\nB ✅ 组件获取方式也是考量因素之一；\nC ✅ 组件之间依赖/功能关系（决定集簇、扁平化分组）；\nD ✅ 组件总量（数量巨大不适合大爆炸）。'
             },
             {
                 year: '第 6 讲 课堂',
@@ -2954,13 +3013,13 @@ PQI = 5 个数据的乘积（基准值作为 1，越接近 1 质量越高）：
                 question: '典型验证(Verification)活动',
                 fullQuestion: '下述活动是典型的验证（Verification）的是：\nA. 需求评审\nB. 详细设计评审\nC. 单元测试\nD. 试运行',
                 options: [
-                    { label: 'A', text: '需求评审', isCorrect: true },
+                    { label: 'A', text: '需求评审', isCorrect: false },
                     { label: 'B', text: '详细设计评审', isCorrect: true },
                     { label: 'C', text: '单元测试', isCorrect: true },
                     { label: 'D', text: '试运行', isCorrect: false }
                 ],
-                answer: 'ABC',
-                analysis: '核心定义（PPT原文）：**验证Verification**——做得对不对，检查产物是否符合上游规格（过程内部校验）；**确认Validation**——做的是不是用户要的，真实环境验证最终产品价值。\nA ✅ 需求评审：核对需求是否符合业务输入，验证；\nB ✅ 设计评审：核对设计是否匹配需求，验证；\nC ✅ 单元测试：核对代码是否匹配设计，验证；\nD ❌ 试运行：真实环境交付使用，属于确认活动。'
+                answer: 'BC',
+                analysis: '核心定义（PPT原文）：**验证Verification**——做得对不对，检查产物是否符合上游规格（过程内部校验）；**确认Validation**——做的是不是用户要的，真实环境验证最终产品价值。\nA ❌ 需求评审更偏向确认（验证需求是否满足用户期望）；\nB ✅ 设计评审：核对设计是否匹配需求，验证；\nC ✅ 单元测试：核对代码是否匹配设计，验证；\nD ❌ 试运行：真实环境交付使用，属于确认活动。'
             },
             {
                 year: '第 6 讲 课堂',
@@ -2970,11 +3029,11 @@ PQI = 5 个数据的乘积（基准值作为 1，越接近 1 质量越高）：
                 options: [
                     { label: 'A', text: '验收测试', isCorrect: true },
                     { label: 'B', text: '代码评审', isCorrect: false },
-                    { label: 'C', text: '系统测试', isCorrect: true },
+                    { label: 'C', text: '系统测试', isCorrect: false },
                     { label: 'D', text: '持续集成', isCorrect: false }
                 ],
-                answer: 'AC',
-                analysis: 'A ✅ 验收测试由用户/业务验证产品是否满足真实需求，典型确认；\nB ❌ 代码评审属于内部验证；\nC ✅ 系统测试在完整环境校验整体产品是否符合用户目标，确认；\nD ❌ CI自动构建单元/集成校验，属于验证活动。'
+                answer: 'A',
+                analysis: 'A ✅ 验收测试由用户/业务验证产品是否满足真实需求，典型确认；\nB ❌ 代码评审属于内部验证；\nC ❌ 系统测试属于验证活动（校验整体产品是否符合规格）；\nD ❌ CI自动构建单元/集成校验，属于验证活动。'
             },
             {
                 year: '第 6 讲 课堂',
@@ -2983,12 +3042,12 @@ PQI = 5 个数据的乘积（基准值作为 1，越接近 1 质量越高）：
                 fullQuestion: '下述产物中属于典型的确认（Validation）对象的是：\nA. 接口设计文档\nB. 源代码\nC. 用户手册\nD. 系统使用培训材料（视频、录像等）',
                 options: [
                     { label: 'A', text: '接口设计文档', isCorrect: false },
-                    { label: 'B', text: '源代码', isCorrect: false },
+                    { label: 'B', text: '源代码', isCorrect: true },
                     { label: 'C', text: '用户手册', isCorrect: true },
                     { label: 'D', text: '系统使用培训材料（视频、录像等）', isCorrect: true }
                 ],
-                answer: 'CD',
-                analysis: '验证对象：中间技术产物（需求文档、设计、代码、接口文档）；确认面向**交付给最终用户的使用类产物**：用户手册、培训材料，检验是否匹配用户真实使用场景。\nA、B 属于开发内部技术文档，是验证对象；C、D 面向终端用户，属于确认对象。'
+                answer: 'BCD',
+                analysis: '验证对象：中间技术产物（接口设计文档等）；确认面向**交付给最终用户的使用类产物**：源代码、用户手册、培训材料。\nA ❌ 接口设计文档属于开发内部技术文档，是验证对象；\nB ✅ 源代码属于确认对象；\nC ✅ 用户手册面向终端用户，属于确认对象；\nD ✅ 系统使用培训材料面向终端用户，属于确认对象。'
             },
             {
                 year: '第 6 讲 课堂',

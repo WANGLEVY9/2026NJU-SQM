@@ -69,8 +69,8 @@ export const choiceQuestions = [
     type: 'choice',
     question: '以下关于马斯洛的需求层次理论描述不正确的是：',
     options: ['A. 自我实现是寻求自尊（Esteem）', 'B. 激励来自为没有满足的需求而努力奋斗', 'C. 低层次的需求必须在高层次需求满足之前得到满足', 'D. 满足高层次的需求的途径比满足低层次的途径更少'],
-    correctAnswer: 'A',
-    explanation: 'A不正确：自我实现（Self-actualization）是马斯洛需求层次的最高层，不是寻求自尊。自尊（Esteem）是第四层次的需求。B、C、D的描述都是正确的：激励来自未满足的需求、低层次需求先于高层次需求满足、满足高层次需求的途径更少。',
+    correctAnswer: 'AD',
+    explanation: 'A不正确：自我实现（Self-actualization）是第五层，自尊（Esteem）是第四层。D不正确：满足高层次需求的途径比满足低层次的途径**更多**而非更少。B正确。C在马斯洛晚年修正后也不完全正确，但官方答案为AD。',
     topic: '团队管理'
   },
   {
@@ -79,8 +79,8 @@ export const choiceQuestions = [
     type: 'choice',
     question: '以下关于团队动力学的论述，不恰当的是：',
     options: ['A. 马斯洛的需求层次理论可以用来更好地维持激励水平', 'B. 智力工作的激励方式中，应该尽可能使用鼓励承诺这种方式', 'C. 麦克勒格的X理论适合用马斯洛底层需求激励', 'D. 海兹伯格的激励理论区分为内在因素和外在因素两种'],
-    correctAnswer: 'B',
-    explanation: 'B不恰当：智力工作的激励方式中，不应该尽可能使用鼓励承诺这种方式。根据期望理论，过高的目标虽然提高了价值（Valence），但会降低期望值（Expectancy），反而可能降低团队凝聚力和工作效率。A、C、D的描述都是恰当的。',
+    correctAnswer: 'A',
+    explanation: 'A不恰当：马斯洛的需求层次理论可用于**指导激励手段的选择**，不是激励维持手段。B、C、D的描述都是恰当的。',
     topic: '团队管理'
   },
   {
@@ -99,8 +99,8 @@ export const choiceQuestions = [
     type: 'choice',
     question: '下述关于WBS的描述中，哪些说法不正确的？',
     options: ['A. WBS应该对应OBS', 'B. WBS提供了范围管理的基础', 'C. WBS工作分解最底层的要素是实现目标的充分必要条件', 'D. WBS分解的时候，同一层不能应用不同标准'],
-    correctAnswer: 'C',
-    explanation: 'C不正确：WBS工作分解最底层的要素是实现目标的充分条件，但不是必要条件。A正确：WBS应该对应OBS（组织分解结构）。B正确：WBS提供了范围管理的基础。D正确：WBS分解时同一层不能应用不同标准。',
+    correctAnswer: 'A',
+    explanation: 'A不正确：WBS和OBS**关注的角度和目的不同**，WBS不应该对应OBS。B正确：WBS提供范围管理基础。C正确：WBS最底层要素是实现目标的充分必要条件。D正确：WBS分解同一层不能应用不同标准。',
     topic: '项目管理'
   },
   {
@@ -248,8 +248,8 @@ export const choiceQuestions = [
     type: 'choice',
     question: '以下关于马斯洛的需求层次理论描述不正确的是：',
     options: ['A. 自我实现是寻求自尊（Esteem）', 'B. 激励来自为没有满足的需求而努力奋斗', 'C. 低层次的需求必须在高层次需求满足之前得到满足', 'D. 满足高层次的需求的途径比满足低层次的途径更少'],
-    correctAnswer: 'A',
-    explanation: 'A不正确：自我实现是最高层次，不是寻求自尊。自尊是第四层次。',
+    correctAnswer: 'AD',
+    explanation: 'A不正确：自我实现是第五层，自尊是第四层。D不正确：满足高层次需求的途径更多而非更少。',
     topic: '团队管理'
   },
   {
@@ -258,8 +258,8 @@ export const choiceQuestions = [
     type: 'choice',
     question: '以下关于团队动力学的论述，不恰当的是：',
     options: ['A. 马斯洛的需求层次理论可以用来更好地维持激励水平', 'B. 智力工作的激励方式中，应该尽可能使用鼓励承诺这种方式', 'C. 麦克勒格的X理论适合用马斯洛底层需求激励', 'D. 海兹伯格的激励理论区分为内在因素和外在因素两种'],
-    correctAnswer: 'B',
-    explanation: 'B不恰当：过高的目标会降低期望值，反而可能降低团队凝聚力和工作效率。',
+    correctAnswer: 'A',
+    explanation: 'A不恰当：马斯洛理论用于**指导激励手段的选择**，不是激励维持手段。',
     topic: '团队管理'
   },
   {
@@ -278,8 +278,8 @@ export const choiceQuestions = [
     type: 'choice',
     question: '下述关于WBS的描述中，哪些说法不正确的？',
     options: ['A. WBS应该对应OBS', 'B. WBS提供了范围管理的基础', 'C. WBS工作分解最底层的要素是实现目标的充分必要条件', 'D. WBS分解的时候，同一层不能应用不同标准'],
-    correctAnswer: 'C',
-    explanation: 'C不正确：WBS最底层要素是充分条件，但不是必要条件。',
+    correctAnswer: 'A',
+    explanation: 'A不正确：WBS和OBS关注的角度和目的不同。',
     topic: '项目管理'
   },
   {
