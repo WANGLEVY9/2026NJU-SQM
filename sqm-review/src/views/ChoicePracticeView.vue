@@ -2,7 +2,7 @@
   <div class="choice-practice-view container">
     <header class="page-header">
       <h1>选择题专项练习</h1>
-      <p>汇总所有真题选择题，按知识点分类刷题</p>
+      <p>按来源分区刷题，覆盖所有课堂练习和历年真题</p>
     </header>
 
     <!-- 统计面板 -->
@@ -35,18 +35,34 @@
 
     <!-- 控制栏 -->
     <div class="control-bar">
-      <div class="topic-filter">
-        <span class="filter-label">知识点</span>
-        <div class="topic-tags">
-          <button
-            v-for="topic in choiceStore.topics"
-            :key="topic"
-            class="topic-tag"
-            :class="{ 'is-active': choiceStore.selectedTopic === topic }"
-            @click="choiceStore.setTopic(topic)"
-          >
-            {{ topic }}
-          </button>
+      <div class="filter-section">
+        <div class="source-filter">
+          <span class="filter-label">题目来源</span>
+          <div class="topic-tags">
+            <button
+              v-for="cat in choiceStore.sourceCategories"
+              :key="cat"
+              class="topic-tag source-tag"
+              :class="{ 'is-active': choiceStore.selectedCategory === cat }"
+              @click="choiceStore.setCategory(cat)"
+            >
+              {{ cat }}
+            </button>
+          </div>
+        </div>
+        <div class="topic-filter">
+          <span class="filter-label">知识点</span>
+          <div class="topic-tags">
+            <button
+              v-for="topic in choiceStore.topics"
+              :key="topic"
+              class="topic-tag"
+              :class="{ 'is-active': choiceStore.selectedTopic === topic }"
+              @click="choiceStore.setTopic(topic)"
+            >
+              {{ topic }}
+            </button>
+          </div>
         </div>
       </div>
       <div class="mode-controls">
@@ -320,11 +336,33 @@ function resetPractice() {
   }
 }
 
+.filter-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.source-filter,
 .topic-filter {
   display: flex;
   flex-direction: column;
   gap: 10px;
 
+  .filter-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+}
+
+.source-tag {
+  font-weight: 600;
+}
+
+.topic-filter {
   .filter-label {
     font-size: 12px;
     font-weight: 500;

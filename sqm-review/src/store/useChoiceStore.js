@@ -1,23 +1,46 @@
 import { defineStore } from 'pinia'
 import { choiceQuestions } from '@/data/choices'
+import { shaoDongQuestions } from '@/data/shaoDongChoices'
+
+// 为题目添加来源分类
+function addSourceCategory(questions, category) {
+    return questions.map(q => ({ ...q, sourceCategory: category }))
+}
+
+// 合并所有题目并添加来源分类
+const rongQuestions = addSourceCategory(choiceQuestions, '课堂练习-荣国平')
+const shaoQuestions = addSourceCategory(shaoDongQuestions, '课堂练习-邵栋')
+
+// 重新分类：真题应该从荣国平题目中分离
+const allQuestions = rongQuestions.map(q => {
+    if (q.source === '往年真题' || q.source === '2022Fall') {
+        return { ...q, sourceCategory: '真题练习' }
+    }
+    return q
+}).concat(shaoQuestions)
 
 export const useChoiceStore = defineStore('choice', {
     state: () => ({
-        questions: choiceQuestions,
+        questions: allQuestions,
         currentIndex: 0,
-        answers: {},        // user's selected answer per question
-        showAnswer: {},     // whether to show answer panel per question
-        checked: {},        // whether user has "checked" (=> stats count)
+        answers: {},
+        showAnswer: {},
+        checked: {},
         showAllAnswers: false,
+        selectedCategory: '全部',
         selectedTopic: '全部',
         isRandomMode: false,
-        filterMode: 'all',
         shuffledIndices: []
     }),
 
     getters: {
+        sourceCategories: () => ['全部', '课堂练习-荣国平', '课堂练习-邵栋', '真题练习'],
+
         filteredQuestions: (state) => {
             let qs = state.questions
+            if (state.selectedCategory !== '全部') {
+                qs = qs.filter(q => q.sourceCategory === state.selectedCategory)
+            }
             if (state.selectedTopic !== '全部') {
                 qs = qs.filter(q => q.topic === state.selectedTopic)
             }
@@ -35,9 +58,7 @@ export const useChoiceStore = defineStore('choice', {
 
         totalCount: (state) => state.filteredQuestions.length,
 
-        answeredCount: (state) => {
-            return Object.keys(state.checked).length
-        },
+        answeredCount: (state) => Object.keys(state.checked).length,
 
         correctCount: (state) => {
             let correct = 0
@@ -61,22 +82,13 @@ export const useChoiceStore = defineStore('choice', {
             return wrong
         },
 
-        topics: () => {
-            const topics = new Set(choiceQuestions.map(q => q.topic))
+        topics: (state) => {
+            const filtered = state.selectedCategory !== '全部'
+                ? state.questions.filter(q => q.sourceCategory === state.selectedCategory)
+                : state.questions
+            const topics = new Set(filtered.map(q => q.topic))
             return ['全部', ...Array.from(topics)]
         },
-
-        wrongQuestions: (state) => {
-            return state.filteredQuestions.filter(q => {
-                if (!state.checked[q.id]) return false
-                const ans = state.answers[q.id]
-                return ans !== undefined && !isCorrectAnswer(q, ans)
-            })
-        },
-
-        unansweredQuestions: (state) => {
-            return state.filteredQuestions.filter(q => !state.checked[q.id])
-        }
     },
 
     actions: {
@@ -84,18 +96,15 @@ export const useChoiceStore = defineStore('choice', {
             this.answers[questionId] = answer
         },
 
-        // 校对答案：锁定答案，显示正误，计入统计
         checkAnswer(questionId) {
             this.checked[questionId] = true
             this.showAnswer[questionId] = true
         },
 
-        // 直接查看答案：显示答案面板，不计入统计，不显示对错
         viewAnswer(questionId) {
             this.showAnswer[questionId] = true
         },
 
-        // 隐藏答案
         hideAnswer(questionId) {
             this.showAnswer[questionId] = false
         },
@@ -132,12 +141,17 @@ export const useChoiceStore = defineStore('choice', {
             this.currentIndex = index
         },
 
+        setCategory(category) {
+            this.selectedCategory = category
+            this.selectedTopic = '全部'
+            this.currentIndex = 0
+            if (this.isRandomMode) this.shuffle()
+        },
+
         setTopic(topic) {
             this.selectedTopic = topic
             this.currentIndex = 0
-            if (this.isRandomMode) {
-                this.shuffle()
-            }
+            if (this.isRandomMode) this.shuffle()
         },
 
         toggleRandomMode() {
@@ -150,7 +164,7 @@ export const useChoiceStore = defineStore('choice', {
             this.currentIndex = 0
         },
 
-        shuffle() {
+        shuff() {
             const indices = Array.from({ length: this.filteredQuestions.length }, (_, i) => i)
             for (let i = indices.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1))
@@ -167,13 +181,6 @@ export const useChoiceStore = defineStore('choice', {
             this.showAllAnswers = false
             this.shuffledIndices = []
         },
-
-        clearAnswers() {
-            this.answers = {}
-            this.showAnswer = {}
-            this.checked = {}
-            this.showAllAnswers = false
-        }
     }
 })
 
