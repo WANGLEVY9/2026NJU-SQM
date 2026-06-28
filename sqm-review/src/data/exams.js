@@ -1288,13 +1288,13 @@ export const examPapers = [
                 type: 'choice',
                 question: '软件项目管理的「三大目标」是指：',
                 options: [
-                    'A. 范围、质量、风险',
+                    'A. 成本、质量、工期',
                     'B. 进度、成本、范围（铁三角）',
                     'C. 人员、过程、技术',
                     'D. 需求、设计、测试'
                 ],
-                correctAnswer: 'B',
-                explanation: '软件项目管理铁三角三大目标：进度（Time/Schedule）、成本（Cost/Resources）、范围（Scope）。三者相互制约，调整任一目标必然影响其他两者。质量通常被视为第四个维度或约束条件。',
+                correctAnswer: 'A',
+                explanation: 'A ✅ 正确——软件项目管理的三大目标是：**成本（Cost）、质量（Quality）、工期（Time/Schedule）**。速记口诀：「成本、质量、工期」。\n\nB ❌ 「进度、成本、范围」是PMBOK定义的项目管理**铁三角（Iron Triangle）**，不是本课程所讲的「三大目标」。注意区分：\n- 本课程三大目标 = 成本 + 质量 + 工期\n- PMBOK铁三角 = 范围 + 进度(时间) + 成本\n\nC ❌ 是项目管理的关键要素，但不是三大目标。\nD ❌ 是软件开发的阶段，不是管理目标。',
                 year: 2025,
                 topic: '项目管理'
             },
