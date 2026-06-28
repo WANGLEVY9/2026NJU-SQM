@@ -220,7 +220,11 @@ function isAnsweredWrong(q) {
 }
 
 function isCorrect(question, userAnswer) {
-  const ca = question.correctAnswer
+  // 优先使用洗牌后的正确答案（选项乱序开启时）
+  const effectiveQuestion = choiceStore.isOptionShuffle
+    ? (choiceStore.getShuffledQuestionData(question) || question)
+    : question
+  const ca = effectiveQuestion.correctAnswer
   // Boolean (judge questions)
   if (typeof ca === 'boolean') return userAnswer === ca
   // String correctAnswer (letter-based, e.g., 'ABD' or 'C')

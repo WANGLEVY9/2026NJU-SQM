@@ -168,7 +168,11 @@ export const useChoiceStore = defineStore('choice', {
                 if (!state.checked[q.id]) return
                 const ans = state.answers[q.id]
                 if (ans === undefined) return
-                if (isCorrectAnswer(q, ans)) correct++
+                // 选项乱序开启时使用洗牌后的正确答案
+                const effectiveQ = state.isOptionShuffle
+                    ? (this.getShuffledQuestionData(q) || q)
+                    : q
+                if (isCorrectAnswer(effectiveQ, ans)) correct++
             })
             return correct
         },
@@ -179,7 +183,11 @@ export const useChoiceStore = defineStore('choice', {
                 if (!state.checked[q.id]) return
                 const ans = state.answers[q.id]
                 if (ans === undefined) return
-                if (!isCorrectAnswer(q, ans)) wrong++
+                // 选项乱序开启时使用洗牌后的正确答案
+                const effectiveQ = state.isOptionShuffle
+                    ? (this.getShuffledQuestionData(q) || q)
+                    : q
+                if (!isCorrectAnswer(effectiveQ, ans)) wrong++
             })
             return wrong
         },
