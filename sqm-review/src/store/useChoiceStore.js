@@ -158,11 +158,21 @@ export const useChoiceStore = defineStore('choice', {
 
 function isCorrectAnswer(question, userAnswer) {
     const ca = question.correctAnswer
+    // Boolean (judge questions)
+    if (typeof ca === 'boolean') return userAnswer === ca
+    // String correctAnswer (letter-based, e.g., 'ABD' or 'C')
     if (typeof ca === 'string') {
-        return userAnswer === ca
-    }
-    if (typeof ca === 'boolean') {
-        return userAnswer === ca
+        if (ca.length <= 1) {
+            // Single choice: userAnswer is a number (index)
+            const correctIndex = ca.charCodeAt(0) - 65
+            return userAnswer === correctIndex
+        } else {
+            // Multiple choice: userAnswer is an array of indices
+            if (!Array.isArray(userAnswer)) return false
+            const correctIndices = ca.split('').map(l => l.charCodeAt(0) - 65).sort((a, b) => a - b)
+            const sortedUser = [...userAnswer].sort((a, b) => a - b)
+            return JSON.stringify(correctIndices) === JSON.stringify(sortedUser)
+        }
     }
     if (Array.isArray(ca)) {
         if (!Array.isArray(userAnswer)) return false
