@@ -59,8 +59,8 @@ export const choiceQuestions = [
     type: 'choice',
     question: '以下特征适用麦克勒格Y理论（McGregor\'s Theory Y）激励的场合是：',
     options: ['A. 关注工作环境，薪金等', 'B. 更喜欢经常的指导，避免承担责任，缺乏主动性', 'C. 自我中心，对组织需求反应淡漠，反对变革', 'D. 能够自我约束，自我导向与控制，渴望承担责任'],
-    correctAnswer: 'D',
-    explanation: 'Y理论：人能够自我约束、自我导向与控制，渴望承担责任。A、B、C都是X理论的特征。',
+    correctAnswer: 'AD',
+    explanation: 'A ✅ D ✅：A关注工作环境薪金属于外部激励因素（也适用于Y理论情境），D能够自我约束、自我导向与控制、渴望承担责任是Y理论核心特征。B ❌ C ❌ 均为X理论的特征。',
     topic: '团队管理'
   },
   {
@@ -348,8 +348,8 @@ export const choiceQuestions = [
     type: 'choice',
     question: '以下特征适用麦克勒格Y理论（McGregor\'s Theory Y）激励的场合是：',
     options: ['A. 关注工作环境，薪金等', 'B. 更喜欢经常的指导，避免承担责任，缺乏主动性', 'C. 自我中心，对组织需求反应淡漠，反对变革', 'D. 能够自我约束，自我导向与控制，渴望承担责任'],
-    correctAnswer: 'D',
-    explanation: 'Y理论：人能够自我约束、自我导向与控制，渴望承担责任。',
+    correctAnswer: 'AD',
+    explanation: 'A ✅ D ✅：A关注工作环境薪金属于外部激励因素（也适用于Y理论情境），D能够自我约束、自我导向与控制、渴望承担责任是Y理论核心特征。B ❌ C ❌ 均为X理论的特征。',
     topic: '团队管理'
   },
   {

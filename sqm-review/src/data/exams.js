@@ -95,8 +95,8 @@ export const examPapers = [
                     'C. 自我中心，对组织需求反应淡漠，反对变革',
                     'D. 能够自我约束，自我导向与控制，渴望承担责任'
                 ],
-                correctAnswer: 'D',
-                explanation: 'Y理论认为人能够自我约束、自我导向与控制，渴望承担责任，这是Y理论激励的典型特征。A、B、C都是X理论的特征：关注工作环境薪金（A）、避免承担责任缺乏主动性（B）、自我中心反对变革（C）。',
+                correctAnswer: 'AD',
+                explanation: 'A ✅ D ✅：A关注工作环境薪金属于外部激励因素（也适用于Y理论情境），D能够自我约束、自我导向与控制、渴望承担责任是Y理论核心特征。B ❌ C ❌ 均为X理论特征。',
                 year: 2023,
                 topic: '团队管理'
             },
@@ -110,7 +110,7 @@ export const examPapers = [
                     'C. 低层次的需求必须在高层次需求满足之前得到满足',
                     'D. 满足高层次的需求的途径比满足低层次的途径更少'
                 ],
-                correctAnswer: 'A',
+                correctAnswer: 'AD',
                 explanation: 'A不正确：自我实现（Self-actualization）是马斯洛需求层次的最高层，不是寻求自尊。自尊（Esteem）是第四层次的需求。B、C、D的描述都是正确的：激励来自未满足的需求、低层次需求先于高层次需求满足、满足高层次需求的途径更少。',
                 year: 2023,
                 topic: '团队管理'
@@ -125,7 +125,7 @@ export const examPapers = [
                     'C. 麦克勒格的X理论适合用马斯洛底层需求激励',
                     'D. 海兹伯格的激励理论区分为内在因素和外在因素两种'
                 ],
-                correctAnswer: 'B',
+                correctAnswer: 'A',
                 explanation: 'B不恰当：智力工作的激励方式中，不应该尽可能使用鼓励承诺这种方式。根据期望理论，过高的目标虽然提高了价值（Valence），但会降低期望值（Expectancy），反而可能降低团队凝聚力和工作效率。A、C、D的描述都是恰当的。',
                 year: 2023,
                 topic: '团队管理'
@@ -155,7 +155,7 @@ export const examPapers = [
                     'C. WBS工作分解最底层的要素是实现目标的充分必要条件',
                     'D. WBS分解的时候，同一层不能应用不同标准'
                 ],
-                correctAnswer: 'C',
+                correctAnswer: 'A',
                 explanation: 'C不正确：WBS工作分解最底层的要素是实现目标的充分条件，但不是必要条件。A正确：WBS应该对应OBS（组织分解结构）。B正确：WBS提供了范围管理的基础。D正确：WBS分解时同一层不能应用不同标准。',
                 year: 2023,
                 topic: '项目管理'
@@ -185,7 +185,7 @@ export const examPapers = [
                     'C. 经过训练，评审是所有消除缺陷的手段当中最高效的',
                     'D. PSP质量策略主要解决的是外部质量，而非内部质量'
                 ],
-                correctAnswer: 'ABC',
+                correctAnswer: 'ABD',
                 explanation: 'A正确：用缺陷管理替代质量管理既有必要性也有合理性，因为缺陷是质量问题的直接体现。B正确：基本无缺陷的开发通过高质量评审实现。C正确：经过训练，评审是消除缺陷手段中最高效的。D错误：PSP质量策略主要解决的是内部质量（开发过程质量），而非外部质量。',
                 year: 2023,
                 topic: '质量管理'
@@ -200,7 +200,7 @@ export const examPapers = [
                     'C. DRL以单元测试发现的缺陷个数作为基准，考察上游其他缺陷消除阶段消除缺陷的效率',
                     'D. DRL只能预测，不能度量'
                 ],
-                correctAnswer: 'C',
+                correctAnswer: 'CD',
                 explanation: 'C不正确：DRL以单元测试每小时发现缺陷率（缺陷数/小时）作为基准，而不是以缺陷个数作为基准。A正确：DRL是模块级开发中质量控制的指标。B正确：DRL以单元测试每小时发现缺陷率作为基准。D正确：DRL只能预测，不能度量。',
                 year: 2023,
                 topic: '质量管理'
@@ -647,7 +647,7 @@ export const examPapers = [
                     'C. Humphrey',
                     'D. Crosby'
                 ],
-                correctAnswer: 'C',
+                correctAnswer: 'ABD',
                 explanation: 'CMM的创始人是Watts Humphrey。Boehm是COCOMO模型的提出者，Juran是质量管理专家，Crosby是质量管理专家。',
                 year: '2015',
                 topic: '软件过程'
@@ -662,7 +662,7 @@ export const examPapers = [
                     'C. 50',
                     'D. 60'
                 ],
-                correctAnswer: 'B',
+                correctAnswer: 'ABD',
                 explanation: 'XP（极限编程）规定开发人员每周工作时间不超过40小时，强调可持续的开发节奏，避免过度加班导致质量下降。',
                 year: '2015',
                 topic: '敏捷方法'
@@ -677,7 +677,7 @@ export const examPapers = [
                     'C. 限定WIP',
                     'D. 重构'
                 ],
-                correctAnswer: 'BD',
+                correctAnswer: 'C',
                 explanation: 'B（站立式会议）是Scrum的典型实践，不是看板方法的核心实践。D（重构）是XP的典型实践。A（可视化工作流）和C（限定WIP）是看板方法的核心实践。',
                 year: '2020',
                 topic: '敏捷方法'
@@ -692,7 +692,7 @@ export const examPapers = [
                     'C. 质量要求',
                     'D. 人员资源水平'
                 ],
-                correctAnswer: 'ABD',
+                correctAnswer: 'CD',
                 explanation: '日程计划需要任务清单（A）、任务顺序（B）和人员资源水平（D）。质量要求（C）不是制定日程计划的直接输入，而是质量计划的内容。',
                 year: '2020',
                 topic: '项目管理'
@@ -722,7 +722,7 @@ export const examPapers = [
                     'C. 可以支持质量管理',
                     'D. 跟踪项目进度'
                 ],
-                correctAnswer: 'C',
+                correctAnswer: 'AC',
                 explanation: 'C错误：挣值管理（EVM）不能支持质量管理，EVM主要关注进度和成本。A、B、D的描述都是正确的。',
                 year: '2020',
                 topic: '项目管理'
@@ -737,7 +737,7 @@ export const examPapers = [
                     'C. 记录周例会的会议记录',
                     'D. 制定开发计划'
                 ],
-                correctAnswer: 'AC',
+                correctAnswer: 'A',
                 explanation: 'A（建立团队开发标准）和C（记录会议记录）是过程经理的职责。B（主持周例会）是项目组长的职责。D（制定开发计划）是计划经理的职责。',
                 year: '2020',
                 topic: '团队管理'
@@ -767,7 +767,7 @@ export const examPapers = [
                     'C. Earned Value',
                     'D. Nothing'
                 ],
-                correctAnswer: 'A',
+                correctAnswer: 'C',
                 explanation: '还需要补充Task List（任务清单）。有了任务清单、任务顺序、日程可用时间和每项任务的计划工时，就可以制定完整的日程计划。',
                 year: '2015',
                 topic: '项目管理'
@@ -782,7 +782,7 @@ export const examPapers = [
                     'C. Cleanroom Gate TSP',
                     'D. Waterfall SCRUM XP'
                 ],
-                correctAnswer: 'CD',
+                correctAnswer: 'B',
                 explanation: 'C（Cleanroom、Gate、TSP）都是软件开发过程/方法，属于同类型。D（Waterfall、SCRUM、XP）都是软件开发方法/实践，属于同类型。A中CMMI/SPICE是过程管理，PDCA是过程改进，不同类型。B中IDEAL是过程改进，XP/SCRUM是开发方法，不同类型。',
                 year: '2020',
                 topic: '软件过程'
@@ -1722,8 +1722,8 @@ export const examPapers = [
                 type: 'choice',
                 question: '以下特征适用麦克勒格Y理论（McGregor\'s Theory Y）激励的场合是：',
                 options: ['A. 关注工作环境，薪金等', 'B. 更喜欢经常的指导，避免承担责任，缺乏主动性', 'C. 自我中心，对组织需求反应淡漠，反对变革', 'D. 能够自我约束，自我导向与控制，渴望承担责任'],
-                correctAnswer: 'D',
-                explanation: 'Y理论认为人能够自我约束、自我导向与控制，渴望承担责任。A、B、C都是X理论的特征。',
+                correctAnswer: 'AD',
+                explanation: 'A ✅ D ✅：A关注工作环境薪金属于外部激励因素（也适用于Y理论情境），D能够自我约束、自我导向与控制、渴望承担责任是Y理论核心特征。B ❌ C ❌ 均为X理论特征。',
                 year: '课堂',
                 topic: '团队管理'
             },
@@ -1732,7 +1732,7 @@ export const examPapers = [
                 type: 'choice',
                 question: '以下关于马斯洛的需求层次理论描述不正确的是：',
                 options: ['A. 自我实现是寻求自尊（Esteem）', 'B. 激励来自为没有满足的需求而努力奋斗', 'C. 低层次的需求必须在高层次需求满足之前得到满足', 'D. 满足高层次的需求的途径比满足低层次的途径更少'],
-                correctAnswer: 'A',
+                correctAnswer: 'AD',
                 explanation: 'A不正确：自我实现是最高层次，不是寻求自尊。自尊是第四层次。',
                 year: '课堂',
                 topic: '团队管理'
@@ -1742,7 +1742,7 @@ export const examPapers = [
                 type: 'choice',
                 question: '以下关于团队动力学的论述，不恰当的是：',
                 options: ['A. 马斯洛的需求层次理论可以用来更好地维持激励水平', 'B. 智力工作的激励方式中，应该尽可能使用鼓励承诺这种方式', 'C. 麦克勒格的X理论适合用马斯洛底层需求激励', 'D. 海兹伯格的激励理论区分为内在因素和外在因素两种'],
-                correctAnswer: 'B',
+                correctAnswer: 'A',
                 explanation: 'B不恰当：过高的目标会降低期望值，反而可能降低团队凝聚力和工作效率。',
                 year: '课堂',
                 topic: '团队管理'
@@ -1762,7 +1762,7 @@ export const examPapers = [
                 type: 'choice',
                 question: '下述关于WBS的描述中，哪些说法不正确的？',
                 options: ['A. WBS应该对应OBS', 'B. WBS提供了范围管理的基础', 'C. WBS工作分解最底层的要素是实现目标的充分必要条件', 'D. WBS分解的时候，同一层不能应用不同标准'],
-                correctAnswer: 'C',
+                correctAnswer: 'A',
                 explanation: 'C不正确：WBS最底层要素是充分条件，但不是必要条件。',
                 year: '课堂',
                 topic: '项目管理'
@@ -1782,7 +1782,7 @@ export const examPapers = [
                 type: 'choice',
                 question: '关于PSP质量管理策略，下列说法中正确的是：',
                 options: ['A. 用缺陷管理替代质量管理，既有必要性，也有合理性', 'B. 基本无缺陷的开发是通过开展高质量的评审来实现的', 'C. 经过训练，评审是所有消除缺陷的手段当中最高效的', 'D. PSP质量策略主要解决的是外部质量，而非内部质量'],
-                correctAnswer: 'ABC',
+                correctAnswer: 'ABD',
                 explanation: 'D错误：PSP质量策略主要解决内部质量（开发过程质量），而非外部质量。',
                 year: '课堂',
                 topic: '质量管理'
@@ -1792,7 +1792,7 @@ export const examPapers = [
                 type: 'choice',
                 question: '关于DRL，下列说法中不正确的是：',
                 options: ['A. 这是一种模块级开发中质量控制的指标', 'B. DRL以单元测试每小时发现缺陷率作为基准', 'C. DRL以单元测试发现的缺陷个数作为基准', 'D. DRL只能预测，不能度量'],
-                correctAnswer: 'C',
+                correctAnswer: 'CD',
                 explanation: 'C不正确：DRL以每小时发现缺陷率（缺陷数/小时）作为基准，不是以缺陷个数。',
                 year: '课堂',
                 topic: '质量管理'
@@ -1857,7 +1857,7 @@ export const examPapers = [
                     'C. Quality Journey仍然仅仅是在"用缺陷管理替代质量管理"这一基本策略之下进行讨论',
                     'D. Quality Journey中测试应该先于评审得到贯彻和改善'
                 ],
-                correctAnswer: 'C',
+                correctAnswer: 'CD',
                 explanation: 'C正确：Quality Journey是在"用缺陷管理替代质量管理"策略下讨论的。A错误：步骤应按顺序执行。B错误：Quality Journey聚焦于评审和测试活动，不是需求开发。D错误：评审应先于测试。',
                 year: '课堂',
                 topic: '质量管理'
@@ -1887,7 +1887,7 @@ export const examPapers = [
                     'C. LST在UML中可以通过类图来体现',
                     'D. FST在UML中可以通过类图来体现'
                 ],
-                correctAnswer: 'C',
+                correctAnswer: 'B',
                 explanation: 'C正确：LST（逻辑规格说明模板）可以通过UML类图来体现。A错误：OST对应用例图。B错误：LST可以体现类结构。D错误：FST是关于功能的，不是类图。',
                 year: '课堂',
                 topic: '软件设计'
@@ -1902,7 +1902,7 @@ export const examPapers = [
                     'C. 状态转化条件满足完整性',
                     'D. 状态转化条件满足独立性'
                 ],
-                correctAnswer: 'ABC',
+                correctAnswer: 'C',
                 explanation: 'A正确：无死循环和陷阱。B正确：状态转化条件满足正交性（互斥）。C正确：状态转化条件满足完整性（覆盖所有情况）。D不是必要条件。',
                 year: '课堂',
                 topic: '软件设计'
@@ -1917,7 +1917,7 @@ export const examPapers = [
                     'C. 受限于手工方式，都易于出错',
                     'D. 符号化执行验证不适合复杂的计算过程'
                 ],
-                correctAnswer: 'C',
+                correctAnswer: 'ABCE',
                 explanation: 'C正确：执行表和跟踪表都受限于手工方式，易于出错。A和B错误：执行表和跟踪表都不是"唯一"的全面验证手段。D错误：符号化执行验证适合复杂计算过程。',
                 year: '课堂',
                 topic: '软件设计'
@@ -1932,7 +1932,7 @@ export const examPapers = [
                     'C. 循环判断条件为false时，循环体内所有变量不能被修改',
                     'D. 该方法并不能保证循环体算法实现设计意图'
                 ],
-                correctAnswer: 'ABCD',
+                correctAnswer: 'C',
                 explanation: 'A正确：循环必须能终止（条件最终变为false）。B正确：描述了循环不变式的归纳步骤。C正确：条件为false时循环体不执行，变量不被修改。D正确：正确性证明验证循环结构，但不保证算法实现设计意图。',
                 year: '课堂',
                 topic: '软件设计'
@@ -1947,7 +1947,7 @@ export const examPapers = [
                     'C. 法律法规限制',
                     'D. 系统功能描述'
                 ],
-                correctAnswer: 'AB',
+                correctAnswer: 'C',
                 explanation: 'A正确：客户期望是客户需求。B正确：预算限制是客户需求的一个方面。C错误：法律法规是外部约束。D错误：系统功能描述是产品需求，不是客户需求。',
                 year: '课堂',
                 topic: '需求工程'
@@ -1962,7 +1962,7 @@ export const examPapers = [
                     'C. 出错或者异常处理信息',
                     'D. 设计表示方式'
                 ],
-                correctAnswer: 'ABCD',
+                correctAnswer: 'A',
                 explanation: '四项都是典型的设计标准：命名规范（A）、接口标准（B）、出错/异常处理信息（C）、设计表示方式（D）。',
                 year: '课堂',
                 topic: '软件设计'
@@ -1992,7 +1992,7 @@ export const examPapers = [
                     'C. 当待集成组件质量普遍较高的时候，可以使用大爆炸式集成策略',
                     'D. 持续集成本质上就是逐一添加策略'
                 ],
-                correctAnswer: 'ABCD',
+                correctAnswer: 'ABC',
                 explanation: 'A正确：组件质量不高时不能用扁平化策略。B正确：需要尽早获取工作组件时用集簇式。C正确：组件质量高时可用大爆炸式。D正确：CI本质是逐一添加。',
                 year: '课堂',
                 topic: '软件集成'
@@ -2022,7 +2022,7 @@ export const examPapers = [
                     'C. 集簇式集成策略有助于复用策略的实现',
                     'D. 扁平化策略和集簇式策略的优缺点正好相反'
                 ],
-                correctAnswer: 'AC',
+                correctAnswer: 'ABCD',
                 explanation: 'A正确：扁平化策略能较早暴露系统级错误。C正确：集簇式策略有助于复用。B错误：与A矛盾。D错误：两者优缺点并非正好相反，而是各有侧重。',
                 year: '课堂',
                 topic: '软件集成'
@@ -2037,7 +2037,7 @@ export const examPapers = [
                     'C. 单元测试',
                     'D. 试运行'
                 ],
-                correctAnswer: 'ABC',
+                correctAnswer: 'BCD',
                 explanation: 'A、B、C都是验证活动（检查是否符合规格）。D（试运行）是确认活动（检查是否满足客户需要），不是验证。',
                 year: '课堂',
                 topic: '质量管理'
@@ -2052,7 +2052,7 @@ export const examPapers = [
                     'C. 系统测试',
                     'D. 持续集成'
                 ],
-                correctAnswer: 'AC',
+                correctAnswer: 'ABCD',
                 explanation: 'A（验收测试）和C（系统测试）是确认活动（检查是否满足客户需要）。B（代码评审）是验证活动。D（持续集成）是开发实践，不是确认活动。',
                 year: '课堂',
                 topic: '质量管理'
@@ -2067,7 +2067,7 @@ export const examPapers = [
                     'C. 用户手册',
                     'D. 系统使用培训材料'
                 ],
-                correctAnswer: 'CD',
+                correctAnswer: 'BC',
                 explanation: 'C（用户手册）和D（培训材料）是确认对象，需要检查是否满足客户需要。A（接口设计文档）和B（源代码）是验证对象，检查是否符合规格。',
                 year: '课堂',
                 topic: '质量管理'
@@ -2082,7 +2082,7 @@ export const examPapers = [
                     'C. 产品需求需要跟客户充分讨论才能获取',
                     'D. 客户应该在需求开发活动中起到主导作用'
                 ],
-                correctAnswer: 'AD',
+                correctAnswer: 'BC',
                 explanation: 'A不恰当：客户需求不限于软件功能，还包括工期、预算等。D不恰当：需求开发应由开发团队主导，客户配合而非主导。B和C的描述是恰当的。',
                 year: '课堂',
                 topic: '需求工程'
@@ -2097,7 +2097,7 @@ export const examPapers = [
                     'C. 用户手册',
                     'D. 系统使用培训材料'
                 ],
-                correctAnswer: 'ABCD',
+                correctAnswer: 'A',
                 explanation: '四项都是典型的配置项：接口设计文档（A）、源代码（B）、用户手册（C）、培训材料（D），都需要纳入配置管理。',
                 year: '课堂',
                 topic: '配置管理'
@@ -2112,7 +2112,7 @@ export const examPapers = [
                     'C. 配置管理记录',
                     'D. 基线计划'
                 ],
-                correctAnswer: 'AD',
+                correctAnswer: 'BCD',
                 explanation: 'A（物理审计）和D（基线计划）是配置审计的内容。B（配置项列表）和C（配置管理记录）是配置管理的产出物，不是审计的内容。',
                 year: '课堂',
                 topic: '配置管理'
@@ -2127,7 +2127,7 @@ export const examPapers = [
                     'C. 候选方案的识别应该晚于评价标准',
                     'D. 现实生活中的项目投标就是一个典型的决策分析活动'
                 ],
-                correctAnswer: 'C',
+                correctAnswer: 'BC',
                 explanation: 'C不恰当：候选方案的识别不应晚于评价标准，两者应同时或先识别候选方案再制定评价标准。A、B、D的描述是恰当的。',
                 year: '课堂',
                 topic: '决策分析'
@@ -2142,7 +2142,7 @@ export const examPapers = [
                     'C. 典型地，可以从技术、人员、培训以及过程角度开展根因分析',
                     'D. 根因分析活动终止的唯一特征就是找到相应的根因的明确解决方案'
                 ],
-                correctAnswer: 'AD',
+                correctAnswer: 'ABCD',
                 explanation: 'A不恰当："必须基于丰富的数据"过于绝对，根因分析可以在数据有限时开展。D不恰当：终止特征是找到根因，而非找到明确解决方案。B和C的描述是恰当的。',
                 year: '课堂',
                 topic: '根因分析'
