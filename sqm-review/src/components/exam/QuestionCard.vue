@@ -23,8 +23,8 @@
           }"
           @click="handleOptionClick(index)"
         >
-          <span class="option-marker">{{ option.charAt(0) }}</span>
-          <span class="option-text">{{ option.substring(3) }}</span>
+          <span class="option-marker">{{ optionMarker(option) }}</span>
+          <span class="option-text">{{ optionText(option) }}</span>
           <CheckCircle v-if="showAnswer && isCorrect(index)" :size="18" class="result-icon correct" />
           <XCircle v-if="showAnswer && isSelected(index) && !isCorrect(index)" :size="18" class="result-icon wrong" />
         </div>
@@ -201,6 +201,23 @@ const isMultipleChoice = computed(() => {
 const displayOptions = computed(() => {
   return props.question.options || []
 })
+
+// 选项标签和文本提取（兼容 'A. text' / 'A、text' / 'A, text' 等格式）
+const optionMarker = (opt) => {
+  return opt.charAt(0)
+}
+
+const optionText = (opt) => {
+  // 查找第一个分隔符：中文顿号(、)、英文句点(.)加空格、或逗号
+  const delimIndex = opt.search(/[、.,，]/)
+  if (delimIndex === -1) return opt
+  // 跳过分隔符本身，如果后面有空格也跳过
+  let textStart = delimIndex + 1
+  while (textStart < opt.length && opt[textStart] === ' ') {
+    textStart++
+  }
+  return opt.substring(textStart)
+}
 
 // 将字母转换为索引（A->0, B->1, ...）
 const letterToIndex = (letter) => {
