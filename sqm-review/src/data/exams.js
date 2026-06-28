@@ -231,7 +231,7 @@ export const examPapers = [
                     'D. PQI只能预测，不能度量'
                 ],
                 correctAnswer: 'AB',
-                explanation: 'A正确：PQI可以辅助判断模块开发质量。B正确：PQI可以提供过程改进的依据。C错误：PQI是0到1之间的数值，不是大于1。D错误：PQI既可以预测也可以度量，与Yield不同（Yield只能预测不能度量）。',
+                explanation: 'A正确：PQI可以辅助判断模块开发质量。B正确：PQI可以提供过程改进的依据。C错误：PQI是0到1之间的数值，不是大于1。D错误：PQI既可以预测也可以度量。',
                 year: 2023,
                 topic: '质量管理'
             },
@@ -1827,8 +1827,8 @@ export const examPapers = [
                     'C. Yield区分为Process Yield和Phase Yield',
                     'D. Yield只能预测，不能度量'
                 ],
-                correctAnswer: 'ABCD',
-                explanation: 'A正确：Yield可辅助判断模块开发质量。B正确：Yield可提供过程改进依据。C正确：Yield区分为Process Yield和Phase Yield。D正确：Yield只能预测，不能度量（与PQI不同）。',
+                correctAnswer: 'ABC',
+                explanation: 'A正确：Yield可辅助判断模块开发质量。B正确：Yield可提供过程改进依据。C正确：Yield区分为Process Yield和Phase Yield。D❌：Yield可以度量（基于缺陷日志统计各阶段缺陷消除效率），并非只能预测。',
                 year: '课堂',
                 topic: '质量管理'
             },

@@ -159,8 +159,8 @@ export const choiceQuestions = [
     type: 'choice',
     question: '关于Yield，下列说法中正确的是：',
     options: ['A. Yield可以辅助判断模块开发质量', 'B. Yield可以提供过程改进的依据', 'C. Yield区分为Process Yield和Phase Yield', 'D. Yield只能预测，不能度量'],
-    correctAnswer: 'ABCD',
-    explanation: 'A ✅ B ✅ C ✅ D ✅：Yield**只能预测，不能度量**（依赖注入缺陷数的估算）。',
+    correctAnswer: 'ABC',
+    explanation: 'A ✅：Yield可辅助判断模块开发质量。B ✅：Yield可提供过程改进依据。C ✅：Yield区分为Process Yield和Phase Yield。D ❌：Yield可以度量（基于缺陷日志统计各阶段缺陷消除效率），并非只能预测。',
     topic: '质量管理'
   },
   {
@@ -448,8 +448,8 @@ export const choiceQuestions = [
     type: 'choice',
     question: '关于Yield，下列说法中正确的是：',
     options: ['A. Yield可以辅助判断模块开发质量', 'B. Yield可以提供过程改进的依据', 'C. Yield区分为Process Yield和Phase Yield', 'D. Yield只能预测，不能度量'],
-    correctAnswer: 'ABCD',
-    explanation: 'A ✅ B ✅ C ✅ D ✅：Yield只能预测，不能度量。',
+    correctAnswer: 'ABC',
+    explanation: 'A ✅：Yield可辅助判断模块开发质量。B ✅：Yield可提供过程改进依据。C ✅：Yield区分为Process Yield和Phase Yield。D ❌：Yield可以度量（基于缺陷日志统计各阶段缺陷消除效率），并非只能预测。',
     topic: '质量管理'
   },
   {

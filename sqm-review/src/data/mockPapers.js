@@ -1621,8 +1621,8 @@ export const mockPapers = [
                 id: 'm3-j4',
                 type: 'judge',
                 question: 'Yield指标既可以用来度量，也可以用来预测。',
-                answer: false,
-                analysis: 'Yield指标是一种事后的质量控制手段，很难非常精确地计算。Yield只能用来估算(预测)，不可以用来度量。',
+                answer: true,
+                analysis: 'Yield指标既可以用来度量（基于缺陷日志统计各阶段缺陷消除效率），也可以用来预测。',
                 score: 1
             },
             {

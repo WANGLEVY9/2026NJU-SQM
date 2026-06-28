@@ -2597,10 +2597,10 @@ PQI = 5 个数据的乘积（基准值作为 1，越接近 1 质量越高）：
                     { label: 'A', text: 'Yield可以辅助判断模块开发质量', isCorrect: true },
                     { label: 'B', text: 'Yield可以提供过程改进的依据', isCorrect: true },
                     { label: 'C', text: 'Yield区分为Process Yield和Phase Yield', isCorrect: true },
-                    { label: 'D', text: 'Yield只能预测，不能度量', isCorrect: true }
+                    { label: 'D', text: 'Yield只能预测，不能度量', isCorrect: false }
                 ],
-                answer: 'ABCD',
-                analysis: 'A ✅ 各阶段Yield越低代表该阶段自查能力差；\nB ✅ 编码Yield极低说明要强化代码评审；\nC ✅ PPT明确定义两类Yield：Phase Yield和Process Yield；\nD ✅ Yield**只能预测，不能度量**（依赖注入缺陷数的估算）。'
+                answer: 'ABC',
+                analysis: 'A ✅ 各阶段Yield越低代表该阶段自查能力差；\nB ✅ 编码Yield极低说明要强化代码评审；\nC ✅ PPT明确定义两类Yield：Phase Yield和Process Yield；\nD ❌ Yield可以度量（基于缺陷日志统计各阶段缺陷消除效率），并非只能预测。'
             },
             {
                 year: '第 5 讲 课堂',
