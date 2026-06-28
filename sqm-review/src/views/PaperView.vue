@@ -30,8 +30,11 @@
         :question="question"
         :selectedAnswer="getAnswer(question.id)"
         :showAnswer="isAnswerShown(question.id)"
+        :showResult="isChecked(question.id)"
         @select="(answer) => setAnswer(question.id, answer)"
-        @toggle-answer="toggleAnswer(question.id)"
+        @toggle-answer="hideAnswer(question.id)"
+        @check="checkAnswer(question.id)"
+        @view="viewAnswer(question.id)"
       />
     </div>
 
@@ -99,6 +102,22 @@ const isAnswerShown = (questionId) => {
 
 const toggleAnswer = (questionId) => {
   examStore.toggleAnswer(questionId)
+}
+
+const isChecked = (questionId) => {
+  return examStore.isChecked(questionId)
+}
+
+const checkAnswer = (questionId) => {
+  examStore.checkAnswer(questionId)
+}
+
+const viewAnswer = (questionId) => {
+  examStore.viewAnswer(questionId)
+}
+
+const hideAnswer = (questionId) => {
+  examStore.hideAnswer(questionId)
 }
 
 const showAllAnswers = () => {

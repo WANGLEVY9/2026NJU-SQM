@@ -20,6 +20,7 @@ export const useExamStore = defineStore('exam', {
         currentPaperId: null,
         answers: {},
         showAnswer: {},
+        checked: {},
         filters: {
             year: null,
             type: null
@@ -52,6 +53,10 @@ export const useExamStore = defineStore('exam', {
 
         isAnswerShown: (state) => (questionId) => {
             return state.showAnswer[questionId] || false
+        },
+
+        isChecked: (state) => (questionId) => {
+            return state.checked[questionId] || false
         }
     },
 
@@ -68,6 +73,22 @@ export const useExamStore = defineStore('exam', {
             this.showAnswer[questionId] = !this.showAnswer[questionId]
         },
 
+        // 校对答案：显示答案 + 标记为已校对（显示正误）
+        checkAnswer(questionId) {
+            this.showAnswer[questionId] = true
+            this.checked[questionId] = true
+        },
+
+        // 直接查看答案：仅显示答案，不标记正误
+        viewAnswer(questionId) {
+            this.showAnswer[questionId] = true
+        },
+
+        hideAnswer(questionId) {
+            this.showAnswer[questionId] = false
+            this.checked[questionId] = false
+        },
+
         setFilter(key, value) {
             this.filters[key] = value
         },
@@ -79,6 +100,7 @@ export const useExamStore = defineStore('exam', {
         resetPaper() {
             this.answers = {}
             this.showAnswer = {}
+            this.checked = {}
         }
     }
 })
