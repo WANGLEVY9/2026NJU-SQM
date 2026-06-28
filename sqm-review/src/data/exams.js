@@ -20,8 +20,8 @@ export const examPapers = [
                     'C. 需求开发',
                     'D. V&V'
                 ],
-                correctAnswer: 'A',
-                explanation: '"Measure twice, cut once"（三思而后行）强调在行动前要仔细思考和规划。在软件开发中，这对应于软件设计阶段，需要在编码前充分设计方案，避免后期返工。这是软硬件一体化阶段的典型理念。',
+                correctAnswer: 'B',
+                explanation: '"Measure twice, cut once"（三思而后行）强调在行动前要仔细检查和验证。在软件开发中，这对应于代码评审（Code Review），在提交代码前仔细审查，避免引入缺陷。',
                 year: 2023,
                 topic: '软件发展'
             },
@@ -1672,8 +1672,8 @@ export const examPapers = [
                 type: 'choice',
                 question: '"Measure twice, cut once"描述的是下述哪个软件开发场景：',
                 options: ['A. 软件设计', 'B. 代码评审', 'C. 需求开发', 'D. V&V'],
-                correctAnswer: 'A',
-                explanation: '"Measure twice, cut once"（三思而后行）强调在行动前要仔细思考和规划，对应于软件设计阶段。',
+                correctAnswer: 'B',
+                explanation: '"Measure twice, cut once"（三思而后行）强调在行动前要仔细检查和验证，对应于代码评审（Code Review）。',
                 year: '课堂',
                 topic: '软件发展'
             },
